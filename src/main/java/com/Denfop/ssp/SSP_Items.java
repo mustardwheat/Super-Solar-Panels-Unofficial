@@ -5,6 +5,7 @@ import com.Denfop.ssp.items.ItemArmorQuantumBoosts;
 import com.Denfop.ssp.items.ItemArmorQuantumChestplate;
 import com.Denfop.ssp.items.ItemArmorQuantumLeggins;
 import com.Denfop.ssp.items.ItemArmourSolarHelmet;
+import com.Denfop.ssp.items.tools.ItemNanoSaber;
 import ic2.core.block.state.IIdProvider;
 import ic2.core.ref.IMultiItem;
 import net.minecraft.item.Item;
@@ -18,6 +19,8 @@ public enum SSP_Items {
    Quantum_chestplate,
    Quantum_leggins,
    Quantum_boosts,
+   QUANTUM_SABER,
+   SPECTRAL_SABER,
    CRAFTING;
 
    private Item instance;
@@ -54,6 +57,28 @@ public enum SSP_Items {
       Quantum_chestplate.setInstance(new ItemArmorQuantumChestplate());
       Quantum_leggins.setInstance(new ItemArmorQuantumLeggins());
       Quantum_boosts.setInstance(new ItemArmorQuantumBoosts());
+      QUANTUM_SABER.setInstance(
+         new ItemNanoSaber(
+            "quantumsaber",
+            10,
+            Configs1.saberQuantumMaxCharge,
+            Configs1.saberQuantumTransferLimit,
+            Configs1.saberQuantumTier,
+            Configs1.saberQuantumActiveDamage,
+            Configs1.saberQuantumDamage
+         )
+      );
+      SPECTRAL_SABER.setInstance(
+         new ItemNanoSaber(
+            "spectralsaber",
+            10,
+            Configs1.saberSpectralMaxCharge,
+            Configs1.saberSpectralTransferLimit,
+            Configs1.saberSpectralTier,
+            Configs1.saberSpectralActiveDamage,
+            Configs1.saberSpectralDamage
+         )
+      );
       if (side == Side.CLIENT) {
          doModelGuf();
       }

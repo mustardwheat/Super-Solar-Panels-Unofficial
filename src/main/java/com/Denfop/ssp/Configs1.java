@@ -26,6 +26,16 @@ public final class Configs1 {
    public static boolean canCraftASH;
    public static boolean canCraftHSH;
    public static boolean canCraftUHSH;
+   public static int saberQuantumDamage;
+   public static int saberQuantumActiveDamage;
+   public static int saberQuantumMaxCharge;
+   public static int saberQuantumTransferLimit;
+   public static int saberQuantumTier;
+   public static int saberSpectralDamage;
+   public static int saberSpectralActiveDamage;
+   public static int saberSpectralMaxCharge;
+   public static int saberSpectralTransferLimit;
+   public static int saberSpectralTier;
    private static final String NEW_LINE = System.getProperty("line.separator");
    private static final String CONFIG_VERSION = "2.0";
 
@@ -74,6 +84,17 @@ public final class Configs1 {
          canCraftASH = !config.get("settings Quantum Boosts", "Disable Effect REGENERATION ", false).getBoolean(false);
          canCraftHSP = !config.get("settings Quantum Leggins", "Disable Effect SPEED ", false).getBoolean(false);
          canCraftHSH = !config.get("settings Quantum Leggins", "Disable Effect LUCK", false).getBoolean(false);
+         // 量子剑/光谱剑数值（默认值与 1.4 保持一致）
+         saberQuantumDamage = config.get("settings quantum saber", "Damage", 11).getInt(11);
+         saberQuantumActiveDamage = config.get("settings quantum saber", "ActiveDamage", 29).getInt(29);
+         saberQuantumMaxCharge = config.get("settings quantum saber", "maxCharge", 300000).getInt(300000);
+         saberQuantumTransferLimit = config.get("settings quantum saber", "transferLimit", 2000).getInt(2000);
+         saberQuantumTier = config.get("settings quantum saber", "tier", 4).getInt(4);
+         saberSpectralDamage = config.get("settings spectral saber", "Damage", 14).getInt(14);
+         saberSpectralActiveDamage = config.get("settings spectral saber", "ActiveDamage", 39).getInt(39);
+         saberSpectralMaxCharge = config.get("settings spectral saber", "maxCharge", 600000).getInt(600000);
+         saberSpectralTransferLimit = config.get("settings spectral saber", "transferLimit", 2000).getInt(2000);
+         saberSpectralTier = config.get("settings spectral saber", "tier", 5).getInt(5);
       } catch (Exception var7) {
          SuperSolarPanels.log.fatal("Fatal error reading config file.", var7);
          throw new RuntimeException(var7);

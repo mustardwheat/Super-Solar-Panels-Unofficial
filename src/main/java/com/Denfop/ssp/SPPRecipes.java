@@ -11,6 +11,7 @@ import ic2.api.recipe.IRecipeInput;
 import ic2.api.recipe.IRecipeInputFactory;
 import ic2.api.recipe.Recipes;
 import ic2.core.recipe.ColourCarryingRecipe;
+import ic2.core.util.StackUtil;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -265,6 +266,35 @@ final class SPPRecipes {
       addExtrudingRecipe(
          input.forStack(IC2Items.getItem("crafting", "coal_chunk"), 9),
          SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.coal_chunk)
+      );
+      // 双剑配方：1.4 原配方的纳米粉尘（dust）按维护决议替换为烈焰粉
+      addShapedRecipe(
+         new ItemStack(SSP_Items.QUANTUM_SABER.getInstance()),
+         "O  ",
+         "OD ",
+         "OBC",
+         'O',
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.nanobox),
+         'B',
+         Items.BLAZE_POWDER,
+         'D',
+         StackUtil.copyWithWildCard(IC2Items.getItem("nano_saber")),
+         'C',
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.quantumitems6)
+      );
+      addShapedRecipe(
+         new ItemStack(SSP_Items.SPECTRAL_SABER.getInstance()),
+         "O  ",
+         "OD ",
+         "OBC",
+         'O',
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.QuantumItems3),
+         'B',
+         Items.BLAZE_POWDER,
+         'D',
+         new ItemStack(SSP_Items.QUANTUM_SABER.getInstance()),
+         'C',
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.QuantumItems5)
       );
    }
 
