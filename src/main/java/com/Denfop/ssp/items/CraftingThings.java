@@ -48,7 +48,14 @@ public class CraftingThings extends ItemMulti<com.chocohead.advsolar.items.ItemC
       QuantumItems4(14),
       QuantumItems5(15),
       photoniy_ingot(16),
-      photoniy(17);
+      photoniy(17),
+      quantumitems6(18),
+      advanced_core(19),
+      hybrid_core(20),
+      ultimate_core(21),
+      compresscarbon(22),
+      coal_chunk(23),
+      compresscarbonultra(24);
 
       private final String name = this.name().toLowerCase(Locale.ENGLISH);
       private final int ID;
@@ -67,7 +74,14 @@ public class CraftingThings extends ItemMulti<com.chocohead.advsolar.items.ItemC
       }
 
       public static CraftingThings.CraftingTypes getFromID(int ID) {
-         return VALUES[ID % VALUES.length];
+         // 按显式 ID 字段查找，枚举声明顺序与 ID 不再强制一一对应
+         for (CraftingThings.CraftingTypes type : VALUES) {
+            if (type.ID == ID) {
+               return type;
+            }
+         }
+
+         return VALUES[0];
       }
    }
 }

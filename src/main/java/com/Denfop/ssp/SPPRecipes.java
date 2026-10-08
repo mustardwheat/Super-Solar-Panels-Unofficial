@@ -219,6 +219,53 @@ final class SPPRecipes {
          'B',
          SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.quantcore2)
       );
+      // 以下为 1.4 移植配方：三核心、量子电路板与碳系压缩材料
+      addShapedRecipe(
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.ultimate_core),
+         "IPI",
+         'I',
+         ASP_Items.CRAFTING.getItemStack(CraftingTypes.ENRICHED_SUNNARIUM_ALLOY),
+         'P',
+         ASP_Items.CRAFTING.getItemStack(CraftingTypes.SUNNARIUM_ALLOY)
+      );
+      addShapedRecipe(
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.advanced_core),
+         "IPI",
+         'I',
+         ASP_Items.CRAFTING.getItemStack(CraftingTypes.SUNNARIUM),
+         'P',
+         input.forOreDict("ingotUranium")
+      );
+      addShapedRecipe(
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.hybrid_core),
+         "IPI",
+         'I',
+         ASP_Items.CRAFTING.getItemStack(CraftingTypes.SUNNARIUM),
+         'P',
+         ASP_Items.CRAFTING.getItemStack(CraftingTypes.SUNNARIUM_ALLOY)
+      );
+      addShapedRecipe(
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.quantumitems6),
+         " A ",
+         "ABA",
+         " A ",
+         'A',
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.nanobox),
+         'B',
+         IC2Items.getItem("crafting", "advanced_circuit")
+      );
+      addCompressorRecipe(
+         input.forStack(IC2Items.getItem("crafting", "carbon_plate"), 9),
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.compresscarbon)
+      );
+      addCompressorRecipe(
+         input.forStack(IC2Items.getItem("crafting", "alloy"), 9),
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.compresscarbonultra)
+      );
+      addExtrudingRecipe(
+         input.forStack(IC2Items.getItem("crafting", "coal_chunk"), 9),
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.coal_chunk)
+      );
    }
 
    private static void addShapedColourRecipe(ItemStack output, Object... inputs) {
@@ -227,6 +274,10 @@ final class SPPRecipes {
 
    private static void addCompressorRecipe(IRecipeInput input, ItemStack output) {
       Recipes.compressor.addRecipe(input, (NBTTagCompound)null, false, new ItemStack[]{output});
+   }
+
+   private static void addExtrudingRecipe(IRecipeInput input, ItemStack output) {
+      Recipes.metalformerExtruding.addRecipe(input, (NBTTagCompound)null, false, new ItemStack[]{output});
    }
 
    public static void addShapedRecipe(ItemStack output, Object... inputs) {
