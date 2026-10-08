@@ -37,3 +37,5 @@ super_solar_panels.crafting.coal_chunk=Compressed Chunk of Coal
 super_solar_panels.crafting.compresscarbonultra=Compressed Composite
 super_solar_panels.quantumsaber=Quantum Saber
 super_solar_panels.spectralsaber=Spectral Saber
+super_solar_panels.twelve_heat_storage=120k Chilled Rod
+super_solar_panels.max_heat_storage=240k Cooled Bar

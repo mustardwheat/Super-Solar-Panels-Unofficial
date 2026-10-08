@@ -36,6 +36,8 @@ public final class Configs1 {
    public static int saberSpectralMaxCharge;
    public static int saberSpectralTransferLimit;
    public static int saberSpectralTier;
+   public static int twelveHeatStorage;
+   public static int maxHeatStorage;
    private static final String NEW_LINE = System.getProperty("line.separator");
    private static final String CONFIG_VERSION = "2.0";
 
@@ -95,6 +97,9 @@ public final class Configs1 {
          saberSpectralMaxCharge = config.get("settings spectral saber", "maxCharge", 600000).getInt(600000);
          saberSpectralTransferLimit = config.get("settings spectral saber", "transferLimit", 2000).getInt(2000);
          saberSpectralTier = config.get("settings spectral saber", "tier", 5).getInt(5);
+         // 冷却单元热容量（默认值与 1.4 保持一致）
+         twelveHeatStorage = config.get("settings twelve heat storage", "heatStorage", 120000).getInt(120000);
+         maxHeatStorage = config.get("settings max heat storage", "heatStorage", 240000).getInt(240000);
       } catch (Exception var7) {
          SuperSolarPanels.log.fatal("Fatal error reading config file.", var7);
          throw new RuntimeException(var7);

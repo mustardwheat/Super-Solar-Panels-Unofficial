@@ -296,6 +296,31 @@ final class SPPRecipes {
          'C',
          SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.QuantumItems5)
       );
+      // 120k/240k 冷却单元（1.4 移植）
+      addShapedColourRecipe(
+         new ItemStack(SSP_Items.TWELVE_HEAT_STORAGE.getInstance()),
+         "TCT",
+         "TGT",
+         "TCT",
+         'C',
+         IC2Items.getItem("hex_heat_storage"),
+         'G',
+         IC2Items.getItem("plate", "iron"),
+         'T',
+         IC2Items.getItem("plate", "tin")
+      );
+      addShapedColourRecipe(
+         new ItemStack(SSP_Items.MAX_HEAT_STORAGE.getInstance()),
+         "TCT",
+         "TGT",
+         "TCT",
+         'C',
+         new ItemStack(SSP_Items.TWELVE_HEAT_STORAGE.getInstance()),
+         'G',
+         IC2Items.getItem("plate", "iron"),
+         'T',
+         IC2Items.getItem("plate", "tin")
+      );
    }
 
    private static void addShapedColourRecipe(ItemStack output, Object... inputs) {

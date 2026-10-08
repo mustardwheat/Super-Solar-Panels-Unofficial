@@ -5,6 +5,7 @@ import com.Denfop.ssp.items.ItemArmorQuantumBoosts;
 import com.Denfop.ssp.items.ItemArmorQuantumChestplate;
 import com.Denfop.ssp.items.ItemArmorQuantumLeggins;
 import com.Denfop.ssp.items.ItemArmourSolarHelmet;
+import com.Denfop.ssp.items.reactors.ItemReactorHeatStorage;
 import com.Denfop.ssp.items.tools.ItemNanoSaber;
 import ic2.core.block.state.IIdProvider;
 import ic2.core.ref.IMultiItem;
@@ -21,6 +22,8 @@ public enum SSP_Items {
    Quantum_boosts,
    QUANTUM_SABER,
    SPECTRAL_SABER,
+   TWELVE_HEAT_STORAGE,
+   MAX_HEAT_STORAGE,
    CRAFTING;
 
    private Item instance;
@@ -79,6 +82,8 @@ public enum SSP_Items {
             Configs1.saberSpectralDamage
          )
       );
+      TWELVE_HEAT_STORAGE.setInstance(new ItemReactorHeatStorage("twelve_heat_storage", Configs1.twelveHeatStorage));
+      MAX_HEAT_STORAGE.setInstance(new ItemReactorHeatStorage("max_heat_storage", Configs1.maxHeatStorage));
       if (side == Side.CLIENT) {
          doModelGuf();
       }
