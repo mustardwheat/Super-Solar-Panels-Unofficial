@@ -1,0 +1,105 @@
+{
+  "com/Denfop/ssp/SSPKeys$KeyWatcher": {
+    "name": "com/Denfop/ssp/SSPKeys$KeyWatcher",
+    "interfaces": [
+      "ic2/core/util/Keyboard$IKeyWatcher"
+    ]
+  },
+  "com/Denfop/ssp/SuperSolarPanels": {
+    "name": "com/Denfop/ssp/SuperSolarPanels",
+    "annotations": [
+      {
+        "type": "CLASS",
+        "name": "Lnet/minecraftforge/fml/common/Mod$EventBusSubscriber;",
+        "target": "com/Denfop/ssp/SuperSolarPanels"
+      },
+      {
+        "type": "CLASS",
+        "name": "Lnet/minecraftforge/fml/common/Mod;",
+        "target": "com/Denfop/ssp/SuperSolarPanels",
+        "values": {
+          "acceptedMinecraftVersions": {
+            "value": "[1.12,1.12.2]"
+          },
+          "dependencies": {
+            "value": "required-after:advanced_solar_panels@[4.3.0,);"
+          },
+          "modid": {
+            "value": "super_solar_panels"
+          },
+          "name": {
+            "value": "Super Solar Panels"
+          },
+          "version": {
+            "value": "1.0.0"
+          }
+        }
+      },
+      {
+        "type": "METHOD",
+        "name": "Lnet/minecraftforge/fml/common/eventhandler/SubscribeEvent;",
+        "target": "register(Lic2/api/event/TeBlockFinalCallEvent;)V"
+      },
+      {
+        "type": "METHOD",
+        "name": "Lnet/minecraftforge/fml/common/Mod$EventHandler;",
+        "target": "load(Lnet/minecraftforge/fml/common/event/FMLPreInitializationEvent;)V"
+      },
+      {
+        "type": "METHOD",
+        "name": "Lnet/minecraftforge/fml/common/Mod$EventHandler;",
+        "target": "init(Lnet/minecraftforge/fml/common/event/FMLInitializationEvent;)V"
+      },
+      {
+        "type": "METHOD",
+        "name": "Lnet/minecraftforge/fml/common/eventhandler/SubscribeEvent;",
+        "target": "doColourThings(Lnet/minecraftforge/client/event/ColorHandlerEvent$Item;)V"
+      },
+      {
+        "type": "METHOD",
+        "name": "Lnet/minecraftforge/fml/common/Mod$EventHandler;",
+        "target": "postInit(Lnet/minecraftforge/fml/common/event/FMLPostInitializationEvent;)V"
+      }
+    ]
+  },
+  "com/Denfop/ssp/items/CraftingThings$CraftingTypes": {
+    "name": "com/Denfop/ssp/items/CraftingThings$CraftingTypes",
+    "interfaces": [
+      "ic2/core/block/state/IIdProvider"
+    ]
+  },
+  "com/Denfop/ssp/items/ItemArmourSolarHelmet": {
+    "name": "com/Denfop/ssp/items/ItemArmourSolarHelmet",
+    "interfaces": [
+      "ic2/core/ref/IItemModelProvider",
+      "ic2/api/item/IElectricItem",
+      "ic2/api/item/IMetalArmor",
+      "net/minecraftforge/common/ISpecialArmor",
+      "ic2/api/item/IItemHudProvider"
+    ]
+  },
+  "com/Denfop/ssp/items/ItemBoosts": {
+    "name": "com/Denfop/ssp/items/ItemBoosts",
+    "interfaces": [
+      "ic2/core/item/armor/jetpack/IBoostingJetpack"
+    ]
+  },
+  "com/Denfop/ssp/items/ItemChest": {
+    "name": "com/Denfop/ssp/items/ItemChest",
+    "interfaces": [
+      "ic2/core/item/armor/jetpack/IBoostingJetpack"
+    ]
+  },
+  "com/Denfop/ssp/items/ItemLeggins": {
+    "name": "com/Denfop/ssp/items/ItemLeggins",
+    "interfaces": [
+      "ic2/core/item/armor/jetpack/IBoostingJetpack"
+    ]
+  },
+  "com/Denfop/ssp/tiles/SSPBlock": {
+    "name": "com/Denfop/ssp/tiles/SSPBlock",
+    "interfaces": [
+      "ic2/core/block/ITeBlock"
+    ]
+  }
+}

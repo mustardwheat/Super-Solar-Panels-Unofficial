@@ -1,0 +1,108 @@
+apply from: 'gradle/scripts/helpers.gradle'
+
+repositories {
+    // Other repositories described by default:
+    // CleanroomMC: https://maven.cleanroommc.com
+    exclusiveContent {
+        forRepository {
+            maven {
+                name 'CurseMaven'
+                url 'https://cursemaven.com'
+            }
+        }
+        filter {
+            includeGroup 'curse.maven'
+        }
+    }
+    exclusiveContent {
+        forRepository {
+            maven {
+                name 'Modrinth'
+                url 'https://api.modrinth.com/maven'
+            }
+        }
+        filter {
+            includeGroup 'maven.modrinth'
+        }
+    }
+    // NOTE(local): progwml6 is unreachable and blamejared has DNS issues from this
+    // network. The JEI api jar is vendored in libs/ instead (see below).
+    // exclusiveContent {
+    //     forRepository {
+    //         maven {
+    //             name 'BlameJared'
+    //             url 'https://maven.blamejared.com'
+    //         }
+    //     }
+    //     forRepository {
+    //         maven {
+    //             name 'progwml6'
+    //             url 'https://dvs1.progwml6.com/files/maven'
+    //         }
+    //     }
+    //     filter {
+    //         includeGroup 'mezz.jei'
+    //     }
+    // }
+    mavenLocal() // Must be last for caching to work
+}
+
+dependencies {
+    // NOTE(local): maven.cleanroommc.com is unreachable from this network; both are
+    // dev-env-only conveniences and do not affect compilation or the shipped jar.
+    // runtimeOnly 'com.cleanroommc:strip-latest-forge-requirements:1.0'
+    // runtimeOnly 'com.cleanroommc:osxnarratorblocker:1.0'
+
+    // Example - Dependency descriptor:
+    // 'com.google.code.gson:gson:2.8.6' << group: com.google.code.gson, name:gson, version:2.8.6
+    // 'group:name:version:classifier' where classifier is optional
+
+    // Example - Deobfuscating dependencies:
+    // rfg.deobf('curse.maven:had-enough-items-557549:4543375')
+    // By wrapping a dependency descriptor in rfg.deobf() method call, the dependency is queued for deobfuscation
+    // When deobfuscating, RFG respects the mapping_channel + mapping_version stated in gradle.properties
+
+    // Example - CurseMaven dependencies:
+    // 'curse.maven:had-enough-items-557549:4543375' << had-enough-items = project slug, 557549 = project id, 4543375 = file id
+    // Full documentation: https://cursemaven.com/
+
+    // Example - Modrinth dependencies:
+    // 'maven.modrinth:jei:4.16.1.1000' << jei = project name, 4.16.1.1000 = file version
+    // Full documentation: https://docs.modrinth.com/docs/tutorials/maven/
+
+    // Common dependency types (configuration):
+    // implementation = dependency available at both compile time and runtime
+    // runtimeOnly = runtime dependency
+    // compileOnly = compile time dependency
+    // annotationProcessor = annotation processing dependencies
+    // embed = bundle dependencies into final output artifact (no relocation)
+
+    // Transitive dependencies:
+    // (Dependencies that your dependency depends on)
+    // If you wish to exclude transitive dependencies in the described dependencies
+    // Use a closure as such:
+    // implementation ('com.google.code.gson:gson:2.8.6') {
+    //     transitive = false
+    // }
+
+    // IC2 production jar (SRG names) deobfuscated to the current RFG mappings.
+    // The 2.8.192 *-dev.jar uses classic MCP names (setUnlocalizedName & friends),
+    // which do not exist in RFG's modernized stable_39 mappings.
+    implementation rfg.deobf(files('libs/industrialcraft-2-2.8.222-ex112.jar'))
+    // Chocohead Advanced Solar Panels 4.3.0 (CurseForge project 252714, file 2652182).
+    // Hard dependency of SSP v1.2: com.chocohead.advsolar.* is referenced by 9 sources.
+    implementation rfg.deobf(files('libs/AdvancedSolarPanels-4.3.0.jar'))
+}
+
+// AdvSolarPatch (Su5eD, GPL-3.0): coremod that runtime-patches ASP 4.3.0 for IC2 2.8.191+.
+// IC2 2.8.191 changed InvSlot/InvSlotOutput/InvSlotProcessable constructors from
+// TileEntityInventory-first to IInventorySlotHolder-first; ASP 4.3.0 was compiled
+// against <=2.8.190 and crashes with NoSuchMethodError on newer IC2 without this.
+// It must be discovered as a file coremod (FMLCorePlugin manifest), so it is copied
+// into run/mods rather than placed on the classpath.
+tasks.register('prepareAdvSolarPatch', Copy) {
+    from('libs') { include 'advsolarpatch-*.jar' }
+    into file('run/mods')
+}
+tasks.named('runClient') { dependsOn 'prepareAdvSolarPatch' }
+tasks.named('runServer') { dependsOn 'prepareAdvSolarPatch' }

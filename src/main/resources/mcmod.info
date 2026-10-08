@@ -1,0 +1,16 @@
+[
+{
+  "modid": "super_solar_panels",
+  "name": "Super Solar Panels",
+  "description": "Advanced Solar Panels 4.3.0+ IC2experiment 170+",
+  "version": "1.2.0",
+  "mcversion": "1.12.2",
+  "url": "https://forum.industrial-craft.net/thread/16121-supersolarpanels-remastred-1-7-10-1-12-2/?postID=218762#post218762",
+  "updateUrl": "https://www.curseforge.com/minecraft/mc-mods/super-solar-panels-v-2",
+  "authorList": ["Denfop"],
+  "credits": "The Forge and FML guys, for making this example",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

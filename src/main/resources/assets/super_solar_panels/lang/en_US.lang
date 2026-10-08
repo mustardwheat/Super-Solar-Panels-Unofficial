@@ -1,0 +1,29 @@
+
+super_solar_panels.machines.spectral_solar_panel=Spectral Solar Panel
+super_solar_panels.machines.singular_solar_panel=Singular Solar Panel
+super_solar_panels.machines.admin_solar_panel=Admin Solar Panel
+super_solar_panels.machines.photonic_solar_panel=Photonic Solar Panel
+
+super_solar_panels.crafting.enderquantumcomponent=Ender-Quantum Component
+super_solar_panels.crafting.solarsplitter=Solar Light Splitter
+super_solar_panels.crafting.bluecomponent=Blue Spectral Component
+super_solar_panels.crafting.greencomponent=Green Spectral Component
+super_solar_panels.crafting.redcomponent=Red Spectral Component
+super_solar_panels.solar_helmets.spectral=Spectral Solar Helmet
+super_solar_panels.solar_helmets.singular=Singular Solar Helmet
+super_solar_panels.crafting.photoniy=Photoniy
+super_solar_panels.crafting.photoniy_ingot=Photoniy Ingot
+super_solar_panels.crafting.singularcore=Singular Core
+super_solar_panels.crafting.spectralcore=Spectral Core
+super_solar_panels.graviChestplate1=Enhanced Quantum Chestplate
+super_solar_panels.graviLeggins=Enhanced Quantum Leggings
+super_solar_panels.graviBoosts=Enhanced Quantum Boots
+super_solar_panels.crafting.quantumitems5=Spectral Circuit
+super_solar_panels.crafting.quantumitems4=Compressed Iridium Plate
+super_solar_panels.crafting.quantumitems3=Quantum Tool Box
+super_solar_panels.crafting.quantumitems2=Advanced Compressed Iridium Plate
+super_solar_panels.crafting.nanobox=Nano Tool Box
+super_solar_panels.crafting.quantcore1=§6Photonic Quantum Core
+super_solar_panels.crafting.quantcore2=§cAdmin Quantum Core
+super_solar_panels.crafting.enrichedsunnariumalloy2=§cPhotonic Enriched Sunnarium Alloy
+super_solar_panels.crafting.enrichedsunnariumalloy3=§cAdmin Enriched Sunnarium Alloy

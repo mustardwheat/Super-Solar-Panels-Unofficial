@@ -1,0 +1,6 @@
+{
+	"parent": "ic2:item/default",
+	"textures": {
+		"layer0": "super_solar_panels:items/charging_lapotron_crystal_2"
+	}
+}
