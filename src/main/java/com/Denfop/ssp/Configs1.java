@@ -63,6 +63,11 @@ public final class Configs1 {
             config.get("solars", "PhotonicStorage", 999999999).getInt(999999999),
             config.get("solars", "PhotonicTier", 9).getInt(9)
          );
+         // 各级太阳能板的最大输出（EU/t），tier 决定电压等级，maxOutput 决定实际输出上限
+         TileEntitySpectral.maxOutput = config.get("solars", "SpectralMaxOutput", 32768).getInt(32768);
+         TileEntitySingular.maxOutput = config.get("solars", "SingularMaxOutput", 262144).getInt(262144);
+         TileEntityAdmin.maxOutput = config.get("solars", "AdminMaxOutput", 1048576).getInt(1048576);
+         TileEntityphotonic.maxOutput = config.get("solars", "PhotonicMaxOutput", 1000000000).getInt(1000000000);
          canCraftDoubleSlabs = !config.get("settings Quantum chestplate", "Disable Effect FIRE RESISTANCE ", false).getBoolean(false);
          canCraftMT = !config.get("settings Quantum Boosts", "Disable Effect WATER BREATHING ", false).getBoolean(false);
          canCraftASP = !config.get("settings Quantum Boosts", "Disable Effect JUMP BOOST", false).getBoolean(false);
