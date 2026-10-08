@@ -57,7 +57,6 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
       super(ArmorMaterial.DIAMOND, -1, EntityEquipmentSlot.HEAD);
       ((ItemArmourSolarHelmet)BlocksItems.registerItem(this, new ResourceLocation("super_solar_panels", type.getName())))
          .setTranslationKey(type.getLocalisedName());
-      this.setCreativeTab(IC2.tabIC2);
       this.setMaxDamage(27);
       this.type = type;
    }

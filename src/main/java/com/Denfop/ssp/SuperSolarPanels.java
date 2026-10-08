@@ -89,6 +89,14 @@ public final class SuperSolarPanels {
 
    @EventHandler
    public void postInit(FMLPostInitializationEvent event) {
+      // 将 SSP 与 ASP 注册的全部物品统一归入 SuperSolarPanels 创造标签页
+      for (net.minecraft.item.Item item : net.minecraftforge.fml.common.registry.ForgeRegistries.ITEMS) {
+         ResourceLocation registryName = item.getRegistryName();
+         if (registryName != null
+            && ("super_solar_panels".equals(registryName.getNamespace()) || "advanced_solar_panels".equals(registryName.getNamespace()))) {
+            item.setCreativeTab(SSPTab.TAB);
+         }
+      }
    }
 
    public static ResourceLocation getIdentifier(String name) {

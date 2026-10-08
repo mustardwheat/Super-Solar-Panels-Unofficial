@@ -1,5 +1,6 @@
 
 super_solar_panels.machines.spectral_solar_panel=Spectral Solar Panel
+itemGroup.SuperSolarPanels=SuperSolarPanels
 super_solar_panels.machines.singular_solar_panel=Singular Solar Panel
 super_solar_panels.machines.admin_solar_panel=Admin Solar Panel
 super_solar_panels.machines.photonic_solar_panel=Photonic Solar Panel

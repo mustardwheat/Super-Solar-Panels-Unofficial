@@ -1,4 +1,5 @@
 super_solar_panels.machines.spectral_solar_panel=Спектральная солнечная панель
+itemGroup.SuperSolarPanels=SuperSolarPanels
 super_solar_panels.machines.singular_solar_panel=Сингулярная солнечная панель
 super_solar_panels.machines.admin_solar_panel=Светоадсорбционная солнечная панель
 super_solar_panels.machines.photonic_solar_panel=Фотонная солнечная панель
