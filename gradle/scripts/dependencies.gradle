@@ -92,6 +92,8 @@ dependencies {
     // Chocohead Advanced Solar Panels 4.3.0 (CurseForge project 252714, file 2652182).
     // Hard dependency of SSP v1.2: com.chocohead.advsolar.* is referenced by 9 sources.
     implementation rfg.deobf(files('libs/AdvancedSolarPanels-4.3.0.jar'))
+    // JEI 4.22.0.1035（Modrinth cdn），仅 dev 运行时用于查阅配方，不参与编译与发布
+    runtimeOnly rfg.deobf(files('libs/jei_1.12.2-4.22.0.1035.jar'))
 }
 
 // AdvSolarPatch (Su5eD, GPL-3.0): coremod that runtime-patches ASP 4.3.0 for IC2 2.8.191+.
