@@ -10,6 +10,7 @@ import ic2.api.item.IElectricItem;
 import ic2.api.item.IItemHudProvider;
 import ic2.api.item.IMetalArmor;
 import ic2.core.IC2;
+import ic2.core.IC2Potion;
 import ic2.core.init.BlocksItems;
 import ic2.core.init.Localization;
 import ic2.core.item.ElectricItemManager;
@@ -17,8 +18,10 @@ import ic2.core.item.ItemTinCan;
 import ic2.core.ref.IItemModelProvider;
 import ic2.core.ref.ItemName;
 import ic2.core.util.StackUtil;
+import java.util.IdentityHashMap;
 import java.util.LinkedList;
 import java.util.Locale;
+import java.util.Map;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -48,10 +51,22 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvider, IElectricItem, IMetalArmor, ISpecialArmor, IItemHudProvider {
    protected static final int DEFAULT_COLOUR = -1;
+   /** 各负面药水对应的清除耗电量（EU），移植自 1.4 */
+   protected static final Map<Potion, Integer> potionRemovalCost = new IdentityHashMap<>();
    protected final ItemArmourSolarHelmet.SolarHelmetTypes type;
    public static boolean chargeWholeInventory = false;
    protected GenerationState state;
    protected int ticker;
+
+   static {
+      potionRemovalCost.put(IC2Potion.radiation, 5000);
+      potionRemovalCost.put(MobEffects.POISON, 400);
+      potionRemovalCost.put(MobEffects.WITHER, 500);
+      potionRemovalCost.put(MobEffects.SLOWNESS, 300);
+      potionRemovalCost.put(MobEffects.NAUSEA, 1000);
+      potionRemovalCost.put(MobEffects.HUNGER, 300);
+      potionRemovalCost.put(MobEffects.WEAKNESS, 400);
+   }
 
    public ItemArmourSolarHelmet(ItemArmourSolarHelmet.SolarHelmetTypes type) {
       super(ArmorMaterial.DIAMOND, -1, EntityEquipmentSlot.HEAD);
@@ -239,8 +254,16 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
             IC2.achievements.issueAchievement(player, "starveWithQHelmet");
          }
 
-         for (Object effect : new LinkedList(player.getActivePotionEffects())) {
-            Potion var33 = ((PotionEffect)effect).getPotion();
+         for (PotionEffect effect : new LinkedList<>(player.getActivePotionEffects())) {
+            Potion potion = effect.getPotion();
+            Integer cost = potionRemovalCost.get(potion);
+            if (cost != null) {
+               cost = cost * Math.max(1, effect.getAmplifier() + 1);
+               if (ElectricItem.manager.canUse(stack, (double)cost)) {
+                  ElectricItem.manager.use(stack, (double)cost, null);
+                  IC2.platform.removePotion(player, potion);
+               }
+            }
          }
 
          boolean Nightvision = nbtData.getBoolean("Nightvision");
