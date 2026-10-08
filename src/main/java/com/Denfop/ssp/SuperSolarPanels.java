@@ -57,7 +57,6 @@ public final class SuperSolarPanels {
       OreDictionary.registerOre("enderquantumcomponent", SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.enderquantumcomponent));
       OreDictionary.registerOre("solarsplitter", SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.solarsplitter));
       OreDictionary.registerOre("bluecomponent", SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.bluecomponent));
-      OreDictionary.registerOre("greencomponent", SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.greencomponent));
       OreDictionary.registerOre("redcomponent", SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.redcomponent));
       OreDictionary.registerOre("singularcore", SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.singularcore));
       OreDictionary.registerOre("photoniy", SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.photoniy));

@@ -7,7 +7,6 @@ super_solar_panels.machines.photonic_solar_panel=Фотонная солнечн
 super_solar_panels.crafting.enderquantumcomponent=Эндер-Квант Компонент
 super_solar_panels.crafting.solarsplitter=Спектральный расщепитель солнечного света
 super_solar_panels.crafting.bluecomponent=Спектральный компонент синего диапазона
-super_solar_panels.crafting.greencomponent=Спектральный компонент зелёного диапазона
 super_solar_panels.crafting.redcomponent=Спектральный компонент красного диапазона
 super_solar_panels.solar_helmets.spectral=Спектральный солнечный шлем
 super_solar_panels.solar_helmets.singular=Сингулярный солнечный шлем

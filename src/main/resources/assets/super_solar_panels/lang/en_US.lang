@@ -8,7 +8,6 @@ super_solar_panels.machines.photonic_solar_panel=Photonic Solar Panel
 super_solar_panels.crafting.enderquantumcomponent=Ender-Quantum Component
 super_solar_panels.crafting.solarsplitter=Solar Light Splitter
 super_solar_panels.crafting.bluecomponent=Blue Spectral Component
-super_solar_panels.crafting.greencomponent=Green Spectral Component
 super_solar_panels.crafting.redcomponent=Red Spectral Component
 super_solar_panels.solar_helmets.spectral=Spectral Solar Helmet
 super_solar_panels.solar_helmets.singular=Singular Solar Helmet

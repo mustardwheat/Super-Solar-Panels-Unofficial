@@ -47,15 +47,9 @@ final class SPPRecipes {
          'A',
          SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.redcomponent),
          'B',
-         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.greencomponent),
+         ASP_Items.CRAFTING.getItemStack(CraftingTypes.IRRADIANT_GLASS_PANE),
          'C',
          SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.bluecomponent)
-      );
-      addShapedRecipe(
-         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.greencomponent),
-         "A  ",
-         'A',
-         ASP_Items.CRAFTING.getItemStack(CraftingTypes.IRRADIANT_GLASS_PANE)
       );
       addShapelessRecipe(
          new ItemStack(SSP_Items.Spectral_SOLAR_HELMET.getInstance()),

@@ -34,7 +34,6 @@ public class CraftingThings extends ItemMulti<com.chocohead.advsolar.items.ItemC
       enderquantumcomponent(0),
       solarsplitter(1),
       bluecomponent(2),
-      greencomponent(3),
       redcomponent(4),
       singularcore(5),
       spectralcore(6),
