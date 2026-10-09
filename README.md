@@ -14,7 +14,7 @@ supporting equipment, on top of Chocohead's Advanced Solar Panels.
 - Spectral and Singular Solar Helmets: charge your armor from sunlight, provide
   night vision, breathing and feeding support, and remove negative potion effects
   at an EU cost.
-- Enhanced Quantum Chestplate, Leggings and Boots.
+- Enhanced Quantum Helmet, Chestplate, Leggings and Boots.
 - Quantum Saber and Spectral Saber: electric weapons that drain nano and quantum
   armor on hit.
 - 120k and 240k reactor heat storage cells.
@@ -31,16 +31,17 @@ supporting equipment, on top of Chocohead's Advanced Solar Panels.
 | Minecraft | 1.12.2 | Forge 14.23.5.2847 or newer |
 | IndustrialCraft 2 | 2.8.x | compiled against 2.8.222-ex112 |
 | Advanced Solar Panels (Chocohead) | 4.3.0 | hard dependency (`required-after`) |
-| AdvSolarPatch (Su5eD) | 1.1 | required at runtime when IC2 >= 2.8.191 |
+| [AdvSolarPatch (fork)](https://github.com/mustardwheat/AdvSolarPatch) | 1.2.2 | hard dependency (`required-after`) |
 
-### IC2 version caveat
+### Why AdvSolarPatch is required
 
 IC2 2.8.191 changed the `InvSlot` family constructors. Advanced Solar Panels 4.3.0
 was compiled against IC2 2.8.190 or older and crashes with `NoSuchMethodError` on
-newer builds. [AdvSolarPatch](https://github.com/Su5eD/AdvSolarPatch) fixes this at
-runtime. Install it together with Advanced Solar Panels when you use IC2 2.8.191 or
-newer. The dev runtime installs it automatically; production instances must add it
-to `mods/` manually.
+newer builds. Our [fork of AdvSolarPatch](https://github.com/mustardwheat/AdvSolarPatch)
+fixes this at runtime and additionally makes the `MaxOutput` of the four ASP solar
+panels configurable (`AdvancedSPMaxOutput`/`HybrydSPMaxOutput`/`UltimateHSPMaxOutput`/`QuantumSPMaxOutput`
+in the ASP config). Install it together with Advanced Solar Panels. The dev runtime
+installs it automatically; production instances must add it to `mods/` manually.
 
 ## Building
 
@@ -77,11 +78,15 @@ never required by the shipped jar.
 All options live in `config/super_solar_panels.cfg` and apply to both the client
 and the server. Keep the values identical on both sides.
 
-- `solars`: generation, storage, tier and `MaxOutput` of each solar panel.
+- `settings spectral solar panel` / `settings singular solar panel` /
+  `settings admin solar panel` / `settings photonic solar panel`: generation,
+  storage, tier and `MaxOutput` of each solar panel, one group per panel.
 - `settings quantum saber` / `settings spectral saber`: damage, capacity,
   transfer limit and tier of each saber.
 - `settings twelve heat storage` / `settings max heat storage`: heat capacity of
   each reactor heat storage cell.
+- `settings quantum helmet`: capacity, transfer limit and tier of the Superior
+  Quantum Helmet.
 
 ## License & credits
 
@@ -90,5 +95,6 @@ GPL-3.0, following the upstream repository.
 - Original Super Solar Panels mod by **Denfop**.
 - Upstream history by **[ZelGimi](https://github.com/ZelGimi/industrialupgrade)**.
 - Advanced Solar Panels by Icedfire, SeNtiMeL and **Chocohead**.
-- IC2 compatibility patch by **[Su5eD](https://github.com/Su5eD/AdvSolarPatch)**.
+- IC2 compatibility patch by **Su5eD**, maintained as [our fork](https://github.com/mustardwheat/AdvSolarPatch)
+  with configurable ASP solar output.
 - MoreElectricTools by **[lr8soft](https://github.com/lr8soft/MoreElectricTools)**.

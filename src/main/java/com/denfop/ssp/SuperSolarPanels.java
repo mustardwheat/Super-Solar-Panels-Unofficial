@@ -31,7 +31,7 @@ import org.apache.logging.log4j.Logger;
 @Mod(
    modid = "super_solar_panels",
    name = "Super Solar Panels",
-   dependencies = "required-after:advanced_solar_panels@[4.3.0,);",
+   dependencies = "required-after:advanced_solar_panels@[4.3.0,);required-after:advsolarpatch@[1.2.2,);",
    version = "1.2.0",
    acceptedMinecraftVersions = "[1.12,1.12.2]"
 )

@@ -98,12 +98,11 @@ dependencies {
     implementation rfg.deobf(files('libs/MoreElectricTools.v1.662.jar'))
 }
 
-// AdvSolarPatch (Su5eD, GPL-3.0): coremod that runtime-patches ASP 4.3.0 for IC2 2.8.191+.
-// IC2 2.8.191 changed InvSlot/InvSlotOutput/InvSlotProcessable constructors from
-// TileEntityInventory-first to IInventorySlotHolder-first; ASP 4.3.0 was compiled
-// against <=2.8.190 and crashes with NoSuchMethodError on newer IC2 without this.
-// It must be discovered as a file coremod (FMLCorePlugin manifest), so it is copied
-// into run/mods rather than placed on the classpath.
+// AdvSolarPatch（本项目维护的 fork，github.com/mustardwheat/AdvSolarPatch，GPL-3.0）：
+// 在 Su5eD 原版（运行时修补 ASP 4.3.0 以兼容 IC2 2.8.191+ 的 InvSlot 构造器变更）基础上，
+// 通过 shaded Mixin 为 ASP 四种太阳能新增 MaxOutput 配置项，是 SSPU 的硬依赖。
+// 它必须以文件形式被识别为 coremod（FMLCorePlugin manifest），因此复制进 run/mods
+// 而不是放入编译 classpath。
 tasks.register('prepareAdvSolarPatch', Copy) {
     from('libs') { include 'advsolarpatch-*.jar' }
     into file('run/mods')
