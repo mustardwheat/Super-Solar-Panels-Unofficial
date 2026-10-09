@@ -64,9 +64,9 @@ Common tasks:
 | `gradlew runClient` | starts a dev client with IC2, ASP, AdvSolarPatch, METS and JEI |
 | `gradlew runServer` | starts a dev server with IC2, ASP, AdvSolarPatch and METS |
 
-`runClient` and `runServer` first execute `prepareAdvSolarPatch`, which copies
-the vendored patch into `run/mods`. JEI is present in the dev runtime only and is
-never required by the shipped jar.
+AdvSolarPatch is loaded as a classpath dependency in the dev runtime (it must not be
+copied into `run/mods`, or FML discovers it twice). JEI is present in the dev
+runtime only and is never required by the shipped jar.
 
 ## Continuous integration
 
