@@ -34,7 +34,7 @@ public enum SSPBlock implements ITeBlock {
       this.teClass = teClass;
       this.itemMeta = itemMeta;
       this.rarity = rarity;
-      GameRegistry.registerTileEntity(teClass, "suoer_solar_panels:" + this.getName());
+      GameRegistry.registerTileEntity(teClass, "super_solar_panels:" + this.getName());
    }
 
    public boolean hasItem() {
