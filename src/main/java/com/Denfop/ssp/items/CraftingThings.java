@@ -54,7 +54,10 @@ public class CraftingThings extends ItemMulti<com.chocohead.advsolar.items.ItemC
       ultimate_core(21),
       compresscarbon(22),
       coal_chunk(23),
-      compresscarbonultra(24);
+      compresscarbonultra(24),
+      rune_sun(25),
+      rune_night(26),
+      rune_energy(27);
 
       private final String name = this.name().toLowerCase(Locale.ENGLISH);
       private final int ID;

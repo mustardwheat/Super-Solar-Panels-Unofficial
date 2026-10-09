@@ -29,6 +29,9 @@ super_solar_panels.crafting.ultimate_core=终极核心
 super_solar_panels.crafting.compresscarbon=压缩碳板
 super_solar_panels.crafting.coal_chunk=压缩煤块
 super_solar_panels.crafting.compresscarbonultra=压缩高级合金
+super_solar_panels.crafting.rune_sun=太阳符文
+super_solar_panels.crafting.rune_night=黑夜符文
+super_solar_panels.crafting.rune_energy=能量符文
 
 super_solar_panels.solar_helmets.spectral=光谱太阳能头盔
 super_solar_panels.solar_helmets.singular=奇异太阳能头盔
