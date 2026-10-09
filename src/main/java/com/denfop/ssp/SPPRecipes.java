@@ -182,6 +182,21 @@ final class SPPRecipes {
          'B',
          SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.photoniy)
       );
+      // 强化量子头盔（1.4 移植）
+      addShapedRecipe(
+         new ItemStack(SSP_Items.QUANTUM_HELMET.getInstance()),
+         "CBC",
+         "CAC",
+         " H ",
+         'A',
+         IC2Items.getItem("quantum_helmet"),
+         'B',
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.quantumitems6),
+         'C',
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.QuantumItems3),
+         'H',
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.QuantumItems5)
+      );
       addShapedRecipe(
          SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.EnrichedSunnariumAlloy3),
          "ABA",

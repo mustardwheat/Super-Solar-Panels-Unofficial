@@ -3,6 +3,7 @@ package com.denfop.ssp;
 import com.denfop.ssp.items.CraftingThings;
 import com.denfop.ssp.items.ItemArmorQuantumBoosts;
 import com.denfop.ssp.items.ItemArmorQuantumChestplate;
+import com.denfop.ssp.items.ItemArmorQuantumHelmet;
 import com.denfop.ssp.items.ItemArmorQuantumLeggins;
 import com.denfop.ssp.items.ItemArmourSolarHelmet;
 import com.denfop.ssp.items.reactors.ItemReactorHeatStorage;
@@ -20,6 +21,7 @@ public enum SSP_Items {
    Quantum_chestplate,
    Quantum_leggins,
    Quantum_boosts,
+   QUANTUM_HELMET,
    QUANTUM_SABER,
    SPECTRAL_SABER,
    TWELVE_HEAT_STORAGE,
@@ -60,6 +62,7 @@ public enum SSP_Items {
       Quantum_chestplate.setInstance(new ItemArmorQuantumChestplate());
       Quantum_leggins.setInstance(new ItemArmorQuantumLeggins());
       Quantum_boosts.setInstance(new ItemArmorQuantumBoosts());
+      QUANTUM_HELMET.setInstance(new ItemArmorQuantumHelmet(ItemArmorQuantumHelmet.SolarHelmetTypes.Helmet));
       QUANTUM_SABER.setInstance(
          new ItemNanoSaber(
             "quantumsaber",

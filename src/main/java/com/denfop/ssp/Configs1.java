@@ -31,6 +31,9 @@ public final class Configs1 {
    public static int saberSpectralTier;
    public static int twelveHeatStorage;
    public static int maxHeatStorage;
+   public static int quantumHelmetMaxCharge;
+   public static int quantumHelmetTransferLimit;
+   public static int quantumHelmetTier;
 
    static void loadConfig(File config, boolean client) {
       SuperSolarPanels.log.info("Loading ASP Config from " + config.getAbsolutePath());
@@ -91,6 +94,10 @@ public final class Configs1 {
          // 冷却单元热容量（默认值与 1.4 保持一致）
          twelveHeatStorage = config.get("settings twelve heat storage", "heatStorage", 120000).getInt(120000);
          maxHeatStorage = config.get("settings max heat storage", "heatStorage", 240000).getInt(240000);
+         // 强化量子头盔数值（默认值与 1.4 保持一致）
+         quantumHelmetMaxCharge = config.get("settings quantum helmet", "maxCharge", 100000000).getInt(100000000);
+         quantumHelmetTransferLimit = config.get("settings quantum helmet", "transferLimit", 100000).getInt(100000);
+         quantumHelmetTier = config.get("settings quantum helmet", "tier", 8).getInt(8);
       } catch (Exception var7) {
          SuperSolarPanels.log.fatal("Fatal error reading config file.", var7);
          throw new RuntimeException(var7);
