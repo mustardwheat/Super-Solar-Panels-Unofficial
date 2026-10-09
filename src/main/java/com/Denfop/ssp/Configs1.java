@@ -15,6 +15,10 @@ public final class Configs1 {
    private static final String SOLARS = "solars";
    private static final String QUANTUM_GENERATOR = "quantum generator";
    private static final String CRAFTING = "recipes settings";
+   private static final String SPECTRAL_SOLAR = "settings spectral solar panel";
+   private static final String SINGULAR_SOLAR = "settings singular solar panel";
+   private static final String ADMIN_SOLAR = "settings admin solar panel";
+   private static final String PHOTONIC_SOLAR = "settings photonic solar panel";
    static boolean hardRecipes;
    static boolean easyASPRecipe;
    public static boolean canCraftDoubleSlabs;
@@ -51,35 +55,35 @@ public final class Configs1 {
 
       try {
          config.load();
+         // 每种太阳能板一个配置组，键名与其他物品的配置组保持一致
          TileEntitySpectral.settings = new SolarConfig(
-            config.get("solars", "SpecrtalGenDay", 32768).getInt(32768),
-            config.get("solars", "SpecrtalGenNight", 20000).getInt(20000),
-            config.get("solars", "SpecrtalStorage", 100000000).getInt(100000000),
-            config.get("solars", "SpecrtalTier", 6).getInt(6)
+            config.get(SPECTRAL_SOLAR, "GenDay", 32768).getInt(32768),
+            config.get(SPECTRAL_SOLAR, "GenNight", 20000).getInt(20000),
+            config.get(SPECTRAL_SOLAR, "Storage", 100000000).getInt(100000000),
+            config.get(SPECTRAL_SOLAR, "Tier", 6).getInt(6)
          );
+         TileEntitySpectral.maxOutput = config.get(SPECTRAL_SOLAR, "MaxOutput", 32768).getInt(32768);
          TileEntitySingular.settings = new SolarConfig(
-            config.get("solars", "SingularGenDay", 262144).getInt(262144),
-            config.get("solars", "SingularGenNight", 196608).getInt(196608),
-            config.get("solars", "SingularStorage", 1000000000).getInt(100000),
-            config.get("solars", "SingularTier", 7).getInt(7)
+            config.get(SINGULAR_SOLAR, "GenDay", 262144).getInt(262144),
+            config.get(SINGULAR_SOLAR, "GenNight", 196608).getInt(196608),
+            config.get(SINGULAR_SOLAR, "Storage", 1000000000).getInt(1000000000),
+            config.get(SINGULAR_SOLAR, "Tier", 7).getInt(7)
          );
+         TileEntitySingular.maxOutput = config.get(SINGULAR_SOLAR, "MaxOutput", 262144).getInt(262144);
          TileEntityAdmin.settings = new SolarConfig(
-            config.get("solars", "AdminGenDay", 1048576).getInt(1048576),
-            config.get("solars", "AdminGenNight", 1048576).getInt(1048576),
-            config.get("solars", "AdminStorage", 1000000000).getInt(1000000),
-            config.get("solars", "AdminPTier", 8).getInt(8)
+            config.get(ADMIN_SOLAR, "GenDay", 1048576).getInt(1048576),
+            config.get(ADMIN_SOLAR, "GenNight", 1048576).getInt(1048576),
+            config.get(ADMIN_SOLAR, "Storage", 1000000000).getInt(1000000000),
+            config.get(ADMIN_SOLAR, "Tier", 8).getInt(8)
          );
+         TileEntityAdmin.maxOutput = config.get(ADMIN_SOLAR, "MaxOutput", 1048576).getInt(1048576);
          TileEntityphotonic.settings = new SolarConfig(
-            config.get("solars", "PhotonicGenDay", 1000000000).getInt(1000000000),
-            config.get("solars", "PhotonicGenNight", 1000000000).getInt(1000000000),
-            config.get("solars", "PhotonicStorage", 999999999).getInt(999999999),
-            config.get("solars", "PhotonicTier", 9).getInt(9)
+            config.get(PHOTONIC_SOLAR, "GenDay", 1000000000).getInt(1000000000),
+            config.get(PHOTONIC_SOLAR, "GenNight", 1000000000).getInt(1000000000),
+            config.get(PHOTONIC_SOLAR, "Storage", 999999999).getInt(999999999),
+            config.get(PHOTONIC_SOLAR, "Tier", 9).getInt(9)
          );
-         // 各级太阳能板的最大输出（EU/t），tier 决定电压等级，maxOutput 决定实际输出上限
-         TileEntitySpectral.maxOutput = config.get("solars", "SpectralMaxOutput", 32768).getInt(32768);
-         TileEntitySingular.maxOutput = config.get("solars", "SingularMaxOutput", 262144).getInt(262144);
-         TileEntityAdmin.maxOutput = config.get("solars", "AdminMaxOutput", 1048576).getInt(1048576);
-         TileEntityphotonic.maxOutput = config.get("solars", "PhotonicMaxOutput", 1000000000).getInt(1000000000);
+         TileEntityphotonic.maxOutput = config.get(PHOTONIC_SOLAR, "MaxOutput", 1000000000).getInt(1000000000);
          canCraftDoubleSlabs = !config.get("settings Quantum chestplate", "Disable Effect FIRE RESISTANCE ", false).getBoolean(false);
          canCraftMT = !config.get("settings Quantum Boosts", "Disable Effect WATER BREATHING ", false).getBoolean(false);
          canCraftASP = !config.get("settings Quantum Boosts", "Disable Effect JUMP BOOST", false).getBoolean(false);
