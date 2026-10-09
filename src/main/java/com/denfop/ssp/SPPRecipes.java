@@ -264,6 +264,51 @@ final class SPPRecipes {
          'B',
          IC2Items.getItem("crafting", "advanced_circuit")
       );
+      // 以下为 1.4 移植配方：纳米工具箱、高级铱板压缩链、量子工具箱与光谱电路
+      addShapedRecipe(
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.nanobox),
+         "ACA",
+         "CBC",
+         "ACA",
+         'A',
+         IC2Items.getItem("crafting", "carbon_plate"),
+         'B',
+         ASP_Items.CRAFTING.getItemStack(CraftingTypes.IRIDIUM_IRON_PLATE),
+         'C',
+         IC2Items.getItem("crafting", "alloy")
+      );
+      addCompressorRecipe(
+         input.forOreDict("ingotIridium", 9),
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.QuantumItems2)
+      );
+      addCompressorRecipe(
+         input.forStack(SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.QuantumItems2), 9),
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.QuantumItems4)
+      );
+      addShapedRecipe(
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.QuantumItems3),
+         "ACA",
+         "CBC",
+         "ACA",
+         'A',
+         IC2Items.getItem("crafting", "carbon_plate"),
+         'B',
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.nanobox),
+         'C',
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.QuantumItems4)
+      );
+      addShapedRecipe(
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.QuantumItems5),
+         "ACA",
+         "CBC",
+         "ACA",
+         'A',
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.QuantumItems3),
+         'B',
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.quantumitems6),
+         'C',
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.QuantumItems2)
+      );
       addCompressorRecipe(
          input.forStack(IC2Items.getItem("crafting", "carbon_plate"), 9),
          SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.compresscarbon)
