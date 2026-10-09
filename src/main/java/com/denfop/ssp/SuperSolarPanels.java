@@ -2,6 +2,7 @@ package com.denfop.ssp;
 
 import com.denfop.ssp.items.CraftingThings;
 import com.denfop.ssp.tiles.SSPBlock;
+import com.chocohead.advsolar.tiles.TEs;
 import ic2.api.event.TeBlockFinalCallEvent;
 import ic2.core.block.BlockTileEntity;
 import ic2.core.block.TeBlockRegistry;
@@ -71,6 +72,10 @@ public final class SuperSolarPanels {
    @EventHandler
    public void init(FMLInitializationEvent event) {
       SSPBlock.buildDummies();
+      // IC2 机器方块默认仅对 IC2 标签页与搜索页输出子物品，需通过 CreativeRegisterer 扩展点移入本 mod 标签页；
+      // 推迟到 init 执行以保证 ASP 的 TeBlock 已注册（addCreativeRegisterer 要求目标 identity 已存在）
+      TeBlockRegistry.addCreativeRegisterer(new SSPCreativeRegisterer(SSPBlock.values()), SSPBlock.IDENTITY);
+      TeBlockRegistry.addCreativeRegisterer(new SSPCreativeRegisterer(TEs.values()), TEs.IDENTITY);
       SPPRecipes.addCraftingRecipes();
    }
 
