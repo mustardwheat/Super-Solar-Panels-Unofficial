@@ -96,16 +96,10 @@ dependencies {
     runtimeOnly rfg.deobf(files('libs/jei_1.12.2-4.22.0.1035.jar'))
     // METS（MoreElectricTools v1.662，modid: mets），为后续联动内容提供编译与运行时环境
     implementation rfg.deobf(files('libs/MoreElectricTools.v1.662.jar'))
+    // AdvSolarPatch（本项目维护的 fork，github.com/mustardwheat/AdvSolarPatch，GPL-3.0）：
+    // 在 Su5eD 原版（运行时修补 ASP 4.3.0 以兼容 IC2 2.8.191+ 的 InvSlot 构造器变更）基础上，
+    // 通过内嵌 Mixin 为 ASP 四种太阳能新增 MaxOutput 配置项，是 SSPU 的硬依赖。
+    // 1.2.3 起其 coremod 会把自身 jar 注入系统类加载器（Mixin 排除机制要求父加载器可见），
+    // 因此开发环境必须作为 classpath 依赖引入——若复制进 run/mods 会被 FML 发现两次（duplicate mod）。
+    runtimeOnly rfg.deobf(files('libs/advsolarpatch-1.2.3.jar'))
 }
-
-// AdvSolarPatch（本项目维护的 fork，github.com/mustardwheat/AdvSolarPatch，GPL-3.0）：
-// 在 Su5eD 原版（运行时修补 ASP 4.3.0 以兼容 IC2 2.8.191+ 的 InvSlot 构造器变更）基础上，
-// 通过 shaded Mixin 为 ASP 四种太阳能新增 MaxOutput 配置项，是 SSPU 的硬依赖。
-// 它必须以文件形式被识别为 coremod（FMLCorePlugin manifest），因此复制进 run/mods
-// 而不是放入编译 classpath。
-tasks.register('prepareAdvSolarPatch', Copy) {
-    from('libs') { include 'advsolarpatch-*.jar' }
-    into file('run/mods')
-}
-tasks.named('runClient') { dependsOn 'prepareAdvSolarPatch' }
-tasks.named('runServer') { dependsOn 'prepareAdvSolarPatch' }
