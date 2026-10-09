@@ -1,62 +1,94 @@
-# Super Solar Panels - Unofficial (v1.2 maintenance fork)
+# Super Solar Panels - Unofficial
 
-Unofficial maintenance fork of **Denfop's Super Solar Panels v1.2** for Minecraft 1.12.2,
-branched from [ZelGimi/industrialupgrade](https://github.com/ZelGimi/industrialupgrade) at
-commit `ef69c48a` (2020-04-17, the last commit of the early standalone-SSP phase, matching
-the released `[超级太阳能]SuperSolarPanels-1.2.jar` built 2020-05-02).
+Unofficial maintenance fork of **Denfop's Super Solar Panels** for Minecraft 1.12.2.
+The fork is based on [ZelGimi/industrialupgrade](https://github.com/ZelGimi/industrialupgrade)
+at commit `ef69c48a` and continues the mod as an independent line under GPL-3.0.
 
-IndustrialUpgrade (IU) is the direct continuation of this mod; this fork instead preserves
-the small, ASP-based v1.2 feature set as a maintenance baseline.
+The mod extends IndustrialCraft 2 with four top-tier solar panels and their
+supporting equipment, on top of Chocohead's Advanced Solar Panels.
 
-## Source provenance
+## Features
 
-The "sources" uploaded at `ef69c48a` were themselves an incomplete Procyon decompile
-(18 of 21 classes, no resources, no build files, flattened packages). This tree was
-reconstructed from the original v1.2 release binary:
+- Four solar panels: Spectral, Singular, Admin and Photonic.
+  Generation, storage, tier and maximum output are all configurable per panel.
+- Spectral and Singular Solar Helmets: charge your armor from sunlight, provide
+  night vision, breathing and feeding support, and remove negative potion effects
+  at an EU cost.
+- Enhanced Quantum Chestplate, Leggings and Boots.
+- Quantum Saber and Spectral Saber: electric weapons that drain nano and quantum
+  armor on hit.
+- 120k and 240k reactor heat storage cells.
+- A wide range of crafting materials: solar cores, wiring, compressed carbon
+  materials, and the Sun, Night and Energy runes.
+- All SSP and ASP content is grouped in one SuperSolarPanels creative tab.
+- Ships with [MoreElectricTools](https://github.com/lr8soft/MoreElectricTools) (METS)
+  as a bundled dependency for upcoming linkage content.
 
-1. The release jar was deobfuscated (SRG -> current RFG mappings) with the same
-   RetroFuturaGradle pipeline used for the IC2/ASP dependencies.
-2. The deobfuscated jar was decompiled with Vineflower.
-3. The result was verified against the original binary: identical class count (27)
-   and archive entry count (145), and the rebuilt jar reobfuscates to SRG names as expected.
-
-Intentional fixes relative to the original v1.2 binary:
-
-- `@Mod` version `1.0.0` -> `1.2.0` (Denfop never bumped it)
-- `mcmod.info` modid `Super_Solar_Panels` -> `super_solar_panels` (case mismatch meant
-  the metadata never associated with the mod)
-
-## Dependencies
+## Requirements
 
 | Mod | Version | Notes |
 |---|---|---|
-| Minecraft | 1.12.2 | Forge via RFG |
-| IndustrialCraft 2 | compiled against 2.8.222-ex112 | any IC2 the runtime stack supports |
-| Advanced Solar Panels (Chocohead) | 4.3.0 | **hard dependency** (`required-after`) |
-| AdvSolarPatch (Su5eD) | 1.1 | **required at runtime when IC2 >= 2.8.191** |
+| Minecraft | 1.12.2 | Forge 14.23.5.2847 or newer |
+| IndustrialCraft 2 | 2.8.x | compiled against 2.8.222-ex112 |
+| Advanced Solar Panels (Chocohead) | 4.3.0 | hard dependency (`required-after`) |
+| AdvSolarPatch (Su5eD) | 1.1 | required at runtime when IC2 >= 2.8.191 |
 
 ### IC2 version caveat
 
-IC2 2.8.191 changed the `InvSlot` / `InvSlotOutput` / `InvSlotProcessable` constructors
-from `TileEntityInventory`-first to `IInventorySlotHolder`-first. ASP 4.3.0 was compiled
-against IC2 <= 2.8.190 and crashes with `NoSuchMethodError` on newer builds.
-[AdvSolarPatch](https://github.com/Su5eD/AdvSolarPatch) fixes this at runtime; this mod's
-own code never touches those constructors. `runClient`/`runServer` automatically copy
-the vendored `libs/advsolarpatch-1.1.jar` into `run/mods`. On real instances, drop the
-same jar into `mods/` when using IC2 2.8.191 or newer (e.g. 2.8.222).
+IC2 2.8.191 changed the `InvSlot` family constructors. Advanced Solar Panels 4.3.0
+was compiled against IC2 2.8.190 or older and crashes with `NoSuchMethodError` on
+newer builds. [AdvSolarPatch](https://github.com/Su5eD/AdvSolarPatch) fixes this at
+runtime. Install it together with Advanced Solar Panels when you use IC2 2.8.191 or
+newer. The dev runtime installs it automatically; production instances must add it
+to `mods/` manually.
 
 ## Building
 
-- Gradle 8.12 (wrapper included) + RetroFuturaGradle 1.4.2, Azul JDK 8 toolchain
-- `gradlew build` -> `build/libs/super_solar_panels-1.2.0.jar`
-- `gradlew runClient` for a dev client with IC2 + ASP + AdvSolarPatch pre-wired
+The build is driven by RetroFuturaGradle on Gradle 8.12. Use the included wrapper;
+no system Gradle installation is required.
 
-IC2 and ASP are vendored under `libs/` and deobfuscated by RFG at build time; no remote
-mod maven is required to build.
+Prerequisites:
+
+- A JDK that can run Gradle 8.12 (Java 17 or newer) available on `JAVA_HOME`.
+  The compilation toolchain targets Java 8 and is provisioned automatically.
+- The first run downloads the Minecraft and Forge artifacts only. Every mod
+  dependency is vendored under `libs/` and deobfuscated to the active mappings
+  at build time, so no remote mod maven is needed.
+
+Common tasks:
+
+| Task | Result |
+|---|---|
+| `gradlew build` | compiles and packages `build/libs/super_solar_panels-<version>.jar` |
+| `gradlew runClient` | starts a dev client with IC2, ASP, AdvSolarPatch, METS and JEI |
+| `gradlew runServer` | starts a dev server with IC2, ASP, AdvSolarPatch and METS |
+
+`runClient` and `runServer` first execute `prepareAdvSolarPatch`, which copies
+the vendored patch into `run/mods`. JEI is present in the dev runtime only and is
+never required by the shipped jar.
+
+## Continuous integration
+
+- `build.yml` compiles the project and uploads the jar on every push and pull request.
+- `release.yml` builds and publishes a GitHub Release whenever a `v*` tag is pushed.
+
+## Configuration
+
+All options live in `config/super_solar_panels.cfg` and apply to both the client
+and the server. Keep the values identical on both sides.
+
+- `solars`: generation, storage, tier and `MaxOutput` of each solar panel.
+- `settings quantum saber` / `settings spectral saber`: damage, capacity,
+  transfer limit and tier of each saber.
+- `settings twelve heat storage` / `settings max heat storage`: heat capacity of
+  each reactor heat storage cell.
 
 ## License & credits
 
-GPL-3.0 (following the upstream repository). Original mod by **Denfop**; Advanced Solar
-Panels by Icedfire / SeNtiMeL / **Chocohead**; IC2-compat patch by **Su5eD**; upstream
-history by **ZelGimi**; see also the independent later line
-[RuiXuqi/Super-Solar-Panels-Remastered](https://github.com/RuiXuqi/Super-Solar-Panels-Remastered) (v1.4.0, MPL-2.0).
+GPL-3.0, following the upstream repository.
+
+- Original Super Solar Panels mod by **Denfop**.
+- Upstream history by **[ZelGimi](https://github.com/ZelGimi/industrialupgrade)**.
+- Advanced Solar Panels by Icedfire, SeNtiMeL and **Chocohead**.
+- IC2 compatibility patch by **[Su5eD](https://github.com/Su5eD/AdvSolarPatch)**.
+- MoreElectricTools by **[lr8soft](https://github.com/lr8soft/MoreElectricTools)**.
