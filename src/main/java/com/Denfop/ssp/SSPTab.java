@@ -1,6 +1,6 @@
 package com.Denfop.ssp;
 
-import com.Denfop.ssp.items.CraftingThings;
+import com.Denfop.ssp.tiles.SSPBlock;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
@@ -12,7 +12,7 @@ public final class SSPTab {
    public static final CreativeTabs TAB = new CreativeTabs("SuperSolarPanels") {
       @Override
       public ItemStack createIcon() {
-         return SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.singularcore);
+         return SuperSolarPanels.machines.getItemStack(SSPBlock.admin_solar_panel);
       }
    };
 

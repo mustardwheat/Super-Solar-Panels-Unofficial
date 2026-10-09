@@ -96,6 +96,15 @@ public final class SuperSolarPanels {
             item.setCreativeTab(SSPTab.TAB);
          }
       }
+
+      // ItemBlock 的创造标签页委托给方块，机器方块必须单独设置
+      for (net.minecraft.block.Block block : net.minecraftforge.fml.common.registry.ForgeRegistries.BLOCKS) {
+         ResourceLocation registryName = block.getRegistryName();
+         if (registryName != null
+            && ("super_solar_panels".equals(registryName.getNamespace()) || "advanced_solar_panels".equals(registryName.getNamespace()))) {
+            block.setCreativeTab(SSPTab.TAB);
+         }
+      }
    }
 
    public static ResourceLocation getIdentifier(String name) {
