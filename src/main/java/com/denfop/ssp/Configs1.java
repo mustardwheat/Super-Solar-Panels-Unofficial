@@ -5,31 +5,20 @@ import com.denfop.ssp.tiles.TileEntitySingular;
 import com.denfop.ssp.tiles.TileEntitySpectral;
 import com.denfop.ssp.tiles.TileEntityPhotonic;
 import com.chocohead.advsolar.tiles.TileEntitySolarPanel.SolarConfig;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.IOException;
 import net.minecraftforge.common.config.Configuration;
 
 public final class Configs1 {
-   private static final String GENERAL = "general";
-   private static final String SOLARS = "solars";
-   private static final String QUANTUM_GENERATOR = "quantum generator";
-   private static final String CRAFTING = "recipes settings";
    private static final String SPECTRAL_SOLAR = "settings spectral solar panel";
    private static final String SINGULAR_SOLAR = "settings singular solar panel";
    private static final String ADMIN_SOLAR = "settings admin solar panel";
    private static final String PHOTONIC_SOLAR = "settings photonic solar panel";
-   static boolean hardRecipes;
-   static boolean easyASPRecipe;
    public static boolean canCraftDoubleSlabs;
    public static boolean canCraftMT;
    public static boolean canCraftASP;
    public static boolean canCraftHSP;
-   public static boolean canCraftUHSP;
-   public static boolean canCraftQSP;
    public static boolean canCraftASH;
    public static boolean canCraftHSH;
-   public static boolean canCraftUHSH;
    public static int saberQuantumDamage;
    public static int saberQuantumActiveDamage;
    public static int saberQuantumMaxCharge;
@@ -42,8 +31,6 @@ public final class Configs1 {
    public static int saberSpectralTier;
    public static int twelveHeatStorage;
    public static int maxHeatStorage;
-   private static final String NEW_LINE = System.getProperty("line.separator");
-   private static final String CONFIG_VERSION = "2.0";
 
    static void loadConfig(File config, boolean client) {
       SuperSolarPanels.log.info("Loading ASP Config from " + config.getAbsolutePath());
@@ -114,8 +101,4 @@ public final class Configs1 {
       }
    }
 
-   private static void write(BufferedWriter writer, String line) throws IOException {
-      writer.write(line);
-      writer.newLine();
-   }
 }

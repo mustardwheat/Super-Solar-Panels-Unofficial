@@ -52,20 +52,20 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvider, IElectricItem, IMetalArmor, ISpecialArmor, IItemHudProvider {
    protected static final int DEFAULT_COLOUR = -1;
    /** 各负面药水对应的清除耗电量（EU），移植自 1.4 */
-   protected static final Map<Potion, Integer> potionRemovalCost = new IdentityHashMap<>();
+   protected static final Map<Potion, Integer> POTION_REMOVAL_COST = new IdentityHashMap<>();
    protected final ItemArmourSolarHelmet.SolarHelmetTypes type;
    public static boolean chargeWholeInventory = false;
    protected GenerationState state;
    protected int ticker;
 
    static {
-      potionRemovalCost.put(IC2Potion.radiation, 5000);
-      potionRemovalCost.put(MobEffects.POISON, 400);
-      potionRemovalCost.put(MobEffects.WITHER, 500);
-      potionRemovalCost.put(MobEffects.SLOWNESS, 300);
-      potionRemovalCost.put(MobEffects.NAUSEA, 1000);
-      potionRemovalCost.put(MobEffects.HUNGER, 300);
-      potionRemovalCost.put(MobEffects.WEAKNESS, 400);
+      POTION_REMOVAL_COST.put(IC2Potion.radiation, 5000);
+      POTION_REMOVAL_COST.put(MobEffects.POISON, 400);
+      POTION_REMOVAL_COST.put(MobEffects.WITHER, 500);
+      POTION_REMOVAL_COST.put(MobEffects.SLOWNESS, 300);
+      POTION_REMOVAL_COST.put(MobEffects.NAUSEA, 1000);
+      POTION_REMOVAL_COST.put(MobEffects.HUNGER, 300);
+      POTION_REMOVAL_COST.put(MobEffects.WEAKNESS, 400);
    }
 
    public ItemArmourSolarHelmet(ItemArmourSolarHelmet.SolarHelmetTypes type) {
@@ -112,12 +112,12 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
    }
 
    public boolean hasColor(ItemStack stack) {
-      return this.getColor(stack) != -1;
+      return this.getColor(stack) != DEFAULT_COLOUR;
    }
 
    public int getColor(ItemStack stack) {
       NBTTagCompound nbt = this.getDisplayNbt(stack, false);
-      return nbt != null && nbt.hasKey("colour", 3) ? nbt.getInteger("colour") : -1;
+      return nbt != null && nbt.hasKey("colour", 3) ? nbt.getInteger("colour") : DEFAULT_COLOUR;
    }
 
    public void removeColor(ItemStack stack) {
@@ -213,13 +213,11 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
 
          NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(stack);
          byte toggleTimer = nbtData.getByte("toggleTimer");
-         boolean ret = false;
          ElectricItem.manager.charge(stack, output, Integer.MAX_VALUE, true, false);
          int air = player.getAir();
          if (ElectricItem.manager.canUse(stack, 1000.0) && air < 100) {
             player.setAir(air + 200);
             ElectricItem.manager.use(stack, 1000.0, null);
-            ret = true;
          } else if (air <= 0) {
             IC2.achievements.issueAchievement(player, "starveWithQHelmet");
          }
@@ -244,19 +242,17 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
                   player.inventory.mainInventory.set(slot, StackUtil.emptyStack);
                }
 
-               if (result.getType() == EnumActionResult.SUCCESS) {
-                  ElectricItem.manager.use(stack, 1000.0, null);
-               }
-
-               ret = true;
+            if (result.getType() == EnumActionResult.SUCCESS) {
+               ElectricItem.manager.use(stack, 1000.0, null);
             }
+         }
          } else if (player.getFoodStats().getFoodLevel() <= 0) {
             IC2.achievements.issueAchievement(player, "starveWithQHelmet");
          }
 
          for (PotionEffect effect : new LinkedList<>(player.getActivePotionEffects())) {
             Potion potion = effect.getPotion();
-            Integer cost = potionRemovalCost.get(potion);
+            Integer cost = POTION_REMOVAL_COST.get(potion);
             if (cost != null) {
                cost = cost * Math.max(1, effect.getAmplifier() + 1);
                if (ElectricItem.manager.canUse(stack, (double)cost)) {
@@ -296,7 +292,6 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
          }
 
          if (IC2.platform.isSimulating() && toggleTimer > 0) {
-            String s = "toggleTimer";
             nbtData.setByte("toggleTimer", --toggleTimer);
          }
 
@@ -310,8 +305,6 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
                IC2.platform.removePotion(player, MobEffects.BLINDNESS);
                player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 300, 0, true, true));
             }
-
-            ret = true;
          }
       }
    }
@@ -335,7 +328,6 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
       }
 
       if (!isRemote && toggleTimer > 0) {
-         String s = "toggleTimer";
          nbt.setByte("toggleTimer", --toggleTimer);
       }
 

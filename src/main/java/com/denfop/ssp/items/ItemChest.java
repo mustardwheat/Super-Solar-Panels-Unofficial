@@ -5,7 +5,6 @@ import com.google.common.base.CaseFormat;
 import ic2.api.item.ElectricItem;
 import ic2.core.IC2;
 import ic2.core.init.BlocksItems;
-import ic2.core.init.Localization;
 import ic2.core.item.armor.ItemArmorElectric;
 import ic2.core.item.armor.jetpack.IBoostingJetpack;
 import ic2.core.ref.ItemName;
@@ -18,7 +17,6 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
@@ -26,14 +24,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemChest extends ItemArmorElectric implements IBoostingJetpack {
    protected final String name;
-
-   public ItemChest() {
-      this("advancedJetpack");
-   }
-
-   protected ItemChest(String name) {
-      this(name, 3000000.0, 30000.0, 3);
-   }
 
    protected ItemChest(String name, double maxCharge, double transferLimit, int tier) {
       super((ItemName)null, (String)null, EntityEquipmentSlot.CHEST, maxCharge, transferLimit, tier);
@@ -84,16 +74,12 @@ public class ItemChest extends ItemArmorElectric implements IBoostingJetpack {
          toggleTimer = 10;
          nbt.setByte("toggleTimer", (byte)10);
          if (!world.isRemote) {
-            if (switchJetpack(stack)) {
-               String mode = TextFormatting.DARK_GREEN + Localization.translate("super_solar_panels.message.on");
-            } else {
-               String var9 = TextFormatting.DARK_RED + Localization.translate("super_solar_panels.message.off");
-            }
+            // 仅在服务端切换飞行状态，客户端通过 NBT 同步
+            switchJetpack(stack);
          }
       }
 
       if (toggleTimer > 0 && !isJetpackOn(stack)) {
-         String s = "toggleTimer";
          nbt.setByte("toggleTimer", --toggleTimer);
       }
    }

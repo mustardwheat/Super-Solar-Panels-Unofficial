@@ -24,14 +24,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemBoosts extends ItemArmorElectric implements IBoostingJetpack {
    protected final String name;
 
-   public ItemBoosts() {
-      this("advancedJetpack");
-   }
-
-   protected ItemBoosts(String name) {
-      this(name, 3000000.0, 30000.0, 3);
-   }
-
    protected ItemBoosts(String name, double maxCharge, double transferLimit, int tier) {
       super((ItemName)null, (String)null, EntityEquipmentSlot.FEET, maxCharge, transferLimit, tier);
       ((ItemBoosts)BlocksItems.registerItem(this, new ResourceLocation("super_solar_panels", this.name = name))).setTranslationKey(name);
@@ -75,8 +67,7 @@ public class ItemBoosts extends ItemArmorElectric implements IBoostingJetpack {
    }
 
    public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
-      NBTTagCompound nbt = StackUtil.getOrCreateNbtData(stack);
-      byte toggleTimer = nbt.getByte("toggleTimer");
+      // 靴子无飞行开关计时逻辑，保留空实现以屏蔽父类默认行为
    }
 
    public boolean isJetpackActive(ItemStack stack) {

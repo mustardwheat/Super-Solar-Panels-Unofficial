@@ -91,7 +91,7 @@ public enum SSPBlock implements ITeBlock {
          for (SSPBlock block : VALUES) {
             if (block.teClass != null) {
                try {
-                  block.dummyTe = block.teClass.newInstance();
+                  block.dummyTe = block.teClass.getDeclaredConstructor().newInstance();
                } catch (Exception var6) {
                   if (Util.inDev()) {
                      var6.printStackTrace();

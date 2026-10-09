@@ -11,12 +11,12 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class CraftingThings extends ItemMulti<com.chocohead.advsolar.items.ItemCraftingThings.CraftingTypes> {
+public class CraftingThings extends ItemMulti<CraftingThings.CraftingTypes> {
    protected static final String NAME = "crafting";
 
    public CraftingThings() {
-      super((ItemName)null, (Class) CraftingThings.CraftingTypes.class);
-      ((CraftingThings)BlocksItems.registerItem(this, new ResourceLocation("super_solar_panels", "crafting"))).setTranslationKey("crafting");
+      super((ItemName)null, CraftingThings.CraftingTypes.class);
+      ((CraftingThings)BlocksItems.registerItem(this, new ResourceLocation("super_solar_panels", NAME))).setTranslationKey(NAME);
    }
 
    @SideOnly(Side.CLIENT)

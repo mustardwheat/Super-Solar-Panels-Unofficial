@@ -33,12 +33,12 @@ public class ItemArmorQuantumLeggins extends ItemLeggins {
    }
 
    public boolean hasColor(ItemStack stack) {
-      return this.getColor(stack) != -1;
+      return this.getColor(stack) != DEFAULT_COLOUR;
    }
 
    public int getColor(ItemStack stack) {
       NBTTagCompound nbt = this.getDisplayNbt(stack, false);
-      return nbt != null && nbt.hasKey("colour", 3) ? nbt.getInteger("colour") : -1;
+      return nbt != null && nbt.hasKey("colour", 3) ? nbt.getInteger("colour") : DEFAULT_COLOUR;
    }
 
    public void removeColor(ItemStack stack) {
@@ -87,8 +87,6 @@ public class ItemArmorQuantumLeggins extends ItemLeggins {
       super.onArmorTick(world, player, stack);
       player.extinguish();
       NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(stack);
-      byte toggleTimer = nbtData.getByte("toggleTimer");
-      boolean ret = false;
       boolean enableQuantumSpeedOnSprint = !IC2.platform.isRendering() || ConfigUtil.getBool(MainConfig.get(), "misc/quantumSpeedOnSprint");
       if (ElectricItem.manager.canUse(stack, 1000.0)
          && (player.onGround || player.isInWater())
@@ -98,7 +96,6 @@ public class ItemArmorQuantumLeggins extends ItemLeggins {
          if (++speedTicker >= 10) {
             speedTicker = 0;
             ElectricItem.manager.use(stack, 1000.0, null);
-            ret = true;
          }
 
          nbtData.setByte("speedTicker", speedTicker);
@@ -115,7 +112,6 @@ public class ItemArmorQuantumLeggins extends ItemLeggins {
          }
       }
 
-      IC2.platform.profilerEndSection();
       if (Configs1.canCraftDoubleSlabs) {
          player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 300, 2, true, true));
          if (Configs1.canCraftHSH) {

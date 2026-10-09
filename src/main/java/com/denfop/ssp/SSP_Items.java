@@ -85,12 +85,12 @@ public enum SSP_Items {
       TWELVE_HEAT_STORAGE.setInstance(new ItemReactorHeatStorage("twelve_heat_storage", Configs1.twelveHeatStorage));
       MAX_HEAT_STORAGE.setInstance(new ItemReactorHeatStorage("max_heat_storage", Configs1.maxHeatStorage));
       if (side == Side.CLIENT) {
-         doModelGuf();
+         registerItemModels();
       }
    }
 
    @SideOnly(Side.CLIENT)
-   private static void doModelGuf() {
+   private static void registerItemModels() {
       for (SSP_Items item : values()) {
          ((ic2.core.ref.IItemModelProvider)item.getInstance()).registerModels((ic2.core.ref.ItemName)null);
       }

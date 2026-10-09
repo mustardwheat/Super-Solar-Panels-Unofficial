@@ -24,14 +24,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemLeggins extends ItemArmorElectric implements IBoostingJetpack {
    protected final String name;
 
-   public ItemLeggins() {
-      this("advancedJetpack");
-   }
-
-   protected ItemLeggins(String name) {
-      this(name, 3000000.0, 30000.0, 3);
-   }
-
    protected ItemLeggins(String name, double maxCharge, double transferLimit, int tier) {
       super((ItemName)null, (String)null, EntityEquipmentSlot.LEGS, maxCharge, transferLimit, tier);
       ((ItemLeggins)BlocksItems.registerItem(this, new ResourceLocation("super_solar_panels", this.name = name))).setTranslationKey(name);
@@ -78,7 +70,6 @@ public class ItemLeggins extends ItemArmorElectric implements IBoostingJetpack {
       NBTTagCompound nbt = StackUtil.getOrCreateNbtData(stack);
       byte toggleTimer = nbt.getByte("toggleTimer");
       if (toggleTimer > 0 && !isJetpackOn(stack)) {
-         String s = "toggleTimer";
          nbt.setByte("toggleTimer", --toggleTimer);
       }
    }

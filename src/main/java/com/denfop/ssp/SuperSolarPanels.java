@@ -35,9 +35,7 @@ import org.apache.logging.log4j.Logger;
    acceptedMinecraftVersions = "[1.12,1.12.2]"
 )
 public final class SuperSolarPanels {
-   public static boolean seasonal = false;
    public static final String MODID = "super_solar_panels";
-   private static final String Urane = null;
    public static Logger log;
    public static BlockTileEntity machines;
 
@@ -107,7 +105,4 @@ public final class SuperSolarPanels {
       }
    }
 
-   public static ResourceLocation getIdentifier(String name) {
-      return new ResourceLocation("supersolarpanels", name);
-   }
 }

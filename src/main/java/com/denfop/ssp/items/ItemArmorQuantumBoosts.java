@@ -32,12 +32,12 @@ public class ItemArmorQuantumBoosts extends ItemBoosts {
    }
 
    public boolean hasColor(ItemStack stack) {
-      return this.getColor(stack) != -1;
+      return this.getColor(stack) != DEFAULT_COLOUR;
    }
 
    public int getColor(ItemStack stack) {
       NBTTagCompound nbt = this.getDisplayNbt(stack, false);
-      return nbt != null && nbt.hasKey("colour", 3) ? nbt.getInteger("colour") : -1;
+      return nbt != null && nbt.hasKey("colour", 3) ? nbt.getInteger("colour") : DEFAULT_COLOUR;
    }
 
    public void removeColor(ItemStack stack) {
@@ -86,13 +86,10 @@ public class ItemArmorQuantumBoosts extends ItemBoosts {
       super.onArmorTick(world, player, stack);
       player.extinguish();
       NBTTagCompound nbtData = StackUtil.getOrCreateNbtData(stack);
-      byte toggleTimer = nbtData.getByte("toggleTimer");
-      boolean ret = false;
       if (IC2.platform.isSimulating()) {
          boolean wasOnGround = !nbtData.hasKey("wasOnGround") || nbtData.getBoolean("wasOnGround");
          if (wasOnGround && !player.onGround && IC2.keyboard.isJumpKeyDown(player) && IC2.keyboard.isBoostKeyDown(player)) {
             ElectricItem.manager.use(stack, 4000.0, null);
-            ret = true;
          }
 
          if (player.onGround != wasOnGround) {
@@ -104,11 +101,6 @@ public class ItemArmorQuantumBoosts extends ItemBoosts {
          }
 
          if (player.motionY >= 0.0 && this.jumpCharge > 0.0F && !player.isInWater()) {
-            if (this.jumpCharge == 0.9F) {
-               player.motionX *= 1.0;
-               player.motionZ *= 1.0;
-            }
-
             player.motionY = player.motionY + this.jumpCharge * 0.3F;
             this.jumpCharge = (float)(this.jumpCharge * 0.75);
          } else if (this.jumpCharge < 1.0F) {

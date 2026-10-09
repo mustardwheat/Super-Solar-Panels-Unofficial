@@ -30,12 +30,12 @@ public class ItemArmorQuantumChestplate extends ItemChest {
    }
 
    public boolean hasColor(ItemStack stack) {
-      return this.getColor(stack) != -1;
+      return this.getColor(stack) != DEFAULT_COLOUR;
    }
 
    public int getColor(ItemStack stack) {
       NBTTagCompound nbt = this.getDisplayNbt(stack, false);
-      return nbt != null && nbt.hasKey("colour", 3) ? nbt.getInteger("colour") : -1;
+      return nbt != null && nbt.hasKey("colour", 3) ? nbt.getInteger("colour") : DEFAULT_COLOUR;
    }
 
    public void removeColor(ItemStack stack) {
