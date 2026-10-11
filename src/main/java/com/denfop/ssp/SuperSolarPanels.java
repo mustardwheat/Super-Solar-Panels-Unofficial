@@ -2,6 +2,8 @@ package com.denfop.ssp;
 
 import com.denfop.ssp.items.CraftingThings;
 import com.denfop.ssp.tiles.SSPBlock;
+import com.chocohead.advsolar.ASP_Items;
+import com.chocohead.advsolar.items.ItemCraftingThings;
 import com.chocohead.advsolar.tiles.TEs;
 import ic2.api.event.TeBlockFinalCallEvent;
 import ic2.core.block.BlockTileEntity;
@@ -57,6 +59,8 @@ public final class SuperSolarPanels {
       OreDictionary.registerOre("solarsplitter", SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.solarsplitter));
       OreDictionary.registerOre("bluecomponent", SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.bluecomponent));
       OreDictionary.registerOre("redcomponent", SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.redcomponent));
+      // 绿色光谱组件已移除，其矿物词典名转由 ASP 光辉玻璃板继承，保证跨 mod 配方兼容
+      OreDictionary.registerOre("greencomponent", ASP_Items.CRAFTING.getItemStack(ItemCraftingThings.CraftingTypes.IRRADIANT_GLASS_PANE));
       OreDictionary.registerOre("singularcore", SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.singularcore));
       OreDictionary.registerOre("photoniy", SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.photoniy));
       OreDictionary.registerOre("photoniy_ingot", SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.photoniy_ingot));
