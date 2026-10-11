@@ -86,12 +86,12 @@ public final class Configs1 {
          // 量子剑/光谱剑数值（默认值与 1.4 保持一致）
          saberQuantumDamage = config.get("settings quantum saber", "Damage", 11).getInt(11);
          saberQuantumActiveDamage = config.get("settings quantum saber", "ActiveDamage", 29).getInt(29);
-         saberQuantumMaxCharge = config.get("settings quantum saber", "maxCharge", 300000).getInt(300000);
+         saberQuantumMaxCharge = config.get("settings quantum saber", "maxCharge", 10000000).getInt(10000000);
          saberQuantumTransferLimit = config.get("settings quantum saber", "transferLimit", 2000).getInt(2000);
          saberQuantumTier = config.get("settings quantum saber", "tier", 4).getInt(4);
          saberSpectralDamage = config.get("settings spectral saber", "Damage", 14).getInt(14);
          saberSpectralActiveDamage = config.get("settings spectral saber", "ActiveDamage", 39).getInt(39);
-         saberSpectralMaxCharge = config.get("settings spectral saber", "maxCharge", 600000).getInt(600000);
+         saberSpectralMaxCharge = config.get("settings spectral saber", "maxCharge", 100000000).getInt(100000000);
          saberSpectralTransferLimit = config.get("settings spectral saber", "transferLimit", 2000).getInt(2000);
          saberSpectralTier = config.get("settings spectral saber", "tier", 5).getInt(5);
          // 冷却单元热容量（默认值与 1.4 保持一致）
