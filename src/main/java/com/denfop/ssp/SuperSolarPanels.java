@@ -91,6 +91,8 @@ public final class SuperSolarPanels {
 
    @EventHandler
    public void postInit(FMLPostInitializationEvent event) {
+      // 改造 ASP 面板配方（需在其 init 阶段完成注册之后执行）
+      SPPRecipes.replaceAspPanelRecipes();
       // 将 SSP 与 ASP 注册的全部物品统一归入 SuperSolarPanels 创造标签页
       for (net.minecraft.item.Item item : net.minecraftforge.fml.common.registry.ForgeRegistries.ITEMS) {
          ResourceLocation registryName = item.getRegistryName();

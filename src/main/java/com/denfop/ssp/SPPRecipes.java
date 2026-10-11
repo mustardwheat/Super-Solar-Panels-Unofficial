@@ -12,9 +12,22 @@ import ic2.api.recipe.IRecipeInputFactory;
 import ic2.api.recipe.Recipes;
 import ic2.core.recipe.ColourCarryingRecipe;
 import ic2.core.util.StackUtil;
+import java.util.ArrayList;
+import java.util.IdentityHashMap;
+import java.util.List;
+import java.util.Map;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.crafting.IShapedRecipe;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.registries.IForgeRegistryModifiable;
 
 final class SPPRecipes {
    static void addCraftingRecipes() {
@@ -408,5 +421,111 @@ final class SPPRecipes {
 
    public static void addShapelessRecipe(ItemStack output, Object... inputs) {
       Recipes.advRecipes.addShapelessRecipe(output, inputs);
+   }
+
+   /**
+    * 改造 ASP 自有的三个太阳能配方：原位替换指定材料，其余槽位与布局保持不变。
+    * 必须在 ASP 完成配方注册之后（本 mod 的 postInit）调用。
+    */
+   static void replaceAspPanelRecipes() {
+      // 高级太阳能：第二格的光辉玻璃板替换为高级核心
+      swapRecipeIngredient(
+         AdvancedSolarPanels.machines.getItemStack(TEs.advanced_solar_panel),
+         ASP_Items.CRAFTING.getItemStack(CraftingTypes.IRRADIANT_GLASS_PANE),
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.advanced_core),
+         1
+      );
+      // 混合太阳能：青金石块替换为混合核心
+      swapRecipeIngredient(
+         AdvancedSolarPanels.machines.getItemStack(TEs.hybrid_solar_panel),
+         new ItemStack(Blocks.LAPIS_BLOCK),
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.hybrid_core),
+         -1
+      );
+      // 终极混合太阳能：青金石块替换为终极混合核心
+      swapRecipeIngredient(
+         AdvancedSolarPanels.machines.getItemStack(TEs.ultimate_solar_panel),
+         new ItemStack(Blocks.LAPIS_BLOCK),
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.ultimate_core),
+         -1
+      );
+   }
+
+   /**
+    * 在配方注册表中查找产出为 output 的有序配方，将匹配 target 的槽位材料替换为 replacement。
+    * slotIndex >= 0 时仅替换该行优先索引处的槽位，为 -1 时替换所有匹配槽位。
+    * 不含目标材料的配方（例如 ASP 简易配方分支）保持原样，不做任何修改。
+    */
+   private static void swapRecipeIngredient(ItemStack output, ItemStack target, ItemStack replacement, int slotIndex) {
+      IForgeRegistryModifiable<IRecipe> registry = (IForgeRegistryModifiable<IRecipe>)ForgeRegistries.RECIPES;
+      List<ResourceLocation> removed = new ArrayList<>();
+      List<IRecipe> added = new ArrayList<>();
+      for (IRecipe recipe : ForgeRegistries.RECIPES) {
+         if (!(recipe instanceof IShapedRecipe)) {
+            continue;
+         }
+         ItemStack result = recipe.getRecipeOutput();
+         if (result.isEmpty() || !ItemStack.areItemsEqual(result, output)) {
+            continue;
+         }
+         IShapedRecipe shaped = (IShapedRecipe)recipe;
+         int width = shaped.getRecipeWidth();
+         int height = shaped.getRecipeHeight();
+         NonNullList<Ingredient> grid = recipe.getIngredients();
+         if (grid.size() < width * height) {
+            continue;
+         }
+         // 标记需要替换的槽位
+         boolean[] swap = new boolean[width * height];
+         boolean found = false;
+         for (int i = 0; i < swap.length; i++) {
+            if ((slotIndex < 0 || i == slotIndex) && grid.get(i).apply(target)) {
+               swap[i] = true;
+               found = true;
+            }
+         }
+         if (!found) {
+            continue;
+         }
+         // 重建配方参数：空槽记为空格，其余槽位按材料实例分配占位字符
+         List<Object> args = new ArrayList<>();
+         Map<Object, Character> symbols = new IdentityHashMap<>();
+         char nextSymbol = 'A';
+         for (int y = 0; y < height; y++) {
+            StringBuilder row = new StringBuilder(width);
+            for (int x = 0; x < width; x++) {
+               int index = y * width + x;
+               Ingredient ingredient = grid.get(index);
+               if (!swap[index] && (ingredient == Ingredient.EMPTY || ingredient.getMatchingStacks().length == 0)) {
+                  row.append(' ');
+                  continue;
+               }
+               Object cell = swap[index] ? (Object)replacement : (Object)ingredient;
+               Character symbol = symbols.get(cell);
+               if (symbol == null) {
+                  symbol = nextSymbol++;
+                  symbols.put(cell, symbol);
+               }
+               row.append(symbol.charValue());
+            }
+            args.add(row.toString());
+         }
+         for (Map.Entry<Object, Character> entry : symbols.entrySet()) {
+            args.add(entry.getValue());
+            args.add(entry.getKey());
+         }
+         ShapedOreRecipe copy = new ShapedOreRecipe(null, result.copy(), args.toArray());
+         ResourceLocation origin = recipe.getRegistryName();
+         copy.setRegistryName(new ResourceLocation(SuperSolarPanels.MODID, "patched_" + origin.getPath() + "_" + removed.size()));
+         removed.add(origin);
+         added.add(copy);
+      }
+      for (ResourceLocation name : removed) {
+         registry.remove(name);
+      }
+      for (IRecipe recipe : added) {
+         registry.register(recipe);
+      }
+      SuperSolarPanels.log.info("Replaced {} ASP recipe(s) for {}", removed.size(), output.getTranslationKey());
    }
 }
