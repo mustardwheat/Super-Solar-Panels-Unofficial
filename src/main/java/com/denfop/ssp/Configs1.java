@@ -59,7 +59,7 @@ public final class Configs1 {
          TileEntitySingular.settings = new SolarConfig(
             config.get(SINGULAR_SOLAR, "GenDay", 262144).getInt(262144),
             config.get(SINGULAR_SOLAR, "GenNight", 196608).getInt(196608),
-            config.get(SINGULAR_SOLAR, "Storage", 80000000).getInt(80000000),
+            config.get(SINGULAR_SOLAR, "Storage", 1000000000).getInt(1000000000),
             config.get(SINGULAR_SOLAR, "Tier", 7).getInt(7)
          );
          TileEntitySingular.maxOutput = config.get(SINGULAR_SOLAR, "MaxOutput", 262144).getInt(262144);
