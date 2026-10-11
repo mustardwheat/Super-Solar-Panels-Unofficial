@@ -413,7 +413,7 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
 
    public static enum SolarHelmetTypes {
       Spectral(EnumRarity.EPIC, 32758, TileEntitySpectral.settings.nightPower, 9, 6.0E7, 10000.0, 42000, 6.0),
-      Singular(EnumRarity.EPIC, 32758, TileEntitySingular.settings.nightPower, 9, 6.0E7, 10000.0, 42000, 6.0);
+      Singular(EnumRarity.EPIC, 32758, TileEntitySingular.settings.nightPower, 9, 8.0E7, 10000.0, 42000, 6.0);
 
       public final double maxCharge;
       public final double transferLimit;
