@@ -152,35 +152,48 @@ final class SPPRecipes {
          'B',
          SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.photoniy)
       );
+      // 强化量子套装（胸甲/护腿/靴子），配方布局与 1.4 及强化量子头盔一致
       addShapedRecipe(
          new ItemStack(SSP_Items.Quantum_chestplate.getInstance()),
-         " B ",
-         "BAB",
-         " B ",
+         "CBC",
+         "CAC",
+         " H ",
          'A',
          IC2Items.getItem("quantum_chestplate"),
          'B',
-         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.photoniy)
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.quantumitems6),
+         'C',
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.QuantumItems3),
+         'H',
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.QuantumItems5)
       );
       addShapedRecipe(
          new ItemStack(SSP_Items.Quantum_leggins.getInstance()),
-         " B ",
-         "BAB",
-         " B ",
+         "CBC",
+         "CAC",
+         " H ",
          'A',
          IC2Items.getItem("quantum_leggings"),
          'B',
-         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.photoniy)
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.quantumitems6),
+         'C',
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.QuantumItems3),
+         'H',
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.QuantumItems5)
       );
       addShapedRecipe(
          new ItemStack(SSP_Items.Quantum_boosts.getInstance()),
-         " B ",
-         "BAB",
-         " B ",
+         "CBC",
+         "CAC",
+         " H ",
          'A',
          IC2Items.getItem("quantum_boots"),
          'B',
-         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.photoniy)
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.quantumitems6),
+         'C',
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.QuantumItems3),
+         'H',
+         SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.QuantumItems5)
       );
       // 强化量子头盔（1.4 移植）
       addShapedRecipe(

@@ -34,6 +34,9 @@ public final class Configs1 {
    public static int quantumHelmetMaxCharge;
    public static int quantumHelmetTransferLimit;
    public static int quantumHelmetTier;
+   public static int quantumChestplateMaxCharge;
+   public static int quantumLegginsMaxCharge;
+   public static int quantumBoostsMaxCharge;
 
    static void loadConfig(File config, boolean client) {
       SuperSolarPanels.log.info("Loading ASP Config from " + config.getAbsolutePath());
@@ -98,6 +101,10 @@ public final class Configs1 {
          quantumHelmetMaxCharge = config.get("settings quantum helmet", "maxCharge", 100000000).getInt(100000000);
          quantumHelmetTransferLimit = config.get("settings quantum helmet", "transferLimit", 100000).getInt(100000);
          quantumHelmetTier = config.get("settings quantum helmet", "tier", 8).getInt(8);
+         // 强化量子胸甲/护腿/靴子最大储能，默认与强化量子头盔一致（1 亿 EU）
+         quantumChestplateMaxCharge = config.get("settings quantum chestplate", "maxCharge", 100000000).getInt(100000000);
+         quantumLegginsMaxCharge = config.get("settings quantum leggins", "maxCharge", 100000000).getInt(100000000);
+         quantumBoostsMaxCharge = config.get("settings quantum boosts", "maxCharge", 100000000).getInt(100000000);
       } catch (Exception var7) {
          SuperSolarPanels.log.fatal("Fatal error reading config file.", var7);
          throw new RuntimeException(var7);

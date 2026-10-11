@@ -17,7 +17,7 @@ public class ItemArmorQuantumChestplate extends ItemChest {
    protected static final int DEFAULT_COLOUR = -1;
 
    public ItemArmorQuantumChestplate() {
-      super("graviChestplate1", 6.0E7, 100000.0, 4);
+      super("graviChestplate1", Configs1.quantumChestplateMaxCharge, 100000.0, 4);
    }
 
    @Override

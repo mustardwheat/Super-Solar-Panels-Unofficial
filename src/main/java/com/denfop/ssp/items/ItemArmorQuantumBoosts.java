@@ -19,7 +19,7 @@ public class ItemArmorQuantumBoosts extends ItemBoosts {
    private float jumpCharge;
 
    public ItemArmorQuantumBoosts() {
-      super("graviBoosts", 6.0E7, 100000.0, 4);
+      super("graviBoosts", Configs1.quantumBoostsMaxCharge, 100000.0, 4);
    }
 
    @Override

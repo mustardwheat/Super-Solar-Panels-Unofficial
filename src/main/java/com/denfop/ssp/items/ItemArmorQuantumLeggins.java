@@ -20,7 +20,7 @@ public class ItemArmorQuantumLeggins extends ItemLeggins {
    protected static final int DEFAULT_COLOUR = -1;
 
    public ItemArmorQuantumLeggins() {
-      super("graviLeggins", 6.0E7, 100000.0, 4);
+      super("graviLeggins", Configs1.quantumLegginsMaxCharge, 100000.0, 4);
    }
 
    @Override
