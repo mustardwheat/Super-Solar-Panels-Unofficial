@@ -108,7 +108,8 @@ public class ItemArmorQuantumBoosts extends ItemBoosts {
          }
       }
 
-      if (Configs1.canCraftDoubleSlabs) {
+      // 无电时药水效果不生效
+      if (Configs1.canCraftDoubleSlabs && ElectricItem.manager.getCharge(stack) > 0.0) {
          player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 300, 0, true, true));
          if (Configs1.canCraftHSP) {
             player.addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST, 300, 0, true, true));

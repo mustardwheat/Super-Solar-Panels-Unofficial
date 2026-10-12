@@ -82,6 +82,10 @@ public class ItemArmorQuantumChestplate extends ItemChest {
    @Override
    public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
       super.onArmorTick(world, player, stack);
+      // 无电时灭火、清毒与药水效果均不生效，套装只保留基础护甲
+      if (ElectricItem.manager.getCharge(stack) <= 0.0) {
+         return;
+      }
       player.extinguish();
       player.removePotionEffect(MobEffects.POISON);
       if (Configs1.canCraftDoubleSlabs) {

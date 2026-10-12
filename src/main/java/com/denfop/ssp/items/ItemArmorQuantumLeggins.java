@@ -112,7 +112,8 @@ public class ItemArmorQuantumLeggins extends ItemLeggins {
          }
       }
 
-      if (Configs1.canCraftDoubleSlabs) {
+      // 无电时药水效果不生效（行走加速由上方 canUse 自行控制）
+      if (Configs1.canCraftDoubleSlabs && ElectricItem.manager.getCharge(stack) > 0.0) {
          player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 300, 2, true, true));
          if (Configs1.canCraftHSH) {
             player.addPotionEffect(new PotionEffect(MobEffects.LUCK, 300, 2, true, true));
