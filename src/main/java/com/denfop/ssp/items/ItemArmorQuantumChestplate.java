@@ -1,6 +1,6 @@
 package com.denfop.ssp.items;
 
-import com.denfop.ssp.Configs1;
+import com.denfop.ssp.SspConfig;
 import ic2.api.item.ElectricItem;
 import ic2.core.IC2;
 import net.minecraft.entity.Entity;
@@ -17,7 +17,7 @@ public class ItemArmorQuantumChestplate extends ItemChest {
    protected static final int DEFAULT_COLOUR = -1;
 
    public ItemArmorQuantumChestplate() {
-      super("graviChestplate1", Configs1.quantumChestplateMaxCharge, 100000.0, 4);
+      super("graviChestplate1", SspConfig.quantumChestplateMaxCharge, 100000.0, 4);
    }
 
    @Override
@@ -88,7 +88,7 @@ public class ItemArmorQuantumChestplate extends ItemChest {
       }
       player.extinguish();
       player.removePotionEffect(MobEffects.POISON);
-      if (Configs1.canCraftDoubleSlabs) {
+      if (SspConfig.canCraftDoubleSlabs) {
          player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 300, 2, true, true));
          player.removePotionEffect(MobEffects.WITHER);
       }

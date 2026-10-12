@@ -1,6 +1,6 @@
 package com.denfop.ssp.items;
 
-import com.denfop.ssp.Configs1;
+import com.denfop.ssp.SspConfig;
 import ic2.api.item.ElectricItem;
 import ic2.core.IC2;
 import ic2.core.util.StackUtil;
@@ -19,7 +19,7 @@ public class ItemArmorQuantumBoosts extends ItemBoosts {
    private float jumpCharge;
 
    public ItemArmorQuantumBoosts() {
-      super("graviBoosts", Configs1.quantumBoostsMaxCharge, 100000.0, 4);
+      super("graviBoosts", SspConfig.quantumBoostsMaxCharge, 100000.0, 4);
    }
 
    @Override
@@ -109,11 +109,11 @@ public class ItemArmorQuantumBoosts extends ItemBoosts {
       }
 
       // 无电时药水效果不生效
-      if (Configs1.canCraftDoubleSlabs && ElectricItem.manager.getCharge(stack) > 0.0) {
+      if (SspConfig.canCraftDoubleSlabs && ElectricItem.manager.getCharge(stack) > 0.0) {
          player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 300, 0, true, true));
-         if (Configs1.canCraftHSP) {
+         if (SspConfig.canCraftHSP) {
             player.addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST, 300, 0, true, true));
-            if (Configs1.canCraftDoubleSlabs) {
+            if (SspConfig.canCraftDoubleSlabs) {
                player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 300, 4, true, true));
             }
          }

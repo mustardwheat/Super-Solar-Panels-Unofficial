@@ -9,7 +9,7 @@ import com.chocohead.advsolar.tiles.TileEntitySolarPanel.SolarConfig;
 import java.io.File;
 import net.minecraftforge.common.config.Configuration;
 
-public final class Configs1 {
+public final class SspConfig {
    private static final String SPECTRAL_SOLAR = "settings spectral solar panel";
    private static final String SINGULAR_SOLAR = "settings singular solar panel";
    private static final String ADMIN_SOLAR = "settings admin solar panel";

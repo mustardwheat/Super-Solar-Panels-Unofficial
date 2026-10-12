@@ -1,6 +1,6 @@
 package com.denfop.ssp.items;
 
-import com.denfop.ssp.Configs1;
+import com.denfop.ssp.SspConfig;
 import ic2.api.item.ElectricItem;
 import ic2.core.IC2;
 import ic2.core.init.MainConfig;
@@ -20,7 +20,7 @@ public class ItemArmorQuantumLeggins extends ItemLeggins {
    protected static final int DEFAULT_COLOUR = -1;
 
    public ItemArmorQuantumLeggins() {
-      super("graviLeggins", Configs1.quantumLegginsMaxCharge, 100000.0, 4);
+      super("graviLeggins", SspConfig.quantumLegginsMaxCharge, 100000.0, 4);
    }
 
    @Override
@@ -113,9 +113,9 @@ public class ItemArmorQuantumLeggins extends ItemLeggins {
       }
 
       // 无电时药水效果不生效（行走加速由上方 canUse 自行控制）
-      if (Configs1.canCraftDoubleSlabs && ElectricItem.manager.getCharge(stack) > 0.0) {
+      if (SspConfig.canCraftDoubleSlabs && ElectricItem.manager.getCharge(stack) > 0.0) {
          player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 300, 2, true, true));
-         if (Configs1.canCraftHSH) {
+         if (SspConfig.canCraftHSH) {
             player.addPotionEffect(new PotionEffect(MobEffects.LUCK, 300, 2, true, true));
          }
       }

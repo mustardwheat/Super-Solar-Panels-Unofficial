@@ -1,6 +1,6 @@
 package com.denfop.ssp.items;
 
-import com.denfop.ssp.Configs1;
+import com.denfop.ssp.SspConfig;
 import com.google.common.base.CaseFormat;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.HudMode;
@@ -290,7 +290,7 @@ public class ItemArmorQuantumHelmet extends ItemArmor implements IItemModelProvi
    }
 
    public static enum SolarHelmetTypes {
-      Helmet(Configs1.quantumHelmetTier, Configs1.quantumHelmetMaxCharge, Configs1.quantumHelmetTransferLimit);
+      Helmet(SspConfig.quantumHelmetTier, SspConfig.quantumHelmetMaxCharge, SspConfig.quantumHelmetTransferLimit);
 
       public final double maxCharge;
       public final double transferLimit;

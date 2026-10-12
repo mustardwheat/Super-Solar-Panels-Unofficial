@@ -67,26 +67,26 @@ public enum SspItems {
          new ItemNanoSaber(
             "quantumsaber",
             10,
-            Configs1.saberQuantumMaxCharge,
-            Configs1.saberQuantumTransferLimit,
-            Configs1.saberQuantumTier,
-            Configs1.saberQuantumActiveDamage,
-            Configs1.saberQuantumDamage
+            SspConfig.saberQuantumMaxCharge,
+            SspConfig.saberQuantumTransferLimit,
+            SspConfig.saberQuantumTier,
+            SspConfig.saberQuantumActiveDamage,
+            SspConfig.saberQuantumDamage
          )
       );
       SPECTRAL_SABER.setInstance(
          new ItemNanoSaber(
             "spectralsaber",
             10,
-            Configs1.saberSpectralMaxCharge,
-            Configs1.saberSpectralTransferLimit,
-            Configs1.saberSpectralTier,
-            Configs1.saberSpectralActiveDamage,
-            Configs1.saberSpectralDamage
+            SspConfig.saberSpectralMaxCharge,
+            SspConfig.saberSpectralTransferLimit,
+            SspConfig.saberSpectralTier,
+            SspConfig.saberSpectralActiveDamage,
+            SspConfig.saberSpectralDamage
          )
       );
-      TWELVE_HEAT_STORAGE.setInstance(new ItemReactorHeatStorage("twelve_heat_storage", Configs1.twelveHeatStorage));
-      MAX_HEAT_STORAGE.setInstance(new ItemReactorHeatStorage("max_heat_storage", Configs1.maxHeatStorage));
+      TWELVE_HEAT_STORAGE.setInstance(new ItemReactorHeatStorage("twelve_heat_storage", SspConfig.twelveHeatStorage));
+      MAX_HEAT_STORAGE.setInstance(new ItemReactorHeatStorage("max_heat_storage", SspConfig.maxHeatStorage));
       if (side == Side.CLIENT) {
          registerItemModels();
       }

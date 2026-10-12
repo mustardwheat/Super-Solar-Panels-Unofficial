@@ -51,7 +51,7 @@ public final class SuperSolarPanels {
    @EventHandler
    public void load(FMLPreInitializationEvent event) {
       log = event.getModLog();
-      Configs1.loadConfig(event.getSuggestedConfigurationFile(), event.getSide().isClient());
+      SspConfig.loadConfig(event.getSuggestedConfigurationFile(), event.getSide().isClient());
       machines = TeBlockRegistry.get(SSPBlock.IDENTITY);
       SspItems.buildItems(event.getSide());
       SSPKeys.addFlyKey();
