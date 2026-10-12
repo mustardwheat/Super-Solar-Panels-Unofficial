@@ -51,3 +51,4 @@
 - GitHub Actions 自动构建，推送 v* 标签自动发布 Release（10-08，53fee28）
 - 包名统一为 com.denfop.ssp，清理死亡遗留代码（10-09，b1b415c / 503e0bc）
 - 物品注册表类 SSP_Items 重命名为 SspItems，统一 Java 命名规范（10-12，631a5fb）
+- 配置类 Configs1 重命名为 SspConfig，统一 Java 命名规范（10-12，03bf442）
