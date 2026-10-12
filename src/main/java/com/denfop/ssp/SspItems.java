@@ -70,7 +70,6 @@ public enum SspItems {
             SspConfig.saberQuantumMaxCharge,
             SspConfig.saberQuantumTransferLimit,
             SspConfig.saberQuantumTier,
-            SspConfig.saberQuantumActiveDamage,
             SspConfig.saberQuantumDamage
          )
       );
@@ -81,7 +80,6 @@ public enum SspItems {
             SspConfig.saberSpectralMaxCharge,
             SspConfig.saberSpectralTransferLimit,
             SspConfig.saberSpectralTier,
-            SspConfig.saberSpectralActiveDamage,
             SspConfig.saberSpectralDamage
          )
       );

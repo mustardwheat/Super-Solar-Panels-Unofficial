@@ -1,5 +1,6 @@
 package com.denfop.ssp.items.tools;
 
+import com.denfop.ssp.SspConfig;
 import com.denfop.ssp.items.itembase.ItemElectricTool;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -11,6 +12,8 @@ import ic2.core.item.armor.ItemArmorQuantumSuit;
 import ic2.core.slot.ArmorSlot;
 import ic2.core.util.StackUtil;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -18,15 +21,20 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Enchantments;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -34,19 +42,27 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 /**
  * 纳米剑系列电动武器（量子剑/光谱剑），移植自 1.4。
  * 右键切换激活状态；激活后攻击力提升并持续耗电，命中时可抽干目标的纳米/量子护甲电量。
+ * 激活态命中时对目标周围 12 格内的生物造成一半伤害并击退；仅接受锋利附魔。
  */
 public class ItemNanoSaber extends ItemElectricTool {
-   /** 激活状态攻击力 */
-   private final int activeDamage;
-   /** 未激活状态攻击力 */
-   private final int inactiveDamage;
+   /** 常态攻击力；激活后 ×1.5，有锋利附魔则 ×(锋利等级 + 1)，与 METS 量子剑乘伤一致 */
+   private final double baseDamage;
    private int soundTicker;
 
-   public ItemNanoSaber(String name, int operationEnergyCost, int maxCharge, int transferLimit, int tier, int activeDamage, int inactiveDamage) {
+   public ItemNanoSaber(String name, int operationEnergyCost, int maxCharge, int transferLimit, int tier, double baseDamage) {
       super(name, operationEnergyCost, maxCharge, transferLimit, tier);
-      this.activeDamage = activeDamage;
-      this.inactiveDamage = inactiveDamage;
+      this.baseDamage = baseDamage;
       this.soundTicker = 0;
+   }
+
+   // 当前攻击力：激活态无锋利时 ×1.5，有锋利时 ×(锋利等级 + 1)，未激活不享受附魔加成
+   private double getCurrentDamage(ItemStack stack) {
+      double damage = this.baseDamage;
+      if (isActive(stack) && ElectricItem.manager.canUse(stack, 400.0)) {
+         int sharpness = EnchantmentHelper.getEnchantmentLevel(Enchantments.SHARPNESS, stack);
+         damage *= sharpness == 0 ? 1.5 : sharpness + 1;
+      }
+      return damage;
    }
 
    public static void drainSaber(ItemStack stack, double amount, EntityLivingBase entity) {
@@ -74,11 +90,7 @@ public class ItemNanoSaber extends ItemElectricTool {
       if (slot != EntityEquipmentSlot.MAINHAND) {
          return super.getAttributeModifiers(slot, stack);
       } else {
-         int dmg = this.inactiveDamage;
-         if (ElectricItem.manager.canUse(stack, 400.0) && isActive(stack)) {
-            dmg = this.activeDamage;
-         }
-
+         double dmg = this.getCurrentDamage(stack);
          HashMultimap<String, AttributeModifier> hashMultimap = HashMultimap.create();
          hashMultimap.put(
             SharedMonsterAttributes.ATTACK_SPEED.getName(),
@@ -86,7 +98,7 @@ public class ItemNanoSaber extends ItemElectricTool {
          );
          hashMultimap.put(
             SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
-            new AttributeModifier(Item.ATTACK_DAMAGE_MODIFIER, "Tool modifier", (double)dmg, 0)
+            new AttributeModifier(Item.ATTACK_DAMAGE_MODIFIER, "Tool modifier", dmg, 0)
          );
          return hashMultimap;
       }
@@ -189,28 +201,49 @@ public class ItemNanoSaber extends ItemElectricTool {
       } else {
          if (IC2.platform.isSimulating()) {
             drainSaber(stack, 400.0, source);
-            if (!(source instanceof EntityPlayerMP) || !(target instanceof EntityPlayer) || ((EntityPlayerMP)source).canAttackPlayer((EntityPlayer)target)) {
-               for (EntityEquipmentSlot slot : ArmorSlot.getAll()) {
-                  if (!ElectricItem.manager.canUse(stack, 2000.0)) {
-                     break;
-                  }
+            // 激活态横扫：目标周围 12 格内的其他生物受到一半伤害并被击退
+            boolean swept = false;
+            for (EntityLivingBase nearby : target.getEntityWorld().getEntitiesWithinAABB(EntityLivingBase.class, target.getEntityBoundingBox().grow(12.0))) {
+               if (nearby == target || nearby == source) {
+                  continue;
+               }
+               nearby.knockBack(source, 0.4F, MathHelper.sin(source.rotationYaw * 0.017453292F), (-MathHelper.cos(source.rotationYaw * 0.017453292F)));
+               nearby.attackEntityFrom(
+                  source instanceof EntityPlayer ? DamageSource.causePlayerDamage((EntityPlayer)source) : DamageSource.causeMobDamage(source),
+                  (float)(this.getCurrentDamage(stack) / 2.0)
+               );
+               swept = true;
+            }
 
-                  ItemStack armor = target.getItemStackFromSlot(slot);
-                  if (!armor.isEmpty()) {
-                     double amount = 0.0;
-                     if (armor.getItem() instanceof ItemArmorNanoSuit) {
-                        amount = 48000.0;
-                     } else if (armor.getItem() instanceof ItemArmorQuantumSuit) {
-                        amount = 300000.0;
+            if (swept) {
+               target.getEntityWorld().playSound(null, source.posX, source.posY, source.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, SoundCategory.PLAYERS, 1.0F, 1.0F);
+            }
+
+            // 抽干目标纳米/量子护甲电量并扒掉护甲件的机制，可用配置开关关闭
+            if (SspConfig.saberDrainArmorOnHit) {
+               if (!(source instanceof EntityPlayerMP) || !(target instanceof EntityPlayer) || ((EntityPlayerMP)source).canAttackPlayer((EntityPlayer)target)) {
+                  for (EntityEquipmentSlot slot : ArmorSlot.getAll()) {
+                     if (!ElectricItem.manager.canUse(stack, 2000.0)) {
+                        break;
                      }
 
-                     if (amount > 0.0) {
-                        ElectricItem.manager.discharge(armor, amount, this.tier, true, false, false);
-                        if (!ElectricItem.manager.canUse(armor, 1.0)) {
-                           target.setItemStackToSlot(slot, ItemStack.EMPTY);
+                     ItemStack armor = target.getItemStackFromSlot(slot);
+                     if (!armor.isEmpty()) {
+                        double amount = 0.0;
+                        if (armor.getItem() instanceof ItemArmorNanoSuit) {
+                           amount = 48000.0;
+                        } else if (armor.getItem() instanceof ItemArmorQuantumSuit) {
+                           amount = 300000.0;
                         }
 
-                        drainSaber(stack, 2000.0, source);
+                        if (amount > 0.0) {
+                           ElectricItem.manager.discharge(armor, amount, this.tier, true, false, false);
+                           if (!ElectricItem.manager.canUse(armor, 1.0)) {
+                              target.setItemStackToSlot(slot, ItemStack.EMPTY);
+                           }
+
+                           drainSaber(stack, 2000.0, source);
+                        }
                      }
                   }
                }
@@ -229,5 +262,16 @@ public class ItemNanoSaber extends ItemElectricTool {
    @SideOnly(Side.CLIENT)
    public EnumRarity getForgeRarity(ItemStack stack) {
       return EnumRarity.UNCOMMON;
+   }
+
+   // 仅允许锋利附魔（附魔台与铁砧附魔书均受此限制）
+   @Override
+   public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+      return enchantment == Enchantments.SHARPNESS;
+   }
+
+   @Override
+   public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+      return EnchantmentHelper.getEnchantments(book).keySet().stream().allMatch(enchantment -> enchantment == Enchantments.SHARPNESS);
    }
 }

@@ -23,15 +23,14 @@ public final class SspConfig {
    public static boolean canCraftASH;
    public static boolean canCraftHSH;
    public static int saberQuantumDamage;
-   public static int saberQuantumActiveDamage;
    public static int saberQuantumMaxCharge;
    public static int saberQuantumTransferLimit;
    public static int saberQuantumTier;
    public static int saberSpectralDamage;
-   public static int saberSpectralActiveDamage;
    public static int saberSpectralMaxCharge;
    public static int saberSpectralTransferLimit;
    public static int saberSpectralTier;
+   public static boolean saberDrainArmorOnHit;
    public static int twelveHeatStorage;
    public static int maxHeatStorage;
    public static int quantumHelmetMaxCharge;
@@ -96,14 +95,14 @@ public final class SspConfig {
          canCraftHSH = !config.get("settings Quantum Leggins", "Disable Effect LUCK", false).getBoolean(false);
          // 太阳能头盔是否给整个背包充电（默认开启，对齐 ASP 混合/终混太阳能头盔行为）
          ItemArmourSolarHelmet.chargeWholeInventory = config.get("general", "solarHelmetsChargeWholeInventory", true).getBoolean(true);
-         // 量子剑/光谱剑数值（默认值与 1.4 保持一致）
-         saberQuantumDamage = config.get("settings quantum saber", "Damage", 11).getInt(11);
-         saberQuantumActiveDamage = config.get("settings quantum saber", "ActiveDamage", 29).getInt(29);
+         // 双剑命中时抽干目标纳米/量子护甲电量并扒掉护甲件的机制开关（默认开启）
+         saberDrainArmorOnHit = config.get("general", "saberDrainArmorOnHit", true).getBoolean(true);
+         // 量子剑/光谱剑常态伤害；激活态 ×1.5，有锋利附魔时 ×(锋利等级 + 1)，与 METS 量子剑乘伤一致
+         saberQuantumDamage = config.get("settings quantum saber", "Damage", 25).getInt(25);
          saberQuantumMaxCharge = config.get("settings quantum saber", "maxCharge", 10000000).getInt(10000000);
-         saberQuantumTransferLimit = config.get("settings quantum saber", "transferLimit", 2000).getInt(2000);
+         saberQuantumTransferLimit = config.get("settings quantum saber", "transferLimit", 2048).getInt(2048);
          saberQuantumTier = config.get("settings quantum saber", "tier", 4).getInt(4);
-         saberSpectralDamage = config.get("settings spectral saber", "Damage", 14).getInt(14);
-         saberSpectralActiveDamage = config.get("settings spectral saber", "ActiveDamage", 39).getInt(39);
+         saberSpectralDamage = config.get("settings spectral saber", "Damage", 40).getInt(40);
          saberSpectralMaxCharge = config.get("settings spectral saber", "maxCharge", 100000000).getInt(100000000);
          saberSpectralTransferLimit = config.get("settings spectral saber", "transferLimit", 2000).getInt(2000);
          saberSpectralTier = config.get("settings spectral saber", "tier", 5).getInt(5);
