@@ -1,6 +1,7 @@
 package com.denfop.ssp;
 
 import com.denfop.ssp.tiles.TileEntityAdmin;
+import com.denfop.ssp.items.ItemArmourSolarHelmet;
 import com.denfop.ssp.tiles.TileEntityNeutron;
 import com.denfop.ssp.tiles.TileEntitySingular;
 import com.denfop.ssp.tiles.TileEntitySpectral;
@@ -93,6 +94,8 @@ public final class SspConfig {
          canCraftASH = !config.get("settings Quantum Boosts", "Disable Effect REGENERATION ", false).getBoolean(false);
          canCraftHSP = !config.get("settings Quantum Leggins", "Disable Effect SPEED ", false).getBoolean(false);
          canCraftHSH = !config.get("settings Quantum Leggins", "Disable Effect LUCK", false).getBoolean(false);
+         // 太阳能头盔是否给整个背包充电（默认开启，对齐 ASP 混合/终混太阳能头盔行为）
+         ItemArmourSolarHelmet.chargeWholeInventory = config.get("general", "solarHelmetsChargeWholeInventory", true).getBoolean(true);
          // 量子剑/光谱剑数值（默认值与 1.4 保持一致）
          saberQuantumDamage = config.get("settings quantum saber", "Damage", 11).getInt(11);
          saberQuantumActiveDamage = config.get("settings quantum saber", "ActiveDamage", 29).getInt(29);
