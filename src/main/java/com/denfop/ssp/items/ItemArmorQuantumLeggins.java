@@ -2,11 +2,13 @@ package com.denfop.ssp.items;
 
 import com.denfop.ssp.SspConfig;
 import ic2.api.item.ElectricItem;
+import ic2.api.item.IHazmatLike;
 import ic2.core.IC2;
 import ic2.core.init.MainConfig;
 import ic2.core.util.ConfigUtil;
 import ic2.core.util.StackUtil;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -16,7 +18,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-public class ItemArmorQuantumLeggins extends ItemLeggins {
+public class ItemArmorQuantumLeggins extends ItemLeggins implements IHazmatLike {
    protected static final int DEFAULT_COLOUR = -1;
 
    public ItemArmorQuantumLeggins() {
@@ -80,6 +82,12 @@ public class ItemArmorQuantumLeggins extends ItemLeggins {
    @Override
    public EnumRarity getRarity(ItemStack stack) {
       return EnumRarity.EPIC;
+   }
+
+   // 辐射防护接入 IC2 的 IHazmatLike 检查：四件齐全且均有电时，背包内放射物不再施加辐射
+   @Override
+   public boolean addsProtection(EntityLivingBase entity, EntityEquipmentSlot slot, ItemStack stack) {
+      return ElectricItem.manager.getCharge(stack) > 0.0;
    }
 
    @Override

@@ -5,6 +5,7 @@ import com.google.common.base.CaseFormat;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.HudMode;
 import ic2.api.item.IElectricItem;
+import ic2.api.item.IHazmatLike;
 import ic2.api.item.IItemHudProvider;
 import ic2.api.item.IMetalArmor;
 import ic2.core.IC2;
@@ -52,13 +53,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  * 功能：耗电清除负面药水效果、水下补气、自动进食罐头、夜视开关与 HUD 模式切换。
  * 与太阳能头盔的区别：不发电，因此移除了 1.4 中发电量恒为 0 的充能分配死代码。
  */
-public class ItemArmorQuantumHelmet extends ItemArmor implements IItemModelProvider, IElectricItem, IMetalArmor, ISpecialArmor, IItemHudProvider {
-   /** 各负面药水对应的清除耗电量（EU），数值与 1.4 保持一致 */
+public class ItemArmorQuantumHelmet extends ItemArmor implements IItemModelProvider, IElectricItem, IMetalArmor, ISpecialArmor, IItemHudProvider, IHazmatLike {
+   /** 各负面药水对应的清除耗电量（EU）；辐射与原版量子头盔一致为 10000，其余与 1.4 保持一致 */
    protected static final Map<Potion, Integer> POTION_REMOVAL_COST = new IdentityHashMap<>();
    protected final ItemArmorQuantumHelmet.SolarHelmetTypes type;
 
    static {
-      POTION_REMOVAL_COST.put(IC2Potion.radiation, 5000);
+      POTION_REMOVAL_COST.put(IC2Potion.radiation, 10000);
       POTION_REMOVAL_COST.put(MobEffects.POISON, 400);
       POTION_REMOVAL_COST.put(MobEffects.WITHER, 500);
       POTION_REMOVAL_COST.put(MobEffects.SLOWNESS, 300);
@@ -241,6 +242,12 @@ public class ItemArmorQuantumHelmet extends ItemArmor implements IItemModelProvi
 
    public boolean isMetalArmor(ItemStack stack, EntityPlayer player) {
       return true;
+   }
+
+   // 辐射防护接入 IC2 的 IHazmatLike 检查：四件齐全且均有电时，背包内放射物不再施加辐射
+   @Override
+   public boolean addsProtection(EntityLivingBase entity, EntityEquipmentSlot slot, ItemStack stack) {
+      return ElectricItem.manager.getCharge(stack) > 0.0;
    }
 
    public int getItemEnchantability() {
