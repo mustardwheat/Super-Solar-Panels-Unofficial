@@ -14,7 +14,13 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.ISpecialArmor.ArmorProperties;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ItemArmorQuantumBoosts extends ItemBoosts implements IHazmatLike {
    protected static final int DEFAULT_COLOUR = -1;
@@ -22,6 +28,8 @@ public class ItemArmorQuantumBoosts extends ItemBoosts implements IHazmatLike {
 
    public ItemArmorQuantumBoosts() {
       super("graviBoosts", SspConfig.quantumBoostsMaxCharge, 100000.0, 4);
+      // 与原版量子靴一致：仅靴子实例注册摔落事件总线监听
+      MinecraftForge.EVENT_BUS.register(this);
    }
 
    @Override
@@ -189,6 +197,33 @@ public class ItemArmorQuantumBoosts extends ItemBoosts implements IHazmatLike {
    @Override
    public int getEnergyPerDamage() {
       return 20000;
+   }
+
+   // 摔落伤害特判：全额吸收，与原版量子靴一致（优先级 10）
+   @Override
+   public ArmorProperties getProperties(EntityLivingBase player, ItemStack armour, DamageSource source, double damage, int slot) {
+      if (source == DamageSource.FALL) {
+         int limit = (int)Math.min(Integer.MAX_VALUE, 25.0 * ElectricItem.manager.getCharge(armour) / this.getEnergyPerDamage());
+         return new ArmorProperties(10, 1.0, limit);
+      }
+      return super.getProperties(player, armour, source, damage, slot);
+   }
+
+   // 摔落保护：10 格以内免伤不耗电，超出部分每点伤害 20000 EU，电量足够时取消整个摔落事件
+   @SubscribeEvent(priority = EventPriority.LOW)
+   public void onEntityLivingFallEvent(LivingFallEvent event) {
+      if (IC2.platform.isSimulating()) {
+         EntityLivingBase entity = event.getEntityLiving();
+         ItemStack armor = entity.getItemStackFromSlot(EntityEquipmentSlot.FEET);
+         if (armor != null && armor.getItem() == this) {
+            int fallDamage = Math.max((int)event.getDistance() - 10, 0);
+            double energyCost = (double)this.getEnergyPerDamage() * fallDamage;
+            if (energyCost <= ElectricItem.manager.getCharge(armor)) {
+               ElectricItem.manager.discharge(armor, energyCost, Integer.MAX_VALUE, true, false, false);
+               event.setCanceled(true);
+            }
+         }
+      }
    }
 
    @Override
