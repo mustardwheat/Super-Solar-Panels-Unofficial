@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public enum SSP_Items {
+public enum SspItems {
    Spectral_SOLAR_HELMET,
    Singular_SOLAR_HELMET,
    Quantum_chestplate,
@@ -94,7 +94,7 @@ public enum SSP_Items {
 
    @SideOnly(Side.CLIENT)
    private static void registerItemModels() {
-      for (SSP_Items item : values()) {
+      for (SspItems item : values()) {
          ((ic2.core.ref.IItemModelProvider)item.getInstance()).registerModels((ic2.core.ref.ItemName)null);
       }
    }

@@ -53,24 +53,24 @@ public final class SuperSolarPanels {
       log = event.getModLog();
       Configs1.loadConfig(event.getSuggestedConfigurationFile(), event.getSide().isClient());
       machines = TeBlockRegistry.get(SSPBlock.IDENTITY);
-      SSP_Items.buildItems(event.getSide());
+      SspItems.buildItems(event.getSide());
       SSPKeys.addFlyKey();
-      OreDictionary.registerOre("enderquantumcomponent", SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.enderquantumcomponent));
-      OreDictionary.registerOre("solarsplitter", SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.solarsplitter));
-      OreDictionary.registerOre("bluecomponent", SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.bluecomponent));
-      OreDictionary.registerOre("redcomponent", SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.redcomponent));
+      OreDictionary.registerOre("enderquantumcomponent", SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.enderquantumcomponent));
+      OreDictionary.registerOre("solarsplitter", SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.solarsplitter));
+      OreDictionary.registerOre("bluecomponent", SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.bluecomponent));
+      OreDictionary.registerOre("redcomponent", SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.redcomponent));
       // 绿色光谱组件已移除，其矿物词典名转由 ASP 光辉玻璃板继承，保证跨 mod 配方兼容
       OreDictionary.registerOre("greencomponent", ASP_Items.CRAFTING.getItemStack(ItemCraftingThings.CraftingTypes.IRRADIANT_GLASS_PANE));
-      OreDictionary.registerOre("singularcore", SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.singularcore));
-      OreDictionary.registerOre("photoniy", SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.photoniy));
-      OreDictionary.registerOre("photoniy_ingot", SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.photoniy_ingot));
-      OreDictionary.registerOre("spectralcore", SSP_Items.CRAFTING.getItemStack(CraftingThings.CraftingTypes.spectralcore));
+      OreDictionary.registerOre("singularcore", SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.singularcore));
+      OreDictionary.registerOre("photoniy", SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.photoniy));
+      OreDictionary.registerOre("photoniy_ingot", SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.photoniy_ingot));
+      OreDictionary.registerOre("spectralcore", SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.spectralcore));
    }
 
    private void registerJetpackBlacklist() {
       // 强化量子胸甲自带飞行，禁止再附挂喷气背包组件（与 IC2 拉黑原版量子胸甲一致）；
       // 喷气背包配方只接受胸甲槽位的物品，护腿与靴子天然不可附挂，无需列入黑名单
-      JetpackAttachmentRecipe.blacklistedItems.add(SSP_Items.Quantum_chestplate.getInstance());
+      JetpackAttachmentRecipe.blacklistedItems.add(SspItems.Quantum_chestplate.getInstance());
    }
 
    @EventHandler
@@ -90,8 +90,8 @@ public final class SuperSolarPanels {
       ItemColors colours = event.getItemColors();
       IItemColor armourColouring = (IItemColor)((Map)ReflectionUtil.getFieldValue(ReflectionUtil.getField(ItemColors.class, Map.class), colours))
          .get(Items.LEATHER_BOOTS.delegate);
-      colours.registerItemColorHandler(armourColouring, new net.minecraft.item.Item[]{SSP_Items.Spectral_SOLAR_HELMET.getInstance()});
-      colours.registerItemColorHandler(armourColouring, new net.minecraft.item.Item[]{SSP_Items.Singular_SOLAR_HELMET.getInstance()});
+      colours.registerItemColorHandler(armourColouring, new net.minecraft.item.Item[]{SspItems.Spectral_SOLAR_HELMET.getInstance()});
+      colours.registerItemColorHandler(armourColouring, new net.minecraft.item.Item[]{SspItems.Singular_SOLAR_HELMET.getInstance()});
    }
 
    @EventHandler
