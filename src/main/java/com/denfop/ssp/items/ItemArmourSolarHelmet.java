@@ -385,11 +385,11 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
    public ArmorProperties getProperties(EntityLivingBase player, ItemStack armour, DamageSource source, double damage, int slot) {
       return source.isUnblockable()
          ? new ArmorProperties(0, 0.0, 0)
-         : new ArmorProperties(0, 0.15 * this.type.damageAbsorptionRatio, (int)(25.0 * ElectricItem.manager.getCharge(armour) / this.type.energyPerDamage));
+         : new ArmorProperties(0, this.type.damageAbsorptionRatio, (int)(25.0 * ElectricItem.manager.getCharge(armour) / this.type.energyPerDamage));
    }
 
    public int getArmorDisplay(EntityPlayer player, ItemStack armour, int slot) {
-      return ElectricItem.manager.getCharge(armour) >= this.type.energyPerDamage ? (int)Math.round(3.0 * this.type.damageAbsorptionRatio) : 0;
+      return ElectricItem.manager.getCharge(armour) >= this.type.energyPerDamage ? (int)Math.round(20.0 * this.type.damageAbsorptionRatio) : 0;
    }
 
    public void damageArmor(EntityLivingBase entity, ItemStack stack, DamageSource source, int damage, int slot) {
@@ -421,11 +421,12 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
    }
 
    public static enum SolarHelmetTypes {
-      Spectral(EnumRarity.EPIC, 32758, TileEntitySpectral.settings.nightPower, 8, 6.0E7, 10000.0, 42000, 6.0),
-      Singular(EnumRarity.EPIC, 32758, TileEntitySingular.settings.nightPower, 9, 8.0E7, 10000.0, 42000, 6.0);
+      Spectral(EnumRarity.EPIC, TileEntitySpectral.settings.dayPower, TileEntitySpectral.settings.nightPower, 8, 6.0E7, 10000.0, 20000, 0.7),
+      Singular(EnumRarity.EPIC, TileEntitySingular.settings.dayPower, TileEntitySingular.settings.nightPower, 9, 8.0E7, 10000.0, 20000, 1.0);
 
       public final double maxCharge;
       public final double transferLimit;
+      /** 免伤比例，直接作为吸收率使用（0.7 = 70%、1.0 = 100%），不再乘 IC2 槽位基础值 */
       public final double damageAbsorptionRatio;
       public final int dayEU;
       public final int nightEU;
