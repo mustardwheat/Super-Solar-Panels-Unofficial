@@ -401,12 +401,7 @@ final class SPPRecipes {
          'T',
          IC2Items.getItem("plate", "tin")
       );
-      // 中子链：碎片压缩成中子，中子核心沿用 1.4 配方
-      // 中子碎片暂无获取配方（维护决议：来源待后续联动内容提供）
-      addCompressorRecipe(
-         input.forStack(SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.neutronshard), 9),
-         SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.neutron)
-      );
+      // 中子核心沿用 1.4 配方；中子暂无获取配方（维护决议：来源待后续联动内容提供）
       addShapedRecipe(
          SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.neutroncore),
          " A ",
