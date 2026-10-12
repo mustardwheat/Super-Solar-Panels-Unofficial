@@ -7,7 +7,6 @@
 			"singular_solar_panel": {"model": "super_solar_panels:singulary_solar_panel"},
 			"admin_solar_panel": {"model": "super_solar_panels:admin_solar_panel"},
 			"photonic_solar_panel": {"model": "super_solar_panels:photonic_solar_panel"},
-			"proton_solar_panel": {"model": "super_solar_panels:proton_solar_panel"},
 			"neutronium_solar_panel": {"model": "super_solar_panels:neutronium_solar_panel"}
 		},
 		"facing": {

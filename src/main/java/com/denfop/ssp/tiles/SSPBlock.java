@@ -18,7 +18,6 @@ public enum SSPBlock implements ITeBlock {
    singular_solar_panel(TileEntitySingular.class, 3, EnumRarity.RARE),
    admin_solar_panel(TileEntityAdmin.class, 4, EnumRarity.EPIC),
    photonic_solar_panel(TileEntityPhotonic.class, 5, EnumRarity.EPIC),
-   proton_solar_panel(TileEntityProton.class, 6, EnumRarity.EPIC),
    neutronium_solar_panel(TileEntityNeutron.class, 7, EnumRarity.EPIC);
 
    private final Class<? extends TileEntityBlock> teClass;

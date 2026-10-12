@@ -58,9 +58,6 @@ public class CraftingThings extends ItemMulti<CraftingThings.CraftingTypes> {
       rune_sun(25),
       rune_night(26),
       rune_energy(27),
-      protonshard(28),
-      proton(29),
-      protoncore(30),
       neutronshard(31),
       neutron(32),
       neutroncore(33);
