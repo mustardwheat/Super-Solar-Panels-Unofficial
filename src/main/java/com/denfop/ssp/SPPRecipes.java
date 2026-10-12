@@ -401,6 +401,69 @@ final class SPPRecipes {
          'T',
          IC2Items.getItem("plate", "tin")
       );
+      // 质子链（1.4 移植）：钚压缩出质子碎片，碎片压缩成质子
+      addCompressorRecipe(
+         input.forStack(IC2Items.getItem("nuclear", "plutonium")),
+         SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.protonshard)
+      );
+      addCompressorRecipe(
+         input.forStack(SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.protonshard), 18),
+         SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.proton)
+      );
+      // 质子核心（1.4 布局，浓缩阳光合金 4 号槽位按维护决议改用 ASP 浓缩阳光合金）
+      addShapedRecipe(
+         SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.protoncore),
+         " B ",
+         "ACA",
+         " B ",
+         'A',
+         SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.proton),
+         'B',
+         ASP_Items.CRAFTING.getItemStack(CraftingTypes.ENRICHED_SUNNARIUM_ALLOY),
+         'C',
+         SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.spectralcore)
+      );
+      // 中子碎片获取（维护决议：替代 1.4 的中子制造机体系）：质子压缩
+      addCompressorRecipe(
+         input.forStack(SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.proton)),
+         SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.neutronshard)
+      );
+      // 中子链：碎片压缩成中子，中子核心沿用 1.4 配方
+      addCompressorRecipe(
+         input.forStack(SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.neutronshard), 9),
+         SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.neutron)
+      );
+      addShapedRecipe(
+         SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.neutroncore),
+         " A ",
+         "ABA",
+         " A ",
+         'A',
+         SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.neutron),
+         'B',
+         SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.quantcore2)
+      );
+      // 质子/中子太阳能面板（1.4 布局：四块下级面板环绕核心）
+      addShapedRecipe(
+         SuperSolarPanels.machines.getItemStack(SSPBlock.proton_solar_panel),
+         " B ",
+         "BAB",
+         " B ",
+         'A',
+         SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.protoncore),
+         'B',
+         SuperSolarPanels.machines.getItemStack(SSPBlock.spectral_solar_panel)
+      );
+      addShapedRecipe(
+         SuperSolarPanels.machines.getItemStack(SSPBlock.neutronium_solar_panel),
+         " B ",
+         "BAB",
+         " B ",
+         'A',
+         SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.neutroncore),
+         'B',
+         SuperSolarPanels.machines.getItemStack(SSPBlock.photonic_solar_panel)
+      );
    }
 
    private static void addShapedColourRecipe(ItemStack output, Object... inputs) {

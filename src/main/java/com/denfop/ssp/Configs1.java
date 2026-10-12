@@ -1,6 +1,8 @@
 package com.denfop.ssp;
 
 import com.denfop.ssp.tiles.TileEntityAdmin;
+import com.denfop.ssp.tiles.TileEntityNeutron;
+import com.denfop.ssp.tiles.TileEntityProton;
 import com.denfop.ssp.tiles.TileEntitySingular;
 import com.denfop.ssp.tiles.TileEntitySpectral;
 import com.denfop.ssp.tiles.TileEntityPhotonic;
@@ -13,6 +15,8 @@ public final class Configs1 {
    private static final String SINGULAR_SOLAR = "settings singular solar panel";
    private static final String ADMIN_SOLAR = "settings admin solar panel";
    private static final String PHOTONIC_SOLAR = "settings photonic solar panel";
+   private static final String PROTON_SOLAR = "settings proton solar panel";
+   private static final String NEUTRON_SOLAR = "settings neutron solar panel";
    public static boolean canCraftDoubleSlabs;
    public static boolean canCraftMT;
    public static boolean canCraftASP;
@@ -77,6 +81,22 @@ public final class Configs1 {
             config.get(PHOTONIC_SOLAR, "Tier", 9).getInt(9)
          );
          TileEntityPhotonic.maxOutput = config.get(PHOTONIC_SOLAR, "MaxOutput", 1000000000).getInt(1000000000);
+         // 质子太阳能（1.4 移植默认值）
+         TileEntityProton.settings = new SolarConfig(
+            config.get(PROTON_SOLAR, "GenDay", 32768).getInt(32768),
+            config.get(PROTON_SOLAR, "GenNight", 20000).getInt(20000),
+            config.get(PROTON_SOLAR, "Storage", 999999999).getInt(999999999),
+            config.get(PROTON_SOLAR, "Tier", 6).getInt(6)
+         );
+         TileEntityProton.maxOutput = config.get(PROTON_SOLAR, "MaxOutput", 32768).getInt(32768);
+         // 中子太阳能：发电与储能拉满到 int 上限，能量等级与 ASP 量子发电机默认值一致
+         TileEntityNeutron.settings = new SolarConfig(
+            config.get(NEUTRON_SOLAR, "GenDay", 2147483647).getInt(2147483647),
+            config.get(NEUTRON_SOLAR, "GenNight", 2147483647).getInt(2147483647),
+            config.get(NEUTRON_SOLAR, "Storage", 2147483647).getInt(2147483647),
+            config.get(NEUTRON_SOLAR, "Tier", 3).getInt(3)
+         );
+         TileEntityNeutron.maxOutput = config.get(NEUTRON_SOLAR, "MaxOutput", 2147483647).getInt(2147483647);
          canCraftDoubleSlabs = !config.get("settings Quantum chestplate", "Disable Effect FIRE RESISTANCE ", false).getBoolean(false);
          canCraftMT = !config.get("settings Quantum Boosts", "Disable Effect WATER BREATHING ", false).getBoolean(false);
          canCraftASP = !config.get("settings Quantum Boosts", "Disable Effect JUMP BOOST", false).getBoolean(false);

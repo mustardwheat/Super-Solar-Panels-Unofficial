@@ -4,6 +4,8 @@ super_solar_panels.machines.spectral_solar_panel=光谱太阳能板
 super_solar_panels.machines.singular_solar_panel=奇异太阳能板
 super_solar_panels.machines.admin_solar_panel=管理员太阳能板
 super_solar_panels.machines.photonic_solar_panel=光子太阳能板
+super_solar_panels.machines.proton_solar_panel=质子太阳能板
+super_solar_panels.machines.neutronium_solar_panel=中子太阳能板
 
 super_solar_panels.crafting.enderquantumcomponent=终极量子组件
 super_solar_panels.crafting.solarsplitter=阳光分束器
@@ -32,6 +34,12 @@ super_solar_panels.crafting.compresscarbonultra=压缩高级合金
 super_solar_panels.crafting.rune_sun=太阳符文
 super_solar_panels.crafting.rune_night=黑夜符文
 super_solar_panels.crafting.rune_energy=能量符文
+super_solar_panels.crafting.protonshard=质子碎片
+super_solar_panels.crafting.proton=质子
+super_solar_panels.crafting.protoncore=质子核心
+super_solar_panels.crafting.neutronshard=中子碎片
+super_solar_panels.crafting.neutron=中子
+super_solar_panels.crafting.neutroncore=中子核心
 
 super_solar_panels.solar_helmets.spectral=光谱太阳能头盔
 super_solar_panels.solar_helmets.singular=奇异太阳能头盔
