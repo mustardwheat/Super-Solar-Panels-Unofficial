@@ -72,7 +72,8 @@ final class SPPRecipes {
       );
       addShapelessRecipe(
          new ItemStack(SspItems.Singular_SOLAR_HELMET.getInstance()),
-         SspItems.Spectral_SOLAR_HELMET.getInstance(),
+         ASP_Items.ULTIMATE_HYBRID_SOLAR_HELMET.getInstance(),
+         SuperSolarPanels.machines.getItemStack(SSPBlock.singular_solar_panel),
          SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.singularcore)
       );
       addShapedRecipe(
