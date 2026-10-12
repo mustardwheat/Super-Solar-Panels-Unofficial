@@ -68,16 +68,16 @@ public final class Configs1 {
          );
          TileEntitySingular.maxOutput = config.get(SINGULAR_SOLAR, "MaxOutput", 262144).getInt(262144);
          TileEntityAdmin.settings = new SolarConfig(
-            config.get(ADMIN_SOLAR, "GenDay", 1048576).getInt(1048576),
-            config.get(ADMIN_SOLAR, "GenNight", 1048576).getInt(1048576),
+            config.get(ADMIN_SOLAR, "GenDay", 2097152).getInt(2097152),
+            config.get(ADMIN_SOLAR, "GenNight", 2097152).getInt(2097152),
             config.get(ADMIN_SOLAR, "Storage", 1000000000).getInt(1000000000),
             config.get(ADMIN_SOLAR, "Tier", 8).getInt(8)
          );
-         TileEntityAdmin.maxOutput = config.get(ADMIN_SOLAR, "MaxOutput", 1048576).getInt(1048576);
+         TileEntityAdmin.maxOutput = config.get(ADMIN_SOLAR, "MaxOutput", 2097152).getInt(2097152);
          TileEntityPhotonic.settings = new SolarConfig(
             config.get(PHOTONIC_SOLAR, "GenDay", 1000000000).getInt(1000000000),
             config.get(PHOTONIC_SOLAR, "GenNight", 1000000000).getInt(1000000000),
-            config.get(PHOTONIC_SOLAR, "Storage", 999999999).getInt(999999999),
+            config.get(PHOTONIC_SOLAR, "Storage", 1000000000).getInt(1000000000),
             config.get(PHOTONIC_SOLAR, "Tier", 9).getInt(9)
          );
          TileEntityPhotonic.maxOutput = config.get(PHOTONIC_SOLAR, "MaxOutput", 1000000000).getInt(1000000000);
