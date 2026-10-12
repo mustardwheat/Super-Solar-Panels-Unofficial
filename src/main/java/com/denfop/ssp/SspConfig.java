@@ -79,12 +79,12 @@ public final class SspConfig {
             config.get(PHOTONIC_SOLAR, "Tier", 9).getInt(9)
          );
          TileEntityPhotonic.maxOutput = config.get(PHOTONIC_SOLAR, "MaxOutput", 1000000000).getInt(1000000000);
-         // 中子太阳能：发电与储能拉满到 int 上限，能量等级与 ASP 量子发电机默认值一致
+         // 中子太阳能：发电与储能拉满到 int 上限，能量等级 14（单包电压 2^31，超出 ASP 量子发电机 GUI 的 1-10 档）
          TileEntityNeutron.settings = new SolarConfig(
             config.get(NEUTRON_SOLAR, "GenDay", 2147483647).getInt(2147483647),
             config.get(NEUTRON_SOLAR, "GenNight", 2147483647).getInt(2147483647),
             config.get(NEUTRON_SOLAR, "Storage", 2147483647).getInt(2147483647),
-            config.get(NEUTRON_SOLAR, "Tier", 3).getInt(3)
+            config.get(NEUTRON_SOLAR, "Tier", 14).getInt(14)
          );
          TileEntityNeutron.maxOutput = config.get(NEUTRON_SOLAR, "MaxOutput", 2147483647).getInt(2147483647);
          canCraftDoubleSlabs = !config.get("settings Quantum chestplate", "Disable Effect FIRE RESISTANCE ", false).getBoolean(false);
