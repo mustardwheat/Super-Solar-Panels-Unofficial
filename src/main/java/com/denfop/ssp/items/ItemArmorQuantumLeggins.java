@@ -186,7 +186,8 @@ public class ItemArmorQuantumLeggins extends ItemLeggins {
 
    @Override
    public double getDamageAbsorptionRatio() {
-      return 1.1;
+      // 有效吸收率 = IC2 护腿槽基础值 0.30 × 26/3 ≈ 260%
+      return 26.0 / 3.0;
    }
 
    @Override

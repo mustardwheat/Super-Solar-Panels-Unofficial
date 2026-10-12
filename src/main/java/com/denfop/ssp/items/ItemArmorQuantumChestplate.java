@@ -159,7 +159,8 @@ public class ItemArmorQuantumChestplate extends ItemChest {
 
    @Override
    public double getDamageAbsorptionRatio() {
-      return 1.1;
+      // 有效吸收率 = IC2 胸甲槽基础值 0.40 × 9.75 = 390%
+      return 39.0 / 4.0;
    }
 
    @Override

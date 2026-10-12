@@ -305,8 +305,8 @@ public class ItemArmorQuantumHelmet extends ItemArmor implements IItemModelProvi
          this.tier = tier;
          this.maxCharge = maxCharge;
          this.transferLimit = transferLimit;
-         // 固定数值与 1.4 保持一致：每点伤害耗能 42000 EU，伤害吸收倍率 9
-         this.energyPerDamage = 42000;
+         // 每点伤害耗能与原版量子套一致为 20000 EU，伤害吸收倍率 9 与 1.4 保持一致
+         this.energyPerDamage = 20000;
          this.damageAbsorptionRatio = 9.0;
 
          assert this.damageAbsorptionRatio > 0.0;

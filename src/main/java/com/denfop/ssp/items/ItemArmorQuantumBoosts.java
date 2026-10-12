@@ -185,7 +185,8 @@ public class ItemArmorQuantumBoosts extends ItemBoosts {
 
    @Override
    public double getDamageAbsorptionRatio() {
-      return 1.1;
+      // 有效吸收率 = IC2 靴子槽基础值 0.15 × 283/30 ≈ 141.5%
+      return 283.0 / 30.0;
    }
 
    @Override
