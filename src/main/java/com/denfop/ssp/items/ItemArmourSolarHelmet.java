@@ -20,9 +20,11 @@ import ic2.core.ref.ItemName;
 import ic2.core.util.StackUtil;
 import java.util.IdentityHashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -359,6 +361,13 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
 
    public EnumRarity getRarity(ItemStack stack) {
       return this.type.rarity;
+   }
+
+   // 在物品信息中展示日/夜间发电功率，数值取自头盔类型的发电参数
+   @SideOnly(Side.CLIENT)
+   public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag flag) {
+      tooltip.add(Localization.translate("super_solar_panels.helmet.genDay", this.type.dayEU));
+      tooltip.add(Localization.translate("super_solar_panels.helmet.genNight", this.type.nightEU));
    }
 
    public boolean isMetalArmor(ItemStack stack, EntityPlayer player) {

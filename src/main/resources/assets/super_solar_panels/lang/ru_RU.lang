@@ -29,3 +29,6 @@ super_solar_panels.crafting.enrichedsunnariumalloy2=§cФотонный спла
 super_solar_panels.crafting.enrichedsunnariumalloy3=§cСветоадсорбционный сплав обогащённого саннариума 
 super_solar_panels.crafting.neutron=Нейтрон
 super_solar_panels.crafting.neutroncore=Нейтрон-Ядро
+
+super_solar_panels.helmet.genDay=Дневная генерация: %d EU/t
+super_solar_panels.helmet.genNight=Ночная генерация: %d EU/t

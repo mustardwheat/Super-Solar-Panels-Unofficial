@@ -46,3 +46,6 @@ super_solar_panels.quantumsaber=量子剑
 super_solar_panels.spectralsaber=光谱剑
 super_solar_panels.twelve_heat_storage=120k冷却单元
 super_solar_panels.max_heat_storage=240k冷却单元
+
+super_solar_panels.helmet.genDay=白天发电: %d EU/t
+super_solar_panels.helmet.genNight=夜晚发电: %d EU/t
