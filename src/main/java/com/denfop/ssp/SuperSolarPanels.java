@@ -68,9 +68,9 @@ public final class SuperSolarPanels {
    }
 
    private void registerJetpackBlacklist() {
+      // 强化量子胸甲自带飞行，禁止再附挂喷气背包组件（与 IC2 拉黑原版量子胸甲一致）；
+      // 喷气背包配方只接受胸甲槽位的物品，护腿与靴子天然不可附挂，无需列入黑名单
       JetpackAttachmentRecipe.blacklistedItems.add(SSP_Items.Quantum_chestplate.getInstance());
-      JetpackAttachmentRecipe.blacklistedItems.add(SSP_Items.Quantum_leggins.getInstance());
-      JetpackAttachmentRecipe.blacklistedItems.add(SSP_Items.Quantum_boosts.getInstance());
    }
 
    @EventHandler
@@ -81,6 +81,7 @@ public final class SuperSolarPanels {
       TeBlockRegistry.addCreativeRegisterer(new SSPCreativeRegisterer(SSPBlock.values()), SSPBlock.IDENTITY);
       TeBlockRegistry.addCreativeRegisterer(new SSPCreativeRegisterer(TEs.values()), TEs.IDENTITY);
       SPPRecipes.addCraftingRecipes();
+      registerJetpackBlacklist();
    }
 
    @SubscribeEvent
