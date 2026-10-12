@@ -90,21 +90,21 @@ public class ItemArmorQuantumChestplate extends ItemChest implements IHazmatLike
    @Override
    public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
       super.onArmorTick(world, player, stack);
-      // 无电时灭火、清毒与药水效果均不生效，套装只保留基础护甲
+      // 无电时灭火与药水效果不生效，套装只保留基础护甲
       if (ElectricItem.manager.getCharge(stack) <= 0.0) {
          return;
       }
       player.extinguish();
-      player.removePotionEffect(MobEffects.POISON);
+      // 清毒/清凋零由头盔按耗电清除，胸甲不再重复处理
       if (SspConfig.canCraftDoubleSlabs) {
          player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 300, 2, true, true));
-         player.removePotionEffect(MobEffects.WITHER);
       }
    }
 
    @Override
    public boolean isJetpackActive(ItemStack stack) {
-      return super.isJetpackActive(stack) && ElectricItem.manager.getCharge(stack) >= 10000.0;
+      // 与原版量子胸甲一致：有电即可飞行，无需飞行开关
+      return ElectricItem.manager.getCharge(stack) >= 10000.0;
    }
 
    @Override
