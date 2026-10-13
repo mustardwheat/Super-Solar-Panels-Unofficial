@@ -23,6 +23,7 @@
 
 ## 数值与配方调整
 
+- 奇异、管理员、光子太阳能的默认能量等级由 7/8/9 调整为 8/9/10（10-14）
 - 奇异太阳能头盔最大储能 60M 提升到 80M EU（10-12，a8cabda）
 - 强化量子胸甲、护腿、靴子最大储能 60M 提升到 100M EU，与强化量子头盔一致，且可在配置文件中修改（10-12，f54c65f）
 - 量子剑、光谱剑默认最大储能分别提升到 10M、100M EU（10-12，843e61e）
@@ -57,12 +58,14 @@
 
 ## 依赖与配套 mod
 
-- AdvSolarPatch 转为硬依赖并维护自有分支 AdvSolarPatch-Unofficial（当前 1.3.0）：修复 ASP 4.3.0 在 IC2 2.8.191+ 下的 InvSlot 构造器崩溃；新增 ASP 四档太阳能（高级/混合/终极混合/量子）MaxOutput 配置项；混合/终混太阳能头盔补齐辐射防护（IHazmatLike）、耗电清除负面药水、自动进食罐头、夜视开关（亮处不致盲）；三档太阳能头盔均显示日/夜发电信息（另修复 AdvSolarPatch 语言文件不加载导致原文显示键名的问题）；移除 ASP 双石台阶物品与配方（旧存档加载时提示该物品注册表缺失）；Mixin 引导迁移至 MixinBooter（运行环境需装有 MixinBooter 10.2+，1.12.2 整合包普遍自带）；工具链迁移至 RFG（10-09，e4421ff；10-13，AdvSolarPatch 8e75a0c / e3e5e94 / 80d5584 / 4b2daf3；SSPU 集成 769a527）
+- AdvSolarPatch 转为硬依赖并维护自有分支 AdvSolarPatch-Unofficial（当前 1.3.1）：修复 ASP 4.3.0 在 IC2 2.8.191+ 下的 InvSlot 构造器崩溃；新增 ASP 四档太阳能（高级/混合/终极混合/量子）MaxOutput 配置项；混合/终混太阳能头盔补齐辐射防护（IHazmatLike）、耗电清除负面药水、自动进食罐头、夜视开关（亮处不致盲）；三档太阳能头盔均显示日/夜发电信息；移除 ASP 双石台阶物品与配方（旧存档加载时提示该物品注册表缺失）；Mixin 引导迁移至 MixinBooter（运行环境需装有 MixinBooter 10.2+，1.12.2 整合包普遍自带）；工具链迁移至 RFG（10-09，e4421ff；10-13，AdvSolarPatch 8e75a0c / e3e5e94 / 80d5584 / 4b2daf3；SSPU 集成 769a527）
+- AdvSolarPatch 1.3.1：修复头盔发电信息原文显示键名的问题——1.12.2 固定查询小写 lang/<语言>.lang，FML 的大小写兼容层（LegacyV2Adapter）仅包装 pack_format=2 的资源包，本模组资源包为 format=3，jar 内大写语言文件名不可达，改为小写命名（10-14，AdvSolarPatch 5c9c24a）
 - 开发环境加入 JEI 4.22.0.1035 便于查阅配方（10-08，e93de5b，仅开发环境）
 - 引入 MoreElectricTools（METS）作为后续联动内容的前置（10-09，0bed30b）
 
 ## 工程与构建
 
+- crafting 材料物品的 29 个变体按材料→电路→核心的递进重排，meta 改为连续编号 0-28（10-14，meta 重排为破坏性变更，旧存档中已持有的变体错位为其他变体）
 - 重建可构建的 v1.2 工程并迁移至 RFG 工具链（10-08，1ecc8aa）
 - GitHub Actions 自动构建，推送 v* 标签自动发布 Release（10-08，53fee28）
 - 包名统一为 com.denfop.ssp，清理死亡遗留代码（10-09，b1b415c / 503e0bc）
