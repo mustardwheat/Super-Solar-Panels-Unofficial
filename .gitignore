@@ -20,6 +20,7 @@ build
 # other
 eclipse
 run
+runclient_*.log
 
 # workspace-local agent guidelines
 AGENTS.md
