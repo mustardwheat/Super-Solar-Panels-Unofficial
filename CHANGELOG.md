@@ -57,7 +57,7 @@
 
 ## 依赖与配套 mod
 
-- AdvSolarPatch 转为硬依赖并维护自有分支 AdvSolarPatch-Unofficial（当前 1.2.3）：修复 ASP 4.3.0 在 IC2 2.8.191+ 下的 InvSlot 构造器崩溃；新增 ASP 四档太阳能（高级/混合/终极混合/量子）MaxOutput 配置项；工具链迁移至 RFG（10-09，e4421ff）
+- AdvSolarPatch 转为硬依赖并维护自有分支 AdvSolarPatch-Unofficial（当前 1.3.0）：修复 ASP 4.3.0 在 IC2 2.8.191+ 下的 InvSlot 构造器崩溃；新增 ASP 四档太阳能（高级/混合/终极混合/量子）MaxOutput 配置项；混合/终混太阳能头盔补齐辐射防护（IHazmatLike）、耗电清除负面药水、自动进食罐头、夜视开关（亮处不致盲）与日/夜发电信息；移除 ASP 双石台阶物品与配方（旧存档加载时提示该物品注册表缺失）；Mixin 引导迁移至 MixinBooter（运行环境需装有 MixinBooter 10.2+，1.12.2 整合包普遍自带）；工具链迁移至 RFG（10-09，e4421ff；10-13，AdvSolarPatch 8e75a0c / e3e5e94 / 80d5584 / 4b2daf3；SSPU 集成 769a527）
 - 开发环境加入 JEI 4.22.0.1035 便于查阅配方（10-08，e93de5b，仅开发环境）
 - 引入 MoreElectricTools（METS）作为后续联动内容的前置（10-09，0bed30b）
 
