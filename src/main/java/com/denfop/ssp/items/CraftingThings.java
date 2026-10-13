@@ -30,36 +30,38 @@ public class CraftingThings extends ItemMulti<CraftingThings.CraftingTypes> {
       return "super_solar_panels." + super.getTranslationKey().substring(4);
    }
 
+   // 变体顺序（创造标签页展示顺序）按材料到核心的递进重排，ID 连续编号；
+   // 本次重排为破坏性变更，不兼容旧存档中已持有的本物品变体
    public static enum CraftingTypes implements IIdProvider {
       enderquantumcomponent(0),
       solarsplitter(1),
       bluecomponent(2),
-      redcomponent(4),
-      singularcore(5),
-      spectralcore(6),
-      EnrichedSunnariumAlloy2(7),
-      EnrichedSunnariumAlloy3(8),
-      quantcore1(9),
-      quantcore2(10),
-      nanobox(11),
-      QuantumItems2(12),
-      QuantumItems3(13),
-      QuantumItems4(14),
-      QuantumItems5(15),
-      photoniy_ingot(16),
-      photoniy(17),
-      quantumitems6(18),
-      advanced_core(19),
-      hybrid_core(20),
-      ultimate_core(21),
-      compresscarbon(22),
+      redcomponent(3),
+      QuantumItems2(4),
+      QuantumItems4(5),
+      nanobox(6),
+      QuantumItems3(7),
+      quantumitems6(8),
+      QuantumItems5(9),
+      photoniy(10),
+      photoniy_ingot(11),
+      EnrichedSunnariumAlloy3(12),
+      EnrichedSunnariumAlloy2(13),
+      advanced_core(14),
+      hybrid_core(15),
+      ultimate_core(16),
+      spectralcore(17),
+      singularcore(18),
+      quantcore2(19),
+      quantcore1(20),
+      neutroncore(21),
+      neutron(22),
       coal_chunk(23),
-      compresscarbonultra(24),
-      rune_sun(25),
-      rune_night(26),
-      rune_energy(27),
-      neutron(32),
-      neutroncore(33);
+      compresscarbon(24),
+      compresscarbonultra(25),
+      rune_sun(26),
+      rune_night(27),
+      rune_energy(28);
 
       private final String name = this.name().toLowerCase(Locale.ENGLISH);
       private final int ID;
@@ -78,7 +80,7 @@ public class CraftingThings extends ItemMulti<CraftingThings.CraftingTypes> {
       }
 
       public static CraftingThings.CraftingTypes getFromID(int ID) {
-         // 按显式 ID 字段查找，枚举声明顺序与 ID 不再强制一一对应
+         // 按显式 ID 字段查找（声明顺序与 ID 一致，越界时回退首个变体）
          for (CraftingThings.CraftingTypes type : VALUES) {
             if (type.ID == ID) {
                return type;
