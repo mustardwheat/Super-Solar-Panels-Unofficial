@@ -62,21 +62,21 @@ public final class SspConfig {
             config.get(SINGULAR_SOLAR, "GenDay", 262144).getInt(262144),
             config.get(SINGULAR_SOLAR, "GenNight", 196608).getInt(196608),
             config.get(SINGULAR_SOLAR, "Storage", 1000000000).getInt(1000000000),
-            config.get(SINGULAR_SOLAR, "Tier", 7).getInt(7)
+            config.get(SINGULAR_SOLAR, "Tier", 8).getInt(8)
          );
          TileEntitySingular.maxOutput = config.get(SINGULAR_SOLAR, "MaxOutput", 262144).getInt(262144);
          TileEntityAdmin.settings = new SolarConfig(
             config.get(ADMIN_SOLAR, "GenDay", 2097152).getInt(2097152),
             config.get(ADMIN_SOLAR, "GenNight", 2097152).getInt(2097152),
             config.get(ADMIN_SOLAR, "Storage", 1000000000).getInt(1000000000),
-            config.get(ADMIN_SOLAR, "Tier", 8).getInt(8)
+            config.get(ADMIN_SOLAR, "Tier", 9).getInt(9)
          );
          TileEntityAdmin.maxOutput = config.get(ADMIN_SOLAR, "MaxOutput", 2097152).getInt(2097152);
          TileEntityPhotonic.settings = new SolarConfig(
             config.get(PHOTONIC_SOLAR, "GenDay", 1000000000).getInt(1000000000),
             config.get(PHOTONIC_SOLAR, "GenNight", 1000000000).getInt(1000000000),
             config.get(PHOTONIC_SOLAR, "Storage", 1000000000).getInt(1000000000),
-            config.get(PHOTONIC_SOLAR, "Tier", 9).getInt(9)
+            config.get(PHOTONIC_SOLAR, "Tier", 10).getInt(10)
          );
          TileEntityPhotonic.maxOutput = config.get(PHOTONIC_SOLAR, "MaxOutput", 1000000000).getInt(1000000000);
          // 中子太阳能：发电与储能拉满到 int 上限，能量等级 14（单包电压 2^31，超出 ASP 量子发电机 GUI 的 1-10 档）
