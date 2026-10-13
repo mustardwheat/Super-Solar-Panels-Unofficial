@@ -228,8 +228,8 @@ public class ItemArmorQuantumBoosts extends ItemBoosts implements IHazmatLike {
 
    @Override
    public double getDamageAbsorptionRatio() {
-      // 有效吸收率 = IC2 靴子槽基础值 0.15 × 283/30 ≈ 141.5%
-      return 283.0 / 30.0;
+      // 有效吸收率 = IC2 靴子槽基础值 0.15 × 1.5 = 22.5%
+      return 1.5;
    }
 
    @Override

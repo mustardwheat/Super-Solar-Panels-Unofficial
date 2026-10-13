@@ -194,8 +194,8 @@ public class ItemArmorQuantumLeggins extends ItemLeggins implements IHazmatLike 
 
    @Override
    public double getDamageAbsorptionRatio() {
-      // 有效吸收率 = IC2 护腿槽基础值 0.30 × 26/3 ≈ 260%
-      return 26.0 / 3.0;
+      // 有效吸收率 = IC2 护腿槽基础值 0.30 × 1.5 = 45%
+      return 1.5;
    }
 
    @Override
