@@ -59,11 +59,6 @@ public enum SspItems {
       Singular_SOLAR_HELMET.setInstance(new ItemArmourSolarHelmet(ItemArmourSolarHelmet.SolarHelmetTypes.Singular));
       Spectral_SOLAR_HELMET.setInstance(new ItemArmourSolarHelmet(ItemArmourSolarHelmet.SolarHelmetTypes.Spectral));
       CRAFTING.setInstance(new CraftingThings());
-      // 高级量子套按 头盔→胸甲→护腿→靴子 的顺序注册（注册顺序决定物品 id 的分配顺序）
-      QUANTUM_HELMET.setInstance(new ItemArmorQuantumHelmet(ItemArmorQuantumHelmet.SolarHelmetTypes.Helmet));
-      Quantum_chestplate.setInstance(new ItemArmorQuantumChestplate());
-      Quantum_leggins.setInstance(new ItemArmorQuantumLeggins());
-      Quantum_boosts.setInstance(new ItemArmorQuantumBoosts());
       QUANTUM_SABER.setInstance(
          new ItemNanoSaber(
             "quantumsaber",
@@ -86,6 +81,12 @@ public enum SspItems {
       );
       TWELVE_HEAT_STORAGE.setInstance(new ItemReactorHeatStorage("twelve_heat_storage", SspConfig.twelveHeatStorage));
       MAX_HEAT_STORAGE.setInstance(new ItemReactorHeatStorage("max_heat_storage", SspConfig.maxHeatStorage));
+      // 高级量子套放在本模组物品末尾注册，按 头盔→胸甲→护腿→靴子 排序；
+      // 1.12.2 物品 id 按注册顺序自动分配，此顺序用于避免与其他模组（如 METS）的 id 区段穿插
+      QUANTUM_HELMET.setInstance(new ItemArmorQuantumHelmet(ItemArmorQuantumHelmet.SolarHelmetTypes.Helmet));
+      Quantum_chestplate.setInstance(new ItemArmorQuantumChestplate());
+      Quantum_leggins.setInstance(new ItemArmorQuantumLeggins());
+      Quantum_boosts.setInstance(new ItemArmorQuantumBoosts());
       if (side == Side.CLIENT) {
          registerItemModels();
       }
