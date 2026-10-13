@@ -301,11 +301,10 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
          if (Nightvision && IC2.platform.isSimulating() && ElectricItem.manager.use(stack, 1.0, player)) {
             BlockPos pos = new BlockPos((int)Math.floor(player.posX), (int)Math.floor(player.posY), (int)Math.floor(player.posZ));
             int skylight = player.getEntityWorld().getLightFromNeighbors(pos);
+            // 亮处仅关闭夜视，不像原版量子头盔那样附加致盲；头盔自身不产生致盲，暗处也不再顺带清除它
             if (skylight > 8) {
                IC2.platform.removePotion(player, MobEffects.NIGHT_VISION);
-               player.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 100, 0, true, true));
             } else {
-               IC2.platform.removePotion(player, MobEffects.BLINDNESS);
                player.addPotionEffect(new PotionEffect(MobEffects.NIGHT_VISION, 300, 0, true, true));
             }
          }
