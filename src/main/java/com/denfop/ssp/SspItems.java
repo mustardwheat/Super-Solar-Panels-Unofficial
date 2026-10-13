@@ -59,10 +59,11 @@ public enum SspItems {
       Singular_SOLAR_HELMET.setInstance(new ItemArmourSolarHelmet(ItemArmourSolarHelmet.SolarHelmetTypes.Singular));
       Spectral_SOLAR_HELMET.setInstance(new ItemArmourSolarHelmet(ItemArmourSolarHelmet.SolarHelmetTypes.Spectral));
       CRAFTING.setInstance(new CraftingThings());
+      // 高级量子套按 头盔→胸甲→护腿→靴子 的顺序注册（注册顺序决定物品 id 的分配顺序）
+      QUANTUM_HELMET.setInstance(new ItemArmorQuantumHelmet(ItemArmorQuantumHelmet.SolarHelmetTypes.Helmet));
       Quantum_chestplate.setInstance(new ItemArmorQuantumChestplate());
       Quantum_leggins.setInstance(new ItemArmorQuantumLeggins());
       Quantum_boosts.setInstance(new ItemArmorQuantumBoosts());
-      QUANTUM_HELMET.setInstance(new ItemArmorQuantumHelmet(ItemArmorQuantumHelmet.SolarHelmetTypes.Helmet));
       QUANTUM_SABER.setInstance(
          new ItemNanoSaber(
             "quantumsaber",
