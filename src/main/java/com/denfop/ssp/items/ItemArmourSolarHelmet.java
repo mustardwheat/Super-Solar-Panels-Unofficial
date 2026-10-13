@@ -7,6 +7,7 @@ import com.google.common.base.CaseFormat;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.HudMode;
 import ic2.api.item.IElectricItem;
+import ic2.api.item.IHazmatLike;
 import ic2.api.item.IItemHudProvider;
 import ic2.api.item.IMetalArmor;
 import ic2.core.IC2;
@@ -51,7 +52,7 @@ import net.minecraftforge.common.ISpecialArmor.ArmorProperties;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvider, IElectricItem, IMetalArmor, ISpecialArmor, IItemHudProvider {
+public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvider, IElectricItem, IMetalArmor, ISpecialArmor, IItemHudProvider, IHazmatLike {
    protected static final int DEFAULT_COLOUR = -1;
    /** 各负面药水对应的清除耗电量（EU），移植自 1.4 */
    protected static final Map<Potion, Integer> POTION_REMOVAL_COST = new IdentityHashMap<>();
@@ -374,6 +375,12 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
       return true;
    }
 
+   // 辐射防护接入 IC2 的 IHazmatLike 检查：与其他量子系装备凑齐四件且均有电时，背包内放射物不再施加辐射
+   @Override
+   public boolean addsProtection(EntityLivingBase entity, EntityEquipmentSlot slot, ItemStack stack) {
+      return ElectricItem.manager.getCharge(stack) > 0.0;
+   }
+
    public int getItemEnchantability() {
       return 0;
    }
@@ -385,11 +392,11 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
    public ArmorProperties getProperties(EntityLivingBase player, ItemStack armour, DamageSource source, double damage, int slot) {
       return source.isUnblockable()
          ? new ArmorProperties(0, 0.0, 0)
-         : new ArmorProperties(0, this.type.damageAbsorptionRatio, (int)(25.0 * ElectricItem.manager.getCharge(armour) / this.type.energyPerDamage));
+         : new ArmorProperties(0, 0.15 * this.type.damageAbsorptionRatio, (int)(25.0 * ElectricItem.manager.getCharge(armour) / this.type.energyPerDamage));
    }
 
    public int getArmorDisplay(EntityPlayer player, ItemStack armour, int slot) {
-      return ElectricItem.manager.getCharge(armour) >= this.type.energyPerDamage ? (int)Math.round(20.0 * this.type.damageAbsorptionRatio) : 0;
+      return ElectricItem.manager.getCharge(armour) >= this.type.energyPerDamage ? (int)Math.round(3.0 * this.type.damageAbsorptionRatio) : 0;
    }
 
    public void damageArmor(EntityLivingBase entity, ItemStack stack, DamageSource source, int damage, int slot) {
@@ -421,12 +428,12 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
    }
 
    public static enum SolarHelmetTypes {
-      Spectral(EnumRarity.EPIC, TileEntitySpectral.settings.dayPower, TileEntitySpectral.settings.nightPower, 8, 6.0E7, 10000.0, 20000, 0.7),
-      Singular(EnumRarity.EPIC, TileEntitySingular.settings.dayPower, TileEntitySingular.settings.nightPower, 9, 8.0E7, 10000.0, 20000, 1.0);
+      Spectral(EnumRarity.EPIC, TileEntitySpectral.settings.dayPower, TileEntitySpectral.settings.nightPower, 8, 6.0E7, 10000.0, 2000, 1.1),
+      Singular(EnumRarity.EPIC, TileEntitySingular.settings.dayPower, TileEntitySingular.settings.nightPower, 9, 8.0E7, 10000.0, 2000, 1.3);
 
       public final double maxCharge;
       public final double transferLimit;
-      /** 免伤比例，直接作为吸收率使用（0.7 = 70%、1.0 = 100%），不再乘 IC2 槽位基础值 */
+      /** 伤害吸收倍率，有效吸收率 = IC2 头盔槽基础值 0.15 × 该倍率（光谱 16.5%、奇异 19.5%） */
       public final double damageAbsorptionRatio;
       public final int dayEU;
       public final int nightEU;
