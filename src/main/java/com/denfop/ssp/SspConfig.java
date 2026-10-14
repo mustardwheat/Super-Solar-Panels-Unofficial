@@ -16,12 +16,20 @@ public final class SspConfig {
    private static final String ADMIN_SOLAR = "settings admin solar panel";
    private static final String PHOTONIC_SOLAR = "settings photonic solar panel";
    private static final String NEUTRON_SOLAR = "settings neutron solar panel";
-   public static boolean canCraftDoubleSlabs;
-   public static boolean canCraftMT;
-   public static boolean canCraftASP;
-   public static boolean canCraftHSP;
-   public static boolean canCraftASH;
-   public static boolean canCraftHSH;
+   /** 胸甲防火效果开关（对应禁用键 Disable Effect FIRE RESISTANCE） */
+   public static boolean effectFireResistance;
+   /** 胸甲力量效果开关（对应禁用键 Disable Effect STRENGTH） */
+   public static boolean effectStrength;
+   /** 靴子水下呼吸效果开关（对应禁用键 Disable Effect WATER BREATHING） */
+   public static boolean effectWaterBreathing;
+   /** 靴子跳跃提升效果开关（对应禁用键 Disable Effect JUMP BOOST，默认禁用） */
+   public static boolean effectJumpBoost;
+   /** 靴子生命恢复效果开关（对应禁用键 Disable Effect REGENERATION） */
+   public static boolean effectRegeneration;
+   /** 护腿速度效果开关（对应禁用键 Disable Effect SPEED） */
+   public static boolean effectSpeed;
+   /** 护腿幸运效果开关（对应禁用键 Disable Effect LUCK） */
+   public static boolean effectLuck;
    public static int saberQuantumDamage;
    public static int saberQuantumMaxCharge;
    public static int saberQuantumTransferLimit;
@@ -87,13 +95,16 @@ public final class SspConfig {
             config.get(NEUTRON_SOLAR, "Tier", 14).getInt(14)
          );
          TileEntityNeutron.maxOutput = config.get(NEUTRON_SOLAR, "MaxOutput", 2147483647).getInt(2147483647);
-         canCraftDoubleSlabs = !config.get("settings Quantum chestplate", "Disable Effect FIRE RESISTANCE ", false).getBoolean(false);
-         canCraftMT = !config.get("settings Quantum Boosts", "Disable Effect WATER BREATHING ", false).getBoolean(false);
-         // 跳跃提升默认禁用；该开关此前读入后未被使用（靴子实际误挂护腿 SPEED 开关变量），现已接回
-         canCraftASP = !config.get("settings Quantum Boosts", "Disable Effect JUMP BOOST", true).getBoolean(true);
-         canCraftASH = !config.get("settings Quantum Boosts", "Disable Effect REGENERATION ", false).getBoolean(false);
-         canCraftHSP = !config.get("settings Quantum Leggins", "Disable Effect SPEED ", false).getBoolean(false);
-         canCraftHSH = !config.get("settings Quantum Leggins", "Disable Effect LUCK", false).getBoolean(false);
+         // 每个药水效果由同名 Disable Effect 键独立控制（键值为 true 时禁用该效果）；
+         // 注意部分键名带尾部空格，属历史遗留，改动会使旧配置中的对应键失效，务必原样保留
+         effectFireResistance = !config.get("settings Quantum chestplate", "Disable Effect FIRE RESISTANCE ", false).getBoolean(false);
+         effectStrength = !config.get("settings Quantum chestplate", "Disable Effect STRENGTH", false).getBoolean(false);
+         effectWaterBreathing = !config.get("settings Quantum Boosts", "Disable Effect WATER BREATHING ", false).getBoolean(false);
+         // 跳跃提升默认禁用
+         effectJumpBoost = !config.get("settings Quantum Boosts", "Disable Effect JUMP BOOST", true).getBoolean(true);
+         effectRegeneration = !config.get("settings Quantum Boosts", "Disable Effect REGENERATION ", false).getBoolean(false);
+         effectSpeed = !config.get("settings Quantum Leggins", "Disable Effect SPEED ", false).getBoolean(false);
+         effectLuck = !config.get("settings Quantum Leggins", "Disable Effect LUCK", false).getBoolean(false);
          // 太阳能头盔是否给整个背包充电（默认开启，对齐 ASP 混合/终混太阳能头盔行为）
          ItemArmourSolarHelmet.chargeWholeInventory = config.get("general", "solarHelmetsChargeWholeInventory", true).getBoolean(true);
          // 双剑命中时抽干目标纳米/量子护甲电量并扒掉护甲件的机制开关（默认开启）

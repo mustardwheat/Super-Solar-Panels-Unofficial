@@ -124,17 +124,17 @@ public class ItemArmorQuantumBoosts extends ItemBoosts implements IHazmatLike {
          }
       }
 
-      // 无电时药水效果不生效
-      if (SspConfig.canCraftDoubleSlabs && ElectricItem.manager.getCharge(stack) > 0.0) {
-         player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 300, 0, true, true));
-         // 跳跃提升由独立开关 "Disable Effect JUMP BOOST" 控制且默认禁用
-         if (SspConfig.canCraftASP) {
+      // 无电时药水效果不生效；各效果由同名 Disable Effect 配置键独立控制
+      if (ElectricItem.manager.getCharge(stack) > 0.0) {
+         if (SspConfig.effectWaterBreathing) {
+            player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 300, 0, true, true));
+         }
+         // 跳跃提升默认禁用
+         if (SspConfig.effectJumpBoost) {
             player.addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST, 300, 0, true, true));
          }
-         if (SspConfig.canCraftHSP) {
-            if (SspConfig.canCraftDoubleSlabs) {
-               player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 300, 4, true, true));
-            }
+         if (SspConfig.effectRegeneration) {
+            player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 300, 4, true, true));
          }
       }
    }

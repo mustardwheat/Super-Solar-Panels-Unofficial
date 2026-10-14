@@ -120,10 +120,12 @@ public class ItemArmorQuantumLeggins extends ItemLeggins implements IHazmatLike 
          }
       }
 
-      // 无电时药水效果不生效（行走加速由上方 canUse 自行控制）
-      if (SspConfig.canCraftDoubleSlabs && ElectricItem.manager.getCharge(stack) > 0.0) {
-         player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 300, 2, true, true));
-         if (SspConfig.canCraftHSH) {
+      // 无电时药水效果不生效（行走加速由上方 canUse 自行控制）；速度与幸运由各自配置键独立控制
+      if (ElectricItem.manager.getCharge(stack) > 0.0) {
+         if (SspConfig.effectSpeed) {
+            player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 300, 2, true, true));
+         }
+         if (SspConfig.effectLuck) {
             player.addPotionEffect(new PotionEffect(MobEffects.LUCK, 300, 2, true, true));
          }
       }

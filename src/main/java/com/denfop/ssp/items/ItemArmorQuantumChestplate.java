@@ -96,11 +96,13 @@ public class ItemArmorQuantumChestplate extends ItemChest implements IHazmatLike
       }
       player.extinguish();
       // 清毒/清凋零由头盔按耗电清除，胸甲不再重复处理
-      if (SspConfig.canCraftDoubleSlabs) {
+      if (SspConfig.effectFireResistance) {
          player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 300, 2, true, true));
       }
       // 有电时提供力量 I
-      player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 300, 0, true, true));
+      if (SspConfig.effectStrength) {
+         player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 300, 0, true, true));
+      }
    }
 
    @Override
