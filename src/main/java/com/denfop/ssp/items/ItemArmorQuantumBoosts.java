@@ -128,7 +128,6 @@ public class ItemArmorQuantumBoosts extends ItemBoosts implements IHazmatLike {
       if (SspConfig.canCraftDoubleSlabs && ElectricItem.manager.getCharge(stack) > 0.0) {
          player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 300, 0, true, true));
          if (SspConfig.canCraftHSP) {
-            player.addPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST, 300, 0, true, true));
             if (SspConfig.canCraftDoubleSlabs) {
                player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 300, 4, true, true));
             }
