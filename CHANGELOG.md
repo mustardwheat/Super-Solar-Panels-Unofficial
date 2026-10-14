@@ -73,4 +73,5 @@
 - GitHub Actions 自动构建，推送 v* 标签自动发布 Release（10-08，53fee28）
 - 包名统一为 com.denfop.ssp，清理死亡遗留代码（10-09，b1b415c / 503e0bc）
 - 物品注册表类 SSP_Items 重命名为 SspItems，统一 Java 命名规范（10-12，631a5fb）
+- 移除失效的 Fly Key（F 键）：强化量子胸甲改为有电即可飞后，飞行开关的 isFlyActive 状态无人读取；删除 SSPKeys 键注册类与 ItemChest 的按键切换逻辑，ItemBoosts/ItemLeggins 中同簇的死代码（isJetpackOn/switchJetpack/onArmorTick 残留计时片段）一并移除，三个喷气背包基类的 isJetpackActive 统一为默认启用；悬停模式不受影响（由 IC2 JetpackLogic 以 跳跃+模式切换键 自行管理）（10-14，c37f150）
 - 配置类 Configs1 重命名为 SspConfig，统一 Java 命名规范（10-12，03bf442）
