@@ -78,8 +78,8 @@ public final class SuperSolarPanels {
       SSPBlock.buildDummies();
       // IC2 机器方块默认仅对 IC2 标签页与搜索页输出子物品，需通过 CreativeRegisterer 扩展点移入本 mod 标签页；
       // 推迟到 init 执行以保证 ASP 的 TeBlock 已注册（addCreativeRegisterer 要求目标 identity 已存在）
-      TeBlockRegistry.addCreativeRegisterer(new SSPCreativeRegisterer(SSPBlock.values()), SSPBlock.IDENTITY);
-      TeBlockRegistry.addCreativeRegisterer(new SSPCreativeRegisterer(TEs.values()), TEs.IDENTITY);
+      TeBlockRegistry.addCreativeRegisterer(new SSPCreativeRegisterer(SSPTab.TAB, SSPBlock.values()), SSPBlock.IDENTITY);
+      TeBlockRegistry.addCreativeRegisterer(new SSPCreativeRegisterer(SSPTab.ASP_TAB, TEs.values()), TEs.IDENTITY);
       SPPRecipes.addCraftingRecipes();
       registerJetpackBlacklist();
    }
@@ -98,21 +98,29 @@ public final class SuperSolarPanels {
    public void postInit(FMLPostInitializationEvent event) {
       // 改造 ASP 面板配方（需在其 init 阶段完成注册之后执行）
       SPPRecipes.replaceAspPanelRecipes();
-      // 将 SSP 与 ASP 注册的全部物品统一归入 SuperSolarPanels 创造标签页
+      // 将 SSP 与 ASP 注册的全部物品按命名空间分别归入各自的创造标签页
       for (net.minecraft.item.Item item : net.minecraftforge.fml.common.registry.ForgeRegistries.ITEMS) {
          ResourceLocation registryName = item.getRegistryName();
-         if (registryName != null
-            && ("super_solar_panels".equals(registryName.getNamespace()) || "advanced_solar_panels".equals(registryName.getNamespace()))) {
+         if (registryName == null) {
+            continue;
+         }
+         if ("super_solar_panels".equals(registryName.getNamespace())) {
             item.setCreativeTab(SSPTab.TAB);
+         } else if ("advanced_solar_panels".equals(registryName.getNamespace())) {
+            item.setCreativeTab(SSPTab.ASP_TAB);
          }
       }
 
       // ItemBlock 的创造标签页委托给方块，机器方块必须单独设置
       for (net.minecraft.block.Block block : net.minecraftforge.fml.common.registry.ForgeRegistries.BLOCKS) {
          ResourceLocation registryName = block.getRegistryName();
-         if (registryName != null
-            && ("super_solar_panels".equals(registryName.getNamespace()) || "advanced_solar_panels".equals(registryName.getNamespace()))) {
+         if (registryName == null) {
+            continue;
+         }
+         if ("super_solar_panels".equals(registryName.getNamespace())) {
             block.setCreativeTab(SSPTab.TAB);
+         } else if ("advanced_solar_panels".equals(registryName.getNamespace())) {
+            block.setCreativeTab(SSPTab.ASP_TAB);
          }
       }
    }
