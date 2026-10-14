@@ -7,7 +7,6 @@ An unofficial maintenance fork of Denfop's Super Solar Panels for Minecraft 1.12
 - IndustrialCraft 2 (2.8.191+)
 - Advanced Solar Panels (4.3.0)
 - [AdvSolarPatch-Unofficial](https://github.com/mustardwheat/AdvSolarPatch-Unofficial) (1.3.1+)
-- MixinBooter (10.2+)
 
 ## License
 
