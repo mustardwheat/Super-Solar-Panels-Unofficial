@@ -99,6 +99,8 @@ public class ItemArmorQuantumChestplate extends ItemChest implements IHazmatLike
       if (SspConfig.canCraftDoubleSlabs) {
          player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 300, 2, true, true));
       }
+      // 有电时提供力量 I
+      player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 300, 0, true, true));
    }
 
    @Override
