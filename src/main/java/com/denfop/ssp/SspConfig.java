@@ -89,7 +89,8 @@ public final class SspConfig {
          TileEntityNeutron.maxOutput = config.get(NEUTRON_SOLAR, "MaxOutput", 2147483647).getInt(2147483647);
          canCraftDoubleSlabs = !config.get("settings Quantum chestplate", "Disable Effect FIRE RESISTANCE ", false).getBoolean(false);
          canCraftMT = !config.get("settings Quantum Boosts", "Disable Effect WATER BREATHING ", false).getBoolean(false);
-         canCraftASP = !config.get("settings Quantum Boosts", "Disable Effect JUMP BOOST", false).getBoolean(false);
+         // 跳跃提升默认禁用；该开关此前读入后未被使用（靴子实际误挂护腿 SPEED 开关变量），现已接回
+         canCraftASP = !config.get("settings Quantum Boosts", "Disable Effect JUMP BOOST", true).getBoolean(true);
          canCraftASH = !config.get("settings Quantum Boosts", "Disable Effect REGENERATION ", false).getBoolean(false);
          canCraftHSP = !config.get("settings Quantum Leggins", "Disable Effect SPEED ", false).getBoolean(false);
          canCraftHSH = !config.get("settings Quantum Leggins", "Disable Effect LUCK", false).getBoolean(false);
