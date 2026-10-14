@@ -14,9 +14,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -51,27 +49,13 @@ public class ItemBoosts extends ItemArmorElectric implements IBoostingJetpack {
       return EnumRarity.UNCOMMON;
    }
 
-   public static boolean isJetpackOn(ItemStack stack) {
-      return StackUtil.getOrCreateNbtData(stack).getBoolean("isFlyActive");
-   }
-
    public static boolean isHovering(ItemStack stack) {
       return StackUtil.getOrCreateNbtData(stack).getBoolean("hoverMode");
    }
 
-   public static boolean switchJetpack(ItemStack stack) {
-      NBTTagCompound nbt = StackUtil.getOrCreateNbtData(stack);
-      boolean newMode;
-      nbt.setBoolean("isFlyActive", newMode = !nbt.getBoolean("isFlyActive"));
-      return newMode;
-   }
-
-   public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
-      // 靴子无飞行开关计时逻辑，保留空实现以屏蔽父类默认行为
-   }
-
+   // 飞行开关（Fly Key）已移除：喷气背包接口默认启用（IC2 的喷气引擎只查询胸甲槽位，靴子上的实现仅为接口完整实现）
    public boolean isJetpackActive(ItemStack stack) {
-      return isJetpackOn(stack);
+      return true;
    }
 
    public double getChargeLevel(ItemStack stack) {

@@ -54,7 +54,6 @@ public final class SuperSolarPanels {
       SspConfig.loadConfig(event.getSuggestedConfigurationFile(), event.getSide().isClient());
       machines = TeBlockRegistry.get(SSPBlock.IDENTITY);
       SspItems.buildItems(event.getSide());
-      SSPKeys.addFlyKey();
       OreDictionary.registerOre("enderquantumcomponent", SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.enderquantumcomponent));
       OreDictionary.registerOre("solarsplitter", SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.solarsplitter));
       OreDictionary.registerOre("bluecomponent", SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.bluecomponent));
