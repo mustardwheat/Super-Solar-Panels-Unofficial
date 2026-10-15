@@ -142,7 +142,7 @@ public final class SspConfig {
          saberQuantumTier = getInt(config, QUANTUM_SABER, KEY_TIER, 4);
          saberSpectralDamage = getInt(config, SPECTRAL_SABER, KEY_DAMAGE, 40);
          saberSpectralMaxCharge = getInt(config, SPECTRAL_SABER, KEY_MAX_CHARGE, 100000000);
-         saberSpectralTransferLimit = getInt(config, SPECTRAL_SABER, KEY_TRANSFER_LIMIT, 2000);
+         saberSpectralTransferLimit = getInt(config, SPECTRAL_SABER, KEY_TRANSFER_LIMIT, 2048);
          saberSpectralTier = getInt(config, SPECTRAL_SABER, KEY_TIER, 5);
       } catch (Exception e) {
          SuperSolarPanels.log.fatal("Fatal error reading config file.", e);
