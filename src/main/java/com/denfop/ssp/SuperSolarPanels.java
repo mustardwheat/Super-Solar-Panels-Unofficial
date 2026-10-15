@@ -51,7 +51,7 @@ public final class SuperSolarPanels {
    @EventHandler
    public void load(FMLPreInitializationEvent event) {
       log = event.getModLog();
-      SspConfig.loadConfig(event.getSuggestedConfigurationFile(), event.getSide().isClient());
+      SspConfig.loadConfig(event.getSuggestedConfigurationFile());
       machines = TeBlockRegistry.get(SSPBlock.IDENTITY);
       SspItems.buildItems(event.getSide());
       OreDictionary.registerOre("enderquantumcomponent", SspItems.CRAFTING.getItemStack(CraftingThings.CraftingTypes.enderquantumcomponent));
