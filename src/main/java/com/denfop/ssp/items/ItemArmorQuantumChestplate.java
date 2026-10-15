@@ -19,7 +19,7 @@ public class ItemArmorQuantumChestplate extends ItemChest implements IHazmatLike
    protected static final int DEFAULT_COLOUR = -1;
 
    public ItemArmorQuantumChestplate() {
-      super("graviChestplate1", SspConfig.quantumChestplateMaxCharge, 100000.0, 4);
+      super("graviChestplate1", SspConfig.quantumChestplateMaxCharge, 100000.0, SspConfig.quantumChestplateTier);
    }
 
    @Override

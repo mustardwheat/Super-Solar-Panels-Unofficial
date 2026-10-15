@@ -22,7 +22,7 @@ public class ItemArmorQuantumLeggins extends ItemLeggins implements IHazmatLike 
    protected static final int DEFAULT_COLOUR = -1;
 
    public ItemArmorQuantumLeggins() {
-      super("graviLeggins", SspConfig.quantumLegginsMaxCharge, 100000.0, 4);
+      super("graviLeggins", SspConfig.quantumLeggingsMaxCharge, 100000.0, SspConfig.quantumLeggingsTier);
    }
 
    @Override

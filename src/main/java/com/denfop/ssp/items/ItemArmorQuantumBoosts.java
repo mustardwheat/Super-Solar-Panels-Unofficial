@@ -27,7 +27,7 @@ public class ItemArmorQuantumBoosts extends ItemBoosts implements IHazmatLike {
    private float jumpCharge;
 
    public ItemArmorQuantumBoosts() {
-      super("graviBoosts", SspConfig.quantumBoostsMaxCharge, 100000.0, 4);
+      super("graviBoosts", SspConfig.quantumBootsMaxCharge, 100000.0, SspConfig.quantumBootsTier);
       // 与原版量子靴一致：仅靴子实例注册摔落事件总线监听
       MinecraftForge.EVENT_BUS.register(this);
    }
