@@ -63,6 +63,7 @@
 ## 依赖与配套 mod
 
 - AdvSolarPatch 转为硬依赖并维护自有分支 AdvSolarPatch-Unofficial（当前 1.3.1）：修复 ASP 4.3.0 在 IC2 2.8.191+ 下的 InvSlot 构造器崩溃；新增 ASP 四档太阳能（高级/混合/终极混合/量子）MaxOutput 配置项；混合/终混太阳能头盔补齐辐射防护（IHazmatLike）、耗电清除负面药水、自动进食罐头、夜视开关（亮处不致盲）；三档太阳能头盔均显示日/夜发电信息；移除 ASP 双石台阶物品与配方（旧存档加载时提示该物品注册表缺失）；Mixin 引导迁移至 MixinBooter（运行环境需装有 MixinBooter 10.2+，1.12.2 整合包普遍自带）；工具链迁移至 RFG（10-09，e4421ff；10-13，AdvSolarPatch 8e75a0c / e3e5e94 / 80d5584 / 4b2daf3；SSPU 集成 769a527）
+- AdvSolarPatch 最低依赖版本由 1.2.2 提升为 1.2.3，即仅接受本维护线版本，Su5eD 原版不再满足依赖检查（10-15）
 - AdvSolarPatch 1.3.1：修复头盔发电信息原文显示键名的问题——1.12.2 固定查询小写 lang/<语言>.lang，FML 的大小写兼容层（LegacyV2Adapter）仅包装 pack_format=2 的资源包，本模组资源包为 format=3，jar 内大写语言文件名不可达，改为小写命名（10-14，AdvSolarPatch 5c9c24a）
 - 开发环境加入 JEI 4.22.0.1035 便于查阅配方（10-08，e93de5b，仅开发环境）
 - 引入 MoreElectricTools（METS）作为后续联动内容的前置（10-09，0bed30b）
