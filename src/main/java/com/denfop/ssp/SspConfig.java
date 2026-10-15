@@ -110,13 +110,13 @@ public final class SspConfig {
          quantumHelmetMaxCharge = getInt(config, QUANTUM_HELMET, KEY_MAX_CHARGE, 100000000);
          quantumHelmetTransferLimit = getInt(config, QUANTUM_HELMET, KEY_TRANSFER_LIMIT, 100000);
          quantumHelmetTier = getInt(config, QUANTUM_HELMET, KEY_TIER, 8);
-         // 强化量子胸甲/护腿/靴子：能量等级沿用现状的 4，充放电速率固定 100000 EU/t 未开放配置
+         // 强化量子胸甲/护腿/靴子：能量等级与头盔统一为 8，充放电速率固定 100000 EU/t 未开放配置
          quantumChestplateMaxCharge = getInt(config, QUANTUM_CHESTPLATE, KEY_MAX_CHARGE, 100000000);
-         quantumChestplateTier = getInt(config, QUANTUM_CHESTPLATE, KEY_TIER, 4);
+         quantumChestplateTier = getInt(config, QUANTUM_CHESTPLATE, KEY_TIER, 8);
          quantumLeggingsMaxCharge = getInt(config, QUANTUM_LEGGINGS, KEY_MAX_CHARGE, 100000000);
-         quantumLeggingsTier = getInt(config, QUANTUM_LEGGINGS, KEY_TIER, 4);
+         quantumLeggingsTier = getInt(config, QUANTUM_LEGGINGS, KEY_TIER, 8);
          quantumBootsMaxCharge = getInt(config, QUANTUM_BOOTS, KEY_MAX_CHARGE, 100000000);
-         quantumBootsTier = getInt(config, QUANTUM_BOOTS, KEY_TIER, 4);
+         quantumBootsTier = getInt(config, QUANTUM_BOOTS, KEY_TIER, 8);
 
          // 套装药水效果开关：正选语义，true 为启用；跳跃提升默认关闭
          effectFireResistance = getBoolean(config, QUANTUM_CHESTPLATE, "enableFireResistance", true);

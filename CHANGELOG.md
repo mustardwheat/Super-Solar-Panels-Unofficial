@@ -39,7 +39,7 @@
 - 高级量子靴的跳跃提升效果改为默认禁用：配置键 "settings Quantum Boosts"/"Disable Effect JUMP BOOST" 此前读入后未接线（效果实际误挂在护腿 SPEED 开关变量上），现已接回正确开关并将默认改为禁用；既有配置文件中该键保持原值不自动改写，如需禁用请手动改为 true（10-14，efe7be1 / 5c9f78a）
 - 量子剑默认传输上限 2000 提升为 2048 EU/t，常态伤害 11 提升为 25（激活态 ×1.5）；光谱剑常态伤害 14 提升为 40，默认传输上限 2000 提升为 2048 EU/t（10-15）；双剑激活态伤害改为按倍率计算，ActiveDamage 配置键移除（10-13，44d7f15）
 - 强化量子套装（胸甲/护腿/靴子）配方更换为与 1.4 一致的布局：量子电路板居中、量子工具箱环绕、光谱电路板垫底（10-12，f54c65f）
-- 强化量子胸甲、护腿、靴子新增能量等级配置项（quantum_suit 分组下各件的 tier，默认 4，沿用此前硬编码值，行为不变）（10-15）
+- 强化量子胸甲、护腿、靴子新增能量等级配置项（quantum_suit 分组下各件的 tier），默认 8，与强化量子头盔统一（原硬编码 4）；注意能量等级提高后，低于 8 级的充电装置（含 MFSU 充电座）无法再为其充电，需经光谱/奇异太阳能头盔等高等级途径充电（10-15）
 - ASP 面板配方改造：高级太阳能配方第二格的光辉玻璃板替换为高级核心；混合太阳能、终极混合太阳能配方中的青金石块分别替换为混合核心、终极混合核心（10-12，4a6711c）
 - 移除绿色光谱组件，阳光分束器配方改用 ASP 光辉玻璃板；光辉玻璃板继承原绿色光谱组件的 greencomponent 矿物词典名，保证跨 mod 配方兼容（10-09，ed11f6f；10-12，96091f0）
 - 红色、蓝色光谱组件更名为红色、蓝色光辉玻璃板；终极核心更名为终极混合核心（10-12，96091f0）
@@ -77,4 +77,4 @@
 - 物品注册表类 SSP_Items 重命名为 SspItems，统一 Java 命名规范（10-12，631a5fb）
 - 移除失效的 Fly Key（F 键）：强化量子胸甲改为有电即可飞后，飞行开关的 isFlyActive 状态无人读取；删除 SSPKeys 键注册类与 ItemChest 的按键切换逻辑，ItemBoosts/ItemLeggins 中同簇的死代码（isJetpackOn/switchJetpack/onArmorTick 残留计时片段）一并移除，三个喷气背包基类的 isJetpackActive 统一为默认启用；悬停模式不受影响（由 IC2 JetpackLogic 以 跳跃+模式切换键 自行管理）（10-14，c37f150）
 - 配置类 Configs1 重命名为 SspConfig，统一 Java 命名规范（10-12，03bf442）
-- 配置文件格式定稿：分组改为 Forge 原生嵌套分类 solars / quantum_suit / weapons（去掉带空格的 "settings xxx" 组名，leggins 拼写纠正为 leggings）；套装药水效果开关由 Disable Effect 反选键改为 enableXxx 正选键（enableJumpBoost 默认 false，其余默认 true，语义不变）；配置注释统一使用英文且只保留含义不自明的键（general 两键逐键注释，双剑伤害公式写在 weapons 分类注释上）；120k/240k 冷却单元热容量不再开放配置，改为固定物品属性（120000/240000，与 1.4 一致）；配置类字段同步修正拼写；除光谱剑传输上限外所有默认值与此前行为一致。配置格式破坏性变更：旧 super_solar_panels.cfg 不迁移，删除后由 Forge 重新生成（10-15）
+- 配置文件格式定稿：分组改为 Forge 原生嵌套分类 solars / quantum_suit / weapons（去掉带空格的 "settings xxx" 组名，leggins 拼写纠正为 leggings）；套装药水效果开关由 Disable Effect 反选键改为 enableXxx 正选键（enableJumpBoost 默认 false，其余默认 true，语义不变）；配置注释统一使用英文且只保留含义不自明的键（general 两键逐键注释，双剑伤害公式写在 weapons 分类注释上）；120k/240k 冷却单元热容量不再开放配置，改为固定物品属性（120000/240000，与 1.4 一致）；配置类字段同步修正拼写；除光谱剑传输上限与套装三件能量等级外，所有默认值与此前行为一致。配置格式破坏性变更：旧 super_solar_panels.cfg 不迁移，删除后由 Forge 重新生成（10-15）
