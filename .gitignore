@@ -24,3 +24,6 @@ runclient_*.log
 
 # workspace-local agent guidelines
 AGENTS.md
+
+# local release-notes ledger
+CHANGELOG.md
