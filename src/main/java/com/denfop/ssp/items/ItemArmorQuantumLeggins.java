@@ -84,7 +84,7 @@ public class ItemArmorQuantumLeggins extends ItemLeggins implements IHazmatLike 
       return EnumRarity.EPIC;
    }
 
-   // 辐射防护接入 IC2 的 IHazmatLike 检查：四件齐全且均有电时，背包内放射物不再施加辐射
+   // IHazmatLike检查：四件齐全且均有电时，背包内放射物不再施加辐射
    @Override
    public boolean addsProtection(EntityLivingBase entity, EntityEquipmentSlot slot, ItemStack stack) {
       return ElectricItem.manager.getCharge(stack) > 0.0;
@@ -120,7 +120,6 @@ public class ItemArmorQuantumLeggins extends ItemLeggins implements IHazmatLike 
          }
       }
 
-      // 无电时药水效果不生效（行走加速由上方 canUse 自行控制）；速度与幸运由各自配置键独立控制
       if (ElectricItem.manager.getCharge(stack) > 0.0) {
          if (SspConfig.effectSpeed) {
             player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 300, 2, true, true));
@@ -196,7 +195,6 @@ public class ItemArmorQuantumLeggins extends ItemLeggins implements IHazmatLike 
 
    @Override
    public double getDamageAbsorptionRatio() {
-      // 有效吸收率 = IC2 护腿槽基础值 0.30 × 1.5 = 45%
       return 1.5;
    }
 

@@ -11,9 +11,6 @@ import java.io.File;
 import net.minecraftforge.common.config.Configuration;
 
 /**
- * SSP 配置加载。
- *
- * 配置注释统一使用英文：写入配置文件的注释是静态文本，不随游戏语言切换。
  * 本格式与旧版（"settings xxx" 分组、Disable Effect 反选键）不兼容，旧配置不迁移，删除后重新生成。
  *
  * @author mustardwheat

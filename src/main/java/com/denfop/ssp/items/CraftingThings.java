@@ -30,8 +30,6 @@ public class CraftingThings extends ItemMulti<CraftingThings.CraftingTypes> {
       return "super_solar_panels." + super.getTranslationKey().substring(4);
    }
 
-   // 变体顺序（创造标签页展示顺序）按材料到核心的递进重排，ID 连续编号；
-   // 本次重排为破坏性变更，不兼容旧存档中已持有的本物品变体
    public static enum CraftingTypes implements IIdProvider {
       enderquantumcomponent(0),
       solarsplitter(1),

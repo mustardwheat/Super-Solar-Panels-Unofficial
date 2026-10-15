@@ -6,7 +6,6 @@ import ic2.core.init.Localization;
 
 public class TileEntityAdmin extends TileEntitySolarPanel {
    public static SolarConfig settings;
-   /** 最大输出功率（EU/t），由配置文件读取 */
    public static int maxOutput;
 
    public TileEntityAdmin() {

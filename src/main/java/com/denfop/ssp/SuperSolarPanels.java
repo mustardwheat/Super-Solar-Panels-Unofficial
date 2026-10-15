@@ -67,16 +67,12 @@ public final class SuperSolarPanels {
    }
 
    private void registerJetpackBlacklist() {
-      // 强化量子胸甲自带飞行，禁止再附挂喷气背包组件（与 IC2 拉黑原版量子胸甲一致）；
-      // 喷气背包配方只接受胸甲槽位的物品，护腿与靴子天然不可附挂，无需列入黑名单
       JetpackAttachmentRecipe.blacklistedItems.add(SspItems.Quantum_chestplate.getInstance());
    }
 
    @EventHandler
    public void init(FMLInitializationEvent event) {
       SSPBlock.buildDummies();
-      // IC2 机器方块默认仅对 IC2 标签页与搜索页输出子物品，需通过 CreativeRegisterer 扩展点移入本 mod 标签页；
-      // 推迟到 init 执行以保证 ASP 的 TeBlock 已注册（addCreativeRegisterer 要求目标 identity 已存在）
       TeBlockRegistry.addCreativeRegisterer(new SSPCreativeRegisterer(SSPTab.TAB, SSPBlock.values()), SSPBlock.IDENTITY);
       TeBlockRegistry.addCreativeRegisterer(new SSPCreativeRegisterer(SSPTab.ASP_TAB, TEs.values()), TEs.IDENTITY);
       SPPRecipes.addCraftingRecipes();
@@ -95,9 +91,7 @@ public final class SuperSolarPanels {
 
    @EventHandler
    public void postInit(FMLPostInitializationEvent event) {
-      // 改造 ASP 面板配方（需在其 init 阶段完成注册之后执行）
       SPPRecipes.replaceAspPanelRecipes();
-      // 将 SSP 与 ASP 注册的全部物品按命名空间分别归入各自的创造标签页
       for (net.minecraft.item.Item item : net.minecraftforge.fml.common.registry.ForgeRegistries.ITEMS) {
          ResourceLocation registryName = item.getRegistryName();
          if (registryName == null) {
@@ -110,7 +104,6 @@ public final class SuperSolarPanels {
          }
       }
 
-      // ItemBlock 的创造标签页委托给方块，机器方块必须单独设置
       for (net.minecraft.block.Block block : net.minecraftforge.fml.common.registry.ForgeRegistries.BLOCKS) {
          ResourceLocation registryName = block.getRegistryName();
          if (registryName == null) {

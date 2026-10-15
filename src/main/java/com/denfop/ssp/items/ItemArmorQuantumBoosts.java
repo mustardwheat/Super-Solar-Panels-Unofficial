@@ -28,7 +28,7 @@ public class ItemArmorQuantumBoosts extends ItemBoosts implements IHazmatLike {
 
    public ItemArmorQuantumBoosts() {
       super("graviBoosts", SspConfig.quantumBootsMaxCharge, 100000.0, SspConfig.quantumBootsTier);
-      // 与原版量子靴一致：仅靴子实例注册摔落事件总线监听
+      // 与原版一致：仅靴子实例注册摔落事件总线监听
       MinecraftForge.EVENT_BUS.register(this);
    }
 
@@ -91,7 +91,7 @@ public class ItemArmorQuantumBoosts extends ItemBoosts implements IHazmatLike {
       return EnumRarity.EPIC;
    }
 
-   // 辐射防护接入 IC2 的 IHazmatLike 检查：四件齐全且均有电时，背包内放射物不再施加辐射
+   // IHazmatLike检查：四件齐全且均有电时，背包内放射物不再施加辐射
    @Override
    public boolean addsProtection(EntityLivingBase entity, EntityEquipmentSlot slot, ItemStack stack) {
       return ElectricItem.manager.getCharge(stack) > 0.0;
@@ -124,7 +124,6 @@ public class ItemArmorQuantumBoosts extends ItemBoosts implements IHazmatLike {
          }
       }
 
-      // 无电时药水效果不生效；各效果由同名 Disable Effect 配置键独立控制
       if (ElectricItem.manager.getCharge(stack) > 0.0) {
          if (SspConfig.effectWaterBreathing) {
             player.addPotionEffect(new PotionEffect(MobEffects.WATER_BREATHING, 300, 0, true, true));
@@ -202,7 +201,7 @@ public class ItemArmorQuantumBoosts extends ItemBoosts implements IHazmatLike {
       return 20000;
    }
 
-   // 摔落伤害特判：全额吸收，与原版量子靴一致（优先级 10）
+   // 摔落伤害特判：全额吸收，与原版量子靴一致
    @Override
    public ArmorProperties getProperties(EntityLivingBase player, ItemStack armour, DamageSource source, double damage, int slot) {
       if (source == DamageSource.FALL) {
@@ -212,7 +211,6 @@ public class ItemArmorQuantumBoosts extends ItemBoosts implements IHazmatLike {
       return super.getProperties(player, armour, source, damage, slot);
    }
 
-   // 摔落保护：10 格以内免伤不耗电，超出部分每点伤害 20000 EU，电量足够时取消整个摔落事件
    @SubscribeEvent(priority = EventPriority.LOW)
    public void onEntityLivingFallEvent(LivingFallEvent event) {
       if (IC2.platform.isSimulating()) {
@@ -231,7 +229,6 @@ public class ItemArmorQuantumBoosts extends ItemBoosts implements IHazmatLike {
 
    @Override
    public double getDamageAbsorptionRatio() {
-      // 有效吸收率 = IC2 靴子槽基础值 0.15 × 1.5 = 22.5%
       return 1.5;
    }
 

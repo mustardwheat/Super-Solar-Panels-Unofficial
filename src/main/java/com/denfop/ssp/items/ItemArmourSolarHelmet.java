@@ -54,7 +54,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvider, IElectricItem, IMetalArmor, ISpecialArmor, IItemHudProvider, IHazmatLike {
    protected static final int DEFAULT_COLOUR = -1;
-   /** 各负面药水对应的清除耗电量（EU），移植自 1.4 */
    protected static final Map<Potion, Integer> POTION_REMOVAL_COST = new IdentityHashMap<>();
    protected final ItemArmourSolarHelmet.SolarHelmetTypes type;
    public static boolean chargeWholeInventory = false;
@@ -301,7 +300,6 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
          if (Nightvision && IC2.platform.isSimulating() && ElectricItem.manager.use(stack, 1.0, player)) {
             BlockPos pos = new BlockPos((int)Math.floor(player.posX), (int)Math.floor(player.posY), (int)Math.floor(player.posZ));
             int skylight = player.getEntityWorld().getLightFromNeighbors(pos);
-            // 亮处仅关闭夜视，不像原版量子头盔那样附加致盲；头盔自身不产生致盲，暗处也不再顺带清除它
             if (skylight > 8) {
                IC2.platform.removePotion(player, MobEffects.NIGHT_VISION);
             } else {
@@ -374,7 +372,7 @@ public class ItemArmourSolarHelmet extends ItemArmor implements IItemModelProvid
       return true;
    }
 
-   // 辐射防护接入 IC2 的 IHazmatLike 检查：与其他量子系装备凑齐四件且均有电时，背包内放射物不再施加辐射
+   // IHazmatLike检查：四件齐全且均有电时，背包内放射物不再施加辐射
    @Override
    public boolean addsProtection(EntityLivingBase entity, EntityEquipmentSlot slot, ItemStack stack) {
       return ElectricItem.manager.getCharge(stack) > 0.0;

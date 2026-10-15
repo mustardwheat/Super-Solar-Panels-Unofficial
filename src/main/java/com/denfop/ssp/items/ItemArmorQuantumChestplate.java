@@ -81,7 +81,7 @@ public class ItemArmorQuantumChestplate extends ItemChest implements IHazmatLike
       return EnumRarity.EPIC;
    }
 
-   // 辐射防护接入 IC2 的 IHazmatLike 检查：四件齐全且均有电时，背包内放射物不再施加辐射
+   // IHazmatLike检查：四件齐全且均有电时，背包内放射物不再施加辐射
    @Override
    public boolean addsProtection(EntityLivingBase entity, EntityEquipmentSlot slot, ItemStack stack) {
       return ElectricItem.manager.getCharge(stack) > 0.0;
@@ -90,16 +90,13 @@ public class ItemArmorQuantumChestplate extends ItemChest implements IHazmatLike
    @Override
    public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
       super.onArmorTick(world, player, stack);
-      // 无电时灭火与药水效果不生效，套装只保留基础护甲
       if (ElectricItem.manager.getCharge(stack) <= 0.0) {
          return;
       }
       player.extinguish();
-      // 清毒/清凋零由头盔按耗电清除，胸甲不再重复处理
       if (SspConfig.effectFireResistance) {
          player.addPotionEffect(new PotionEffect(MobEffects.FIRE_RESISTANCE, 300, 2, true, true));
       }
-      // 有电时提供力量 I
       if (SspConfig.effectStrength) {
          player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 300, 0, true, true));
       }
@@ -107,7 +104,6 @@ public class ItemArmorQuantumChestplate extends ItemChest implements IHazmatLike
 
    @Override
    public boolean isJetpackActive(ItemStack stack) {
-      // 与原版量子胸甲一致：有电即可飞行，无需飞行开关
       return ElectricItem.manager.getCharge(stack) >= 10000.0;
    }
 
@@ -171,7 +167,6 @@ public class ItemArmorQuantumChestplate extends ItemChest implements IHazmatLike
 
    @Override
    public double getDamageAbsorptionRatio() {
-      // 有效吸收率 = IC2 胸甲槽基础值 0.40 × 1.5 = 60%
       return 1.5;
    }
 

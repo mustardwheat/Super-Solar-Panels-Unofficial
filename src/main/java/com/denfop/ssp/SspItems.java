@@ -28,7 +28,6 @@ public enum SspItems {
    MAX_HEAT_STORAGE,
    CRAFTING;
 
-   // 冷却单元热容量为固定物品属性，不开放配置（数值与 1.4 一致）
    private static final int TWELVE_HEAT_STORAGE_CAPACITY = 120000;
    private static final int MAX_HEAT_STORAGE_CAPACITY = 240000;
 
@@ -85,8 +84,6 @@ public enum SspItems {
       );
       TWELVE_HEAT_STORAGE.setInstance(new ItemReactorHeatStorage("twelve_heat_storage", TWELVE_HEAT_STORAGE_CAPACITY));
       MAX_HEAT_STORAGE.setInstance(new ItemReactorHeatStorage("max_heat_storage", MAX_HEAT_STORAGE_CAPACITY));
-      // 高级量子套放在本模组物品末尾注册，按 头盔→胸甲→护腿→靴子 排序；
-      // 1.12.2 物品 id 按注册顺序自动分配，此顺序用于避免与其他模组（如 METS）的 id 区段穿插
       QUANTUM_HELMET.setInstance(new ItemArmorQuantumHelmet(ItemArmorQuantumHelmet.SolarHelmetTypes.Helmet));
       Quantum_chestplate.setInstance(new ItemArmorQuantumChestplate());
       Quantum_leggins.setInstance(new ItemArmorQuantumLeggins());

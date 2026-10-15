@@ -48,13 +48,7 @@ import net.minecraftforge.common.ISpecialArmor.ArmorProperties;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-/**
- * 强化量子头盔，移植自 1.4 的 ItemArmorQuantumHelmet。
- * 功能：耗电清除负面药水效果、水下补气、自动进食罐头、夜视开关与 HUD 模式切换。
- * 与太阳能头盔的区别：不发电，因此移除了 1.4 中发电量恒为 0 的充能分配死代码。
- */
 public class ItemArmorQuantumHelmet extends ItemArmor implements IItemModelProvider, IElectricItem, IMetalArmor, ISpecialArmor, IItemHudProvider, IHazmatLike {
-   /** 各负面药水对应的清除耗电量（EU）；辐射与原版量子头盔一致为 10000，其余与 1.4 保持一致 */
    protected static final Map<Potion, Integer> POTION_REMOVAL_COST = new IdentityHashMap<>();
    protected final ItemArmorQuantumHelmet.SolarHelmetTypes type;
 
@@ -116,7 +110,6 @@ public class ItemArmorQuantumHelmet extends ItemArmor implements IItemModelProvi
             IC2.achievements.issueAchievement(player, "starveWithQHelmet");
          }
 
-         // 自动进食：饥饿时耗电食用背包中的灌装食物
          if (ElectricItem.manager.canUse(stack, 1000.0) && player.getFoodStats().needFood()) {
             int slot = -1;
 
@@ -145,7 +138,6 @@ public class ItemArmorQuantumHelmet extends ItemArmor implements IItemModelProvi
             IC2.achievements.issueAchievement(player, "starveWithQHelmet");
          }
 
-         // 耗电清除负面药水效果，倍率随药水等级放大
          for (PotionEffect effect : new LinkedList<>(player.getActivePotionEffects())) {
             Potion potion = effect.getPotion();
             Integer cost = POTION_REMOVAL_COST.get(potion);
@@ -158,7 +150,6 @@ public class ItemArmorQuantumHelmet extends ItemArmor implements IItemModelProvi
             }
          }
 
-         // 夜视开关：Alt + 模式切换键，与太阳能头盔按键方案保持一致
          boolean Nightvision = nbtData.getBoolean("Nightvision");
          short hubmode = nbtData.getShort("HudMode");
          if (IC2.keyboard.isAltKeyDown(player) && IC2.keyboard.isModeSwitchKeyDown(player) && toggleTimer == 0) {
@@ -192,7 +183,6 @@ public class ItemArmorQuantumHelmet extends ItemArmor implements IItemModelProvi
             nbtData.setByte("toggleTimer", --toggleTimer);
          }
 
-         // 夜视仅在环境亮度足够低时施加，逻辑与 1.4 保持一致
          if (Nightvision && IC2.platform.isSimulating() && ElectricItem.manager.use(stack, 1.0, player)) {
             BlockPos pos = new BlockPos((int)Math.floor(player.posX), (int)Math.floor(player.posY), (int)Math.floor(player.posZ));
             int skylight = player.getEntityWorld().getLightFromNeighbors(pos);
@@ -244,7 +234,7 @@ public class ItemArmorQuantumHelmet extends ItemArmor implements IItemModelProvi
       return true;
    }
 
-   // 辐射防护接入 IC2 的 IHazmatLike 检查：四件齐全且均有电时，背包内放射物不再施加辐射
+   // IHazmatLike检查：四件齐全且均有电时，背包内放射物不再施加辐射
    @Override
    public boolean addsProtection(EntityLivingBase entity, EntityEquipmentSlot slot, ItemStack stack) {
       return ElectricItem.manager.getCharge(stack) > 0.0;
