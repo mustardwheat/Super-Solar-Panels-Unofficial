@@ -45,7 +45,8 @@ public final class SspConfig {
    private static final String KEY_DAMAGE = "damage";
 
    /** 双剑伤害公式说明，写在 weapons 分类注释上 */
-   private static final String COMMENT_WEAPONS = "Base damage; ×1.5 while active, ×(Sharpness level + 1) with Sharpness";
+   private static final String COMMENT_WEAPONS
+         = "Base damage; ×1.5 while active, ×(Sharpness level + 1) with Sharpness";
 
    /** 胸甲防火效果开关 */
    public static boolean effectFireResistance;
